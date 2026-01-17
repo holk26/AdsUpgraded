@@ -13,9 +13,9 @@ import Layout from '../layouts/Layout.astro';
       <header class="text-center mb-12">
         <h1 class="font-heading text-text-heading mb-4">LeadFlow Engine Interactive Demo</h1>
         <p class="text-text-body text-lg max-w-2xl mx-auto">
-          Watch how leads flow from multiple channels through our Core system to Dashboard and Twenty CRM
+          Watch how leads flow from multiple channels through automated processing to Twenty CRM
         </p>
-        <button id="start-animation" class="mt-4 px-6 py-3 bg-color-accent text-white rounded-saas font-semibold hover:opacity-90 transition-all">
+        <button id="start-animation" class="mt-4 px-6 py-3 bg-color-accent text-white rounded-saas font-semibold hover:opacity-90 transition-all shadow-lg">
           ▶ Start Flow Animation
         </button>
       </header>
@@ -69,54 +69,39 @@ import Layout from '../layouts/Layout.astro';
           <!-- Connection Lines -->
           <g id="connections">
             <!-- Lead Sources to Core -->
-            <path id="line-fb-core" d="M 150 200 L 420 350" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
-              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
+            <path id="line-fb-core" d="M 150 200 L 420 350" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="10 5" class="connection-line">
+              <animate attributeName="stroke-dashoffset" from="15" to="0" dur="1s" repeatCount="indefinite" />
             </path>
-            <path id="line-ig-core" d="M 150 350 L 420 350" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
-              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
+            <path id="line-ig-core" d="M 150 350 L 420 350" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="10 5" class="connection-line">
+              <animate attributeName="stroke-dashoffset" from="15" to="0" dur="1s" repeatCount="indefinite" />
             </path>
-            <path id="line-google-core" d="M 150 500 L 420 350" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
-              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
-            </path>
-            
-            <!-- Core to Dashboard (main flow) -->
-            <path id="line-core-dashboard" d="M 580 350 L 720 350" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="10 5" class="connection-line">
+            <path id="line-google-core" d="M 150 500 L 420 350" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="10 5" class="connection-line">
               <animate attributeName="stroke-dashoffset" from="15" to="0" dur="1s" repeatCount="indefinite" />
             </path>
             
-            <!-- Dashboard to CRM (main flow) -->
-            <path id="line-dashboard-crm" d="M 880 350 L 970 350" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="10 5" class="connection-line">
-              <animate attributeName="stroke-dashoffset" from="15" to="0" dur="1s" repeatCount="indefinite" />
+            <!-- Core to CRM (main flow) -->
+            <path id="line-core-crm" d="M 580 350 L 920 350" stroke="url(#connectionGradient)" stroke-width="6" fill="none" stroke-dasharray="12 6" class="connection-line">
+              <animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.2s" repeatCount="indefinite" />
             </path>
             
             <!-- Core to Email System (parallel processing) -->
-            <path id="line-core-email" d="M 500 410 L 500 530" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
+            <path id="line-core-email" d="M 500 410 L 650 530" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="8 4" class="connection-line">
               <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
             </path>
             
-            <!-- Email to Dashboard (feedback loop) -->
-            <path id="line-email-dashboard" d="M 560 580 L 750 430" stroke="url(#connectionGradient)" stroke-width="2" fill="none" stroke-dasharray="6 3" class="connection-line" opacity="0.6">
-              <animate attributeName="stroke-dashoffset" from="9" to="0" dur="1.5s" repeatCount="indefinite" />
+            <!-- Email to CRM -->
+            <path id="line-email-crm" d="M 710 580 L 970 430" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line" opacity="0.8">
+              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1.2s" repeatCount="indefinite" />
             </path>
             
             <!-- Core to Sales Agents (parallel processing) -->
-            <path id="line-core-agents" d="M 500 290 L 500 180" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
+            <path id="line-core-agents" d="M 500 290 L 650 170" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="8 4" class="connection-line">
               <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
             </path>
             
-            <!-- Sales Agents to Dashboard (feedback loop) -->
-            <path id="line-agents-dashboard" d="M 560 130 L 750 270" stroke="url(#connectionGradient)" stroke-width="2" fill="none" stroke-dasharray="6 3" class="connection-line" opacity="0.6">
-              <animate attributeName="stroke-dashoffset" from="9" to="0" dur="1.5s" repeatCount="indefinite" />
-            </path>
-            
-            <!-- Email to CRM (direct connection) -->
-            <path id="line-email-crm" d="M 560 580 L 1020 430" stroke="url(#connectionGradient)" stroke-width="2" fill="none" stroke-dasharray="6 3" class="connection-line" opacity="0.4">
-              <animate attributeName="stroke-dashoffset" from="9" to="0" dur="1.5s" repeatCount="indefinite" />
-            </path>
-            
-            <!-- Sales Agents to CRM (direct connection) -->
-            <path id="line-agents-crm" d="M 560 130 L 1020 270" stroke="url(#connectionGradient)" stroke-width="2" fill="none" stroke-dasharray="6 3" class="connection-line" opacity="0.4">
-              <animate attributeName="stroke-dashoffset" from="9" to="0" dur="1.5s" repeatCount="indefinite" />
+            <!-- Sales Agents to CRM -->
+            <path id="line-agents-crm" d="M 710 120 L 970 270" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line" opacity="0.8">
+              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1.2s" repeatCount="indefinite" />
             </path>
           </g>
 
@@ -182,100 +167,87 @@ import Layout from '../layouts/Layout.astro';
             <text x="500" y="470" text-anchor="middle" fill="var(--text-body)" font-size="13">Processing Hub</text>
           </g>
 
-          <!-- Dashboard Node -->
-          <g id="node-dashboard" class="node" data-node="dashboard" style="cursor: pointer;">
-            <circle cx="800" cy="350" r="60" fill="var(--color-secondary)" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="800" cy="350" r="64" fill="none" stroke="var(--color-secondary)" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="64;70;64" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <!-- Dashboard Icon (Chart) -->
-            <g transform="translate(800, 350)">
-              <rect x="-20" y="-15" width="8" height="28" fill="white" rx="2"/>
-              <rect x="-6" y="-22" width="8" height="35" fill="white" rx="2"/>
-              <rect x="8" y="-12" width="8" height="25" fill="white" rx="2"/>
-            </g>
-            <text x="800" y="425" text-anchor="middle" fill="var(--text-heading)" font-size="16" font-weight="600">Dashboard</text>
-            <text x="800" y="445" text-anchor="middle" fill="var(--text-body)" font-size="13">Analytics</text>
-          </g>
-
-          <!-- Twenty CRM Node -->
+          <!-- Twenty CRM Node (larger, more prominent) -->
           <g id="node-crm" class="node" data-node="crm" style="cursor: pointer;">
-            <circle cx="1050" cy="350" r="60" fill="#8B5CF6" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="1050" cy="350" r="64" fill="none" stroke="#8B5CF6" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="64;70;64" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
+            <circle cx="1000" cy="350" r="80" fill="#8B5CF6" filter="url(#dropShadow)" class="node-circle"/>
+            <circle cx="1000" cy="350" r="84" fill="none" stroke="#8B5CF6" stroke-width="3" opacity="0.4" class="node-ring">
+              <animate attributeName="r" values="84;92;84" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite" />
             </circle>
-            <!-- CRM Icon (Database/People) -->
-            <g transform="translate(1050, 350)">
-              <circle cx="-8" cy="-8" r="8" fill="none" stroke="white" stroke-width="2.5"/>
-              <path d="M -8,0 Q -8,8 -15,12 L -15,18 Q -8,14 -8,22 M -8,22 Q -8,14 -1,18 L -1,12 Q -8,8 -8,0" fill="none" stroke="white" stroke-width="2.5"/>
-              <circle cx="8" cy="-8" r="8" fill="none" stroke="white" stroke-width="2.5"/>
-              <path d="M 8,0 Q 8,8 1,12 L 1,18 Q 8,14 8,22 M 8,22 Q 8,14 15,18 L 15,12 Q 8,8 8,0" fill="none" stroke="white" stroke-width="2.5"/>
+            <!-- CRM Icon (Database/People) with Dashboard integrated -->
+            <g transform="translate(1000, 350)">
+              <circle cx="-10" cy="-12" r="9" fill="none" stroke="white" stroke-width="3"/>
+              <path d="M -10,-3 Q -10,6 -18,10 L -18,17 Q -10,13 -10,23 M -10,23 Q -10,13 -2,17 L -2,10 Q -10,6 -10,-3" fill="none" stroke="white" stroke-width="3"/>
+              <circle cx="10" cy="-12" r="9" fill="none" stroke="white" stroke-width="3"/>
+              <path d="M 10,-3 Q 10,6 2,10 L 2,17 Q 10,13 10,23 M 10,23 Q 10,13 18,17 L 18,10 Q 10,6 10,-3" fill="none" stroke="white" stroke-width="3"/>
+              <!-- Dashboard chart icon integrated -->
+              <rect x="-15" y="0" width="6" height="15" fill="white" opacity="0.5" rx="1"/>
+              <rect x="-5" y="-5" width="6" height="20" fill="white" opacity="0.5" rx="1"/>
+              <rect x="5" y="3" width="6" height="12" fill="white" opacity="0.5" rx="1"/>
             </g>
-            <text x="1050" y="425" text-anchor="middle" fill="var(--text-heading)" font-size="16" font-weight="600">Twenty CRM</text>
-            <text x="1050" y="445" text-anchor="middle" fill="var(--text-body)" font-size="13">Lead Management</text>
+            <text x="1000" y="445" text-anchor="middle" fill="var(--text-heading)" font-size="18" font-weight="700">Twenty CRM</text>
+            <text x="1000" y="465" text-anchor="middle" fill="var(--text-body)" font-size="14">CRM + Dashboard</text>
           </g>
 
-          <!-- Email System Node (Below Core) -->
+          <!-- Email System Node (Bottom Right) -->
           <g id="node-email" class="node" data-node="email" style="cursor: pointer;">
-            <circle cx="500" cy="580" r="50" fill="#EA4335" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="500" cy="580" r="53" fill="none" stroke="#EA4335" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="53;58;53" dur="2s" repeatCount="indefinite" />
+            <circle cx="680" cy="580" r="55" fill="#EA4335" filter="url(#dropShadow)" class="node-circle"/>
+            <circle cx="680" cy="580" r="58" fill="none" stroke="#EA4335" stroke-width="2" opacity="0.3" class="node-ring">
+              <animate attributeName="r" values="58;64;58" dur="2s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
             </circle>
             <!-- Email Icon (Envelope) -->
-            <g transform="translate(500, 580)">
-              <rect x="-20" y="-12" width="40" height="24" rx="3" fill="none" stroke="white" stroke-width="2.5"/>
-              <path d="M -20,-12 L 0,2 L 20,-12" fill="none" stroke="white" stroke-width="2.5"/>
+            <g transform="translate(680, 580)">
+              <rect x="-22" y="-14" width="44" height="28" rx="3" fill="none" stroke="white" stroke-width="3"/>
+              <path d="M -22,-14 L 0,4 L 22,-14" fill="none" stroke="white" stroke-width="3"/>
             </g>
-            <text x="500" y="650" text-anchor="middle" fill="var(--text-heading)" font-size="14" font-weight="600">Email System</text>
+            <text x="680" y="655" text-anchor="middle" fill="var(--text-heading)" font-size="15" font-weight="600">Email Automation</text>
           </g>
 
-          <!-- Sales Agents Node (Above Core) -->
+          <!-- Sales Agents Node (Top Right) -->
           <g id="node-agents" class="node" data-node="agents" style="cursor: pointer;">
-            <circle cx="500" cy="130" r="50" fill="#FF6B6B" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="500" cy="130" r="53" fill="none" stroke="#FF6B6B" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="53;58;53" dur="2s" repeatCount="indefinite" />
+            <circle cx="680" cy="120" r="55" fill="#FF6B6B" filter="url(#dropShadow)" class="node-circle"/>
+            <circle cx="680" cy="120" r="58" fill="none" stroke="#FF6B6B" stroke-width="2" opacity="0.3" class="node-ring">
+              <animate attributeName="r" values="58;64;58" dur="2s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
             </circle>
             <!-- Sales Agents Icon (People) -->
-            <g transform="translate(500, 130)">
-              <circle cx="-10" cy="-5" r="6" fill="none" stroke="white" stroke-width="2"/>
-              <path d="M -10,2 Q -10,8 -16,10 L -16,14 Q -10,12 -10,18 M -10,18 Q -10,12 -4,14 L -4,10 Q -10,8 -10,2" fill="none" stroke="white" stroke-width="2"/>
-              <circle cx="10" cy="-5" r="6" fill="none" stroke="white" stroke-width="2"/>
-              <path d="M 10,2 Q 10,8 4,10 L 4,14 Q 10,12 10,18 M 10,18 Q 10,12 16,14 L 16,10 Q 10,8 10,2" fill="none" stroke="white" stroke-width="2"/>
+            <g transform="translate(680, 120)">
+              <circle cx="-12" cy="-6" r="7" fill="none" stroke="white" stroke-width="2.5"/>
+              <path d="M -12,2 Q -12,9 -19,11 L -19,16 Q -12,13 -12,20 M -12,20 Q -12,13 -5,16 L -5,11 Q -12,9 -12,2" fill="none" stroke="white" stroke-width="2.5"/>
+              <circle cx="12" cy="-6" r="7" fill="none" stroke="white" stroke-width="2.5"/>
+              <path d="M 12,2 Q 12,9 5,11 L 5,16 Q 12,13 12,20 M 12,20 Q 12,13 19,16 L 19,11 Q 12,9 12,2" fill="none" stroke="white" stroke-width="2.5"/>
             </g>
-            <text x="500" y="80" text-anchor="middle" fill="var(--text-heading)" font-size="14" font-weight="600">Sales Agents</text>
+            <text x="680" y="65" text-anchor="middle" fill="var(--text-heading)" font-size="15" font-weight="600">Sales Assignment</text>
           </g>
         </svg>
 
         <!-- Simulated Lead Form Modal -->
-        <div id="lead-form-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-          <div class="bg-white rounded-saas shadow-xl p-8 max-w-md w-full mx-4 relative">
-            <button id="close-modal" class="absolute top-4 right-4 text-text-muted hover:text-text-heading text-2xl">×</button>
-            <h3 class="font-heading text-text-heading text-2xl mb-4">Lead Capture Form</h3>
-            <p class="text-text-body mb-6">Simulated form from <span id="form-source" class="font-semibold text-color-accent"></span></p>
-            <form id="demo-form" class="space-y-4">
+        <div id="lead-form-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div class="bg-white rounded-saas shadow-xl p-6 md:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto relative">
+            <button id="close-modal" class="absolute top-4 right-4 text-text-muted hover:text-text-heading text-2xl z-10">×</button>
+            <h3 class="font-heading text-text-heading text-xl md:text-2xl mb-3">Lead Capture Form</h3>
+            <p class="text-text-body mb-4 text-sm md:text-base">Simulated form from <span id="form-source" class="font-semibold text-color-accent"></span></p>
+            <form id="demo-form" class="space-y-3 md:space-y-4">
               <div>
-                <label class="block text-text-heading font-medium mb-2">Name *</label>
-                <input type="text" value="Sarah Chen" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" required />
+                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Name *</label>
+                <input type="text" value="Sarah Chen" class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base" required />
               </div>
               <div>
-                <label class="block text-text-heading font-medium mb-2">Email *</label>
-                <input type="email" value="sarah.chen@example.com" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" required />
+                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Email *</label>
+                <input type="email" value="sarah.chen@example.com" class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base" required />
               </div>
               <div>
-                <label class="block text-text-heading font-medium mb-2">Phone</label>
-                <input type="tel" value="+1 (604) 555-0123" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" />
+                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Phone</label>
+                <input type="tel" value="+1 (604) 555-0123" class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base" />
               </div>
               <div>
-                <label class="block text-text-heading font-medium mb-2">Company</label>
-                <input type="text" value="Vancouver Home Renovations" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" />
+                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Company</label>
+                <input type="text" value="Vancouver Home Renovations" class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base" />
               </div>
               <div>
-                <label class="block text-text-heading font-medium mb-2">Service Interest</label>
-                <select class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent">
+                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Service Interest</label>
+                <select class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base">
                   <option value="kitchen">Kitchen Renovation</option>
                   <option value="bathroom">Bathroom Remodel</option>
                   <option value="landscaping">Landscaping</option>
@@ -284,8 +256,8 @@ import Layout from '../layouts/Layout.astro';
                 </select>
               </div>
               <div>
-                <label class="block text-text-heading font-medium mb-2">Budget Range</label>
-                <select class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent">
+                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Budget Range</label>
+                <select class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base">
                   <option value="5-10k">$5,000 - $10,000 CAD</option>
                   <option value="10-25k">$10,000 - $25,000 CAD</option>
                   <option value="25-50k" selected>$25,000 - $50,000 CAD</option>
@@ -293,14 +265,14 @@ import Layout from '../layouts/Layout.astro';
                 </select>
               </div>
               <div>
-                <label class="block text-text-heading font-medium mb-2">Message</label>
-                <textarea rows="3" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent">Looking to renovate our kitchen in North Vancouver. Interested in getting a quote for a modern design with quartz countertops.</textarea>
+                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Message</label>
+                <textarea rows="3" class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base">Looking to renovate our kitchen in North Vancouver. Interested in getting a quote for a modern design with quartz countertops.</textarea>
               </div>
               <div class="flex items-center">
-                <input type="checkbox" id="newsletter" checked class="mr-2 h-4 w-4 text-color-accent rounded focus:ring-2 focus:ring-color-accent" />
-                <label for="newsletter" class="text-text-body text-sm">Send me updates and promotional offers</label>
+                <input type="checkbox" id="newsletter" checked class="mr-2 h-4 w-4 text-color-accent rounded focus:ring-2 focus:ring-color-accent flex-shrink-0" />
+                <label for="newsletter" class="text-text-body text-xs md:text-sm">Send me updates and promotional offers</label>
               </div>
-              <button type="submit" class="w-full px-6 py-3 bg-color-accent text-white rounded-saas font-semibold hover:opacity-90 transition-all shadow-md">
+              <button type="submit" class="w-full px-4 py-3 md:px-6 md:py-4 bg-color-accent text-white rounded-saas font-semibold hover:opacity-90 transition-all shadow-lg text-sm md:text-base mt-2">
                 Submit Lead →
               </button>
             </form>
@@ -309,16 +281,15 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- Info Panel -->
         <div id="info-panel" class="mt-8 p-6 bg-bg-surface rounded-saas border border-brand-border">
-          <h3 class="font-heading text-text-heading text-xl mb-4">Click on any node to learn more • Click lead sources to see form</h3>
+          <h3 class="font-heading text-text-heading text-xl mb-4">🎯 Streamlined Architecture • Click nodes to explore</h3>
           <div id="node-info" class="text-text-body">
-            <p class="mb-3"><strong>Complete System Architecture:</strong> This visualization shows the full LeadFlow Engine with proper connections between all components.</p>
+            <p class="mb-3"><strong>Simplified LeadFlow:</strong> Direct path from lead capture to CRM with intelligent automation.</p>
             <ul class="list-disc list-inside space-y-2">
-              <li><strong>Lead Sources →</strong> Facebook, Instagram, Google Ads capture leads and send to Core</li>
-              <li><strong>Core Engine →</strong> Processes data and distributes to Dashboard, Email System, and Sales Agents</li>
-              <li><strong>Email System →</strong> Sends notifications and updates both Dashboard and CRM</li>
-              <li><strong>Sales Agents →</strong> Assigns leads and updates Dashboard and CRM</li>
-              <li><strong>Dashboard →</strong> Analyzes all data and feeds into CRM for storage</li>
-              <li><strong>Twenty CRM →</strong> Central repository receiving data from all connected systems</li>
+              <li><strong>Lead Sources →</strong> Capture from Facebook, Instagram, Google Ads</li>
+              <li><strong>Core Engine →</strong> Process, normalize, and route to CRM + parallel services</li>
+              <li><strong>Email Automation →</strong> Instant notifications and follow-up sequences</li>
+              <li><strong>Sales Assignment →</strong> Intelligent routing to available sales agents</li>
+              <li><strong>Twenty CRM →</strong> Unified CRM + Dashboard for complete lead management</li>
             </ul>
           </div>
         </div>
@@ -446,28 +417,19 @@ import Layout from '../layouts/Layout.astro';
           'Advanced UTM attribution'
         ]
       },
-      dashboard: {
-        title: 'Analytics Dashboard',
-        description: 'Get actionable insights and track your ROI in real-time.',
-        features: [
-          'Real-time lead tracking',
-          'Campaign ROI analysis',
-          'Lead source attribution',
-          'Conversion funnel visualization',
-          'Custom reporting',
-          'Export to CSV/PDF'
-        ]
-      },
       crm: {
-        title: 'Twenty CRM Integration',
-        description: 'Seamlessly manage and nurture leads in Twenty CRM.',
+        title: 'Twenty CRM + Dashboard',
+        description: 'Unified CRM and analytics platform for complete lead management.',
         features: [
           'Real-time lead synchronization',
+          'Built-in analytics dashboard',
           'Custom field mapping',
           'Automated workflow triggers',
           'Lead scoring and qualification',
+          'ROI tracking and reporting',
           'Team collaboration tools',
-          'Activity timeline tracking'
+          'Activity timeline tracking',
+          'Campaign performance metrics'
         ]
       },
       email: {
@@ -617,38 +579,36 @@ import Layout from '../layouts/Layout.astro';
       node.addEventListener('mouseenter', function() {
         const nodeType = this.getAttribute('data-node');
         if (nodeType === 'facebook' || nodeType === 'instagram' || nodeType === 'google') {
-          document.getElementById('line-fb-core')?.setAttribute('stroke-width', '5');
-          document.getElementById('line-ig-core')?.setAttribute('stroke-width', '5');
-          document.getElementById('line-google-core')?.setAttribute('stroke-width', '5');
+          document.getElementById('line-fb-core')?.setAttribute('stroke-width', '6');
+          document.getElementById('line-ig-core')?.setAttribute('stroke-width', '6');
+          document.getElementById('line-google-core')?.setAttribute('stroke-width', '6');
         } else if (nodeType === 'core') {
           document.querySelectorAll('.connection-line').forEach(line => {
-            line.setAttribute('stroke-width', '5');
+            line.setAttribute('stroke-width', '7');
           });
         } else if (nodeType === 'email') {
-          document.getElementById('line-core-email')?.setAttribute('stroke-width', '5');
-          document.getElementById('line-email-dashboard')?.setAttribute('stroke-width', '4');
-          document.getElementById('line-email-crm')?.setAttribute('stroke-width', '4');
+          document.getElementById('line-core-email')?.setAttribute('stroke-width', '6');
+          document.getElementById('line-email-crm')?.setAttribute('stroke-width', '5');
         } else if (nodeType === 'agents') {
-          document.getElementById('line-core-agents')?.setAttribute('stroke-width', '5');
-          document.getElementById('line-agents-dashboard')?.setAttribute('stroke-width', '4');
-          document.getElementById('line-agents-crm')?.setAttribute('stroke-width', '4');
-        } else if (nodeType === 'dashboard') {
-          document.getElementById('line-core-dashboard')?.setAttribute('stroke-width', '6');
-          document.getElementById('line-dashboard-crm')?.setAttribute('stroke-width', '6');
-          document.getElementById('line-email-dashboard')?.setAttribute('stroke-width', '4');
-          document.getElementById('line-agents-dashboard')?.setAttribute('stroke-width', '4');
+          document.getElementById('line-core-agents')?.setAttribute('stroke-width', '6');
+          document.getElementById('line-agents-crm')?.setAttribute('stroke-width', '5');
         } else if (nodeType === 'crm') {
-          document.getElementById('line-dashboard-crm')?.setAttribute('stroke-width', '6');
-          document.getElementById('line-email-crm')?.setAttribute('stroke-width', '4');
-          document.getElementById('line-agents-crm')?.setAttribute('stroke-width', '4');
+          document.getElementById('line-core-crm')?.setAttribute('stroke-width', '8');
+          document.getElementById('line-email-crm')?.setAttribute('stroke-width', '5');
+          document.getElementById('line-agents-crm')?.setAttribute('stroke-width', '5');
         }
       });
 
       node.addEventListener('mouseleave', function() {
-        document.querySelectorAll('.connection-line').forEach(line => {
-          line.setAttribute('stroke-width', '3');
-        });
-        document.getElementById('line-dashboard-crm')?.setAttribute('stroke-width', '4');
+        // Reset to original widths
+        document.getElementById('line-fb-core')?.setAttribute('stroke-width', '4');
+        document.getElementById('line-ig-core')?.setAttribute('stroke-width', '4');
+        document.getElementById('line-google-core')?.setAttribute('stroke-width', '4');
+        document.getElementById('line-core-crm')?.setAttribute('stroke-width', '6');
+        document.getElementById('line-core-email')?.setAttribute('stroke-width', '4');
+        document.getElementById('line-core-agents')?.setAttribute('stroke-width', '4');
+        document.getElementById('line-email-crm')?.setAttribute('stroke-width', '3');
+        document.getElementById('line-agents-crm')?.setAttribute('stroke-width', '3');
       });
     });
 
@@ -672,45 +632,30 @@ import Layout from '../layouts/Layout.astro';
       sources.forEach(source => {
         setTimeout(() => {
           createLightSignal(source.start, source.end, source.color, () => {
-            // After reaching core, split into three paths
+            // After reaching core, split into three parallel paths
             setTimeout(() => {
-              // Path 1: Core to Dashboard
-              createLightSignal({x: 500, y: 350}, {x: 800, y: 350}, '#6366F1', () => {
-                // Dashboard to CRM
-                setTimeout(() => {
-                  createLightSignal({x: 800, y: 350}, {x: 1050, y: 350}, '#8B5CF6');
-                }, 200);
-              });
+              // Path 1: Core to CRM (main flow)
+              createLightSignal({x: 500, y: 350}, {x: 1000, y: 350}, '#8B5CF6');
               
-              // Path 2: Core to Email System (parallel)
+              // Path 2: Core to Email System (parallel notification)
               setTimeout(() => {
-                createLightSignal({x: 500, y: 350}, {x: 500, y: 580}, '#EA4335', () => {
-                  // Email to Dashboard
+                createLightSignal({x: 500, y: 350}, {x: 680, y: 580}, '#EA4335', () => {
+                  // Email to CRM
                   setTimeout(() => {
-                    createLightSignal({x: 500, y: 580}, {x: 800, y: 350}, '#EA4335', () => {
-                      // Also Email to CRM directly
-                      setTimeout(() => {
-                        createLightSignal({x: 500, y: 580}, {x: 1050, y: 350}, '#EA4335');
-                      }, 100);
-                    });
-                  }, 200);
+                    createLightSignal({x: 680, y: 580}, {x: 1000, y: 350}, '#EA4335');
+                  }, 300);
                 });
-              }, 100);
+              }, 150);
               
-              // Path 3: Core to Sales Agents (parallel)
+              // Path 3: Core to Sales Agents (parallel assignment)
               setTimeout(() => {
-                createLightSignal({x: 500, y: 350}, {x: 500, y: 130}, '#FF6B6B', () => {
-                  // Agents to Dashboard
+                createLightSignal({x: 500, y: 350}, {x: 680, y: 120}, '#FF6B6B', () => {
+                  // Agents to CRM
                   setTimeout(() => {
-                    createLightSignal({x: 500, y: 130}, {x: 800, y: 350}, '#FF6B6B', () => {
-                      // Also Agents to CRM directly
-                      setTimeout(() => {
-                        createLightSignal({x: 500, y: 130}, {x: 1050, y: 350}, '#FF6B6B');
-                      }, 100);
-                    });
-                  }, 200);
+                    createLightSignal({x: 680, y: 120}, {x: 1000, y: 350}, '#FF6B6B');
+                  }, 300);
                 });
-              }, 200);
+              }, 300);
             }, 200);
           });
         }, source.delay);
