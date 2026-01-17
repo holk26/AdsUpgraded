@@ -1,0 +1,60 @@
+---
+import Button from './ui/Button.astro';
+
+export interface Props {
+  lang?: string;
+  t: (key: string) => string;
+}
+
+const { lang = 'en', t } = Astro.props;
+
+const navItems = [
+  { key: 'nav.features', href: '#features' },
+  { key: 'nav.pricing', href: '#pricing' },
+  { key: 'nav.about', href: '#about' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+  <div class="container mx-auto px-4">
+    <nav class="flex items-center justify-between py-4">
+      <div class="flex items-center gap-2">
+        <svg class="w-8 h-8 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        <span class="text-xl font-bold text-text-heading">LeadFlow Engine</span>
+      </div>
+
+      <div class="hidden md:flex items-center gap-8">
+        {navItems.map((item) => (
+          <a 
+            href={item.href} 
+            class="text-text-body hover:text-brand-primary transition-colors font-medium"
+          >
+            {t(item.key)}
+          </a>
+        ))}
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="flex gap-2">
+          <a 
+            href="/" 
+            class={`px-3 py-1 rounded ${lang === 'en' ? 'bg-brand-primary text-white' : 'text-text-muted hover:text-text-heading'}`}
+          >
+            EN
+          </a>
+          <a 
+            href="/es" 
+            class={`px-3 py-1 rounded ${lang === 'es' ? 'bg-brand-primary text-white' : 'text-text-muted hover:text-text-heading'}`}
+          >
+            ES
+          </a>
+        </div>
+        <Button variant="primary" size="sm" href="#demo">
+          {t('nav.demo')}
+        </Button>
+      </div>
+    </nav>
+  </div>
+</header>

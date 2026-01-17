@@ -1,0 +1,23 @@
+---
+export interface Props {
+  class?: string;
+  variant?: 'default' | 'glass' | 'border';
+}
+
+const { 
+  class: className = '',
+  variant = 'default',
+} = Astro.props;
+
+const variants = {
+  default: 'bg-bg-card border border-gray-200',
+  glass: 'bg-white/80 backdrop-blur-sm border border-gray-200',
+  border: 'bg-bg-surface border-2 border-brand-primary',
+};
+
+const classes = `rounded-xl p-6 transition-all duration-200 hover:shadow-lg ${variants[variant]} ${className}`;
+---
+
+<div class={classes}>
+  <slot />
+</div>
