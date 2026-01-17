@@ -3,294 +3,265 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout 
-  title="LeadFlow Engine - Interactive Demo"
-  description="Interactive mind map showing the flow from Facebook to Core to Dashboard"
+  title="LeadFlow Engine - Automated Demo"
+  description="Modern automation flow showing AI-powered lead management"
 >
-  <div class="min-h-screen bg-bg-surface py-12 px-4">
-    <div class="max-w-6xl mx-auto">
+  <div class="min-h-screen bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-900 py-12 px-4">
+    <div class="max-w-7xl mx-auto">
       
       <!-- Header -->
-      <header class="text-center mb-12">
-        <h1 class="font-heading text-text-heading mb-4">LeadFlow Engine Interactive Demo</h1>
-        <p class="text-text-body text-lg max-w-2xl mx-auto">
-          Watch how leads flow from multiple channels through automated processing to Twenty CRM
+      <header class="text-center mb-16">
+        <div class="inline-block px-4 py-2 bg-emerald-500/20 border border-emerald-500/30 rounded-full mb-4">
+          <span class="text-emerald-400 text-sm font-semibold">🤖 100% Automation • Human Approval When Needed</span>
+        </div>
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+          Automated Lead Engine
+        </h1>
+        <p class="text-gray-300 text-lg max-w-2xl mx-auto mb-6">
+          AI-powered automation handles everything. Humans focus on strategy, not repetitive tasks.
         </p>
-        <button id="start-animation" class="mt-4 px-6 py-3 bg-color-accent text-white rounded-saas font-semibold hover:opacity-90 transition-all shadow-lg">
-          ▶ Start Flow Animation
+        <button id="start-animation" class="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 shadow-lg">
+          ▶ Start Automated Flow
         </button>
       </header>
 
-      <!-- Interactive Mind Map Container -->
-      <div class="bg-white rounded-saas shadow-lg border border-brand-border p-8 relative overflow-hidden">
-        <svg id="mindmap" class="w-full" style="min-height: 700px;" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet">
+      <!-- Modern Flow Container -->
+      <div class="backdrop-blur-xl bg-white/5 rounded-3xl shadow-2xl border border-white/10 p-8 relative overflow-hidden">
+        <!-- Animated background gradient -->
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 animate-pulse"></div>
+        
+        <svg id="flowchart" class="w-full relative z-10" style="min-height: 900px;" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid meet">
           <defs>
-            <!-- Gradient for connections -->
-            <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color:var(--color-accent);stop-opacity:1" />
-              <stop offset="100%" style="stop-color:var(--color-secondary);stop-opacity:1" />
+            <!-- Modern gradient -->
+            <linearGradient id="modernGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
             </linearGradient>
             
-            <!-- Animated gradient for active state -->
-            <linearGradient id="activeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style="stop-color:var(--color-accent);stop-opacity:1">
-                <animate attributeName="offset" values="0;1;0" dur="2s" repeatCount="indefinite" />
-              </stop>
-              <stop offset="50%" style="stop-color:var(--color-secondary);stop-opacity:1">
-                <animate attributeName="offset" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" />
-              </stop>
-              <stop offset="100%" style="stop-color:var(--color-primary);stop-opacity:1">
-                <animate attributeName="offset" values="1;0;1" dur="2s" repeatCount="indefinite" />
-              </stop>
-            </linearGradient>
-
-            <!-- Drop shadow filter -->
-            <filter id="dropShadow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
-              <feOffset dx="0" dy="2" result="offsetblur"/>
+            <!-- Glow filter -->
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            
+            <!-- Drop shadow -->
+            <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+              <feOffset dx="0" dy="4" result="offsetblur"/>
               <feComponentTransfer>
-                <feFuncA type="linear" slope="0.3"/>
+                <feFuncA type="linear" slope="0.4"/>
               </feComponentTransfer>
               <feMerge>
                 <feMergeNode/>
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
-
-            <!-- Glow filter for light signals -->
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-              <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
           </defs>
 
-          <!-- Connection Lines -->
-          <g id="connections">
-            <!-- Lead Sources to Core -->
-            <path id="line-fb-core" d="M 150 200 L 420 350" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="10 5" class="connection-line">
-              <animate attributeName="stroke-dashoffset" from="15" to="0" dur="1s" repeatCount="indefinite" />
-            </path>
-            <path id="line-ig-core" d="M 150 350 L 420 350" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="10 5" class="connection-line">
-              <animate attributeName="stroke-dashoffset" from="15" to="0" dur="1s" repeatCount="indefinite" />
-            </path>
-            <path id="line-google-core" d="M 150 500 L 420 350" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="10 5" class="connection-line">
-              <animate attributeName="stroke-dashoffset" from="15" to="0" dur="1s" repeatCount="indefinite" />
-            </path>
-            
-            <!-- Core to CRM (main flow) -->
-            <path id="line-core-crm" d="M 580 350 L 920 350" stroke="url(#connectionGradient)" stroke-width="6" fill="none" stroke-dasharray="12 6" class="connection-line">
-              <animate attributeName="stroke-dashoffset" from="18" to="0" dur="1.2s" repeatCount="indefinite" />
-            </path>
-            
-            <!-- Core to Email System (parallel processing) -->
-            <path id="line-core-email" d="M 500 410 L 650 530" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="8 4" class="connection-line">
+          <!-- Connection Lines (Vertical Flow) -->
+          <g id="connections" opacity="0.6">
+            <!-- Input to Processing -->
+            <path d="M 400 180 L 400 280" stroke="url(#modernGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4">
               <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
             </path>
             
-            <!-- Email to CRM -->
-            <path id="line-email-crm" d="M 710 580 L 970 430" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line" opacity="0.8">
-              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1.2s" repeatCount="indefinite" />
-            </path>
-            
-            <!-- Core to Sales Agents (parallel processing) -->
-            <path id="line-core-agents" d="M 500 290 L 650 170" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="8 4" class="connection-line">
+            <!-- Processing to CRM -->
+            <path d="M 400 420 L 400 520" stroke="url(#modernGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4">
               <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
             </path>
             
-            <!-- Sales Agents to CRM -->
-            <path id="line-agents-crm" d="M 710 120 L 970 270" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line" opacity="0.8">
-              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1.2s" repeatCount="indefinite" />
+            <!-- CRM to AI Agent -->
+            <path d="M 400 680 L 400 780" stroke="url(#modernGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4">
+              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
             </path>
           </g>
 
-          <!-- Light Signal Particles (hidden by default) -->
+          <!-- Light signals container -->
           <g id="light-signals"></g>
 
-          <!-- Nodes -->
-          <!-- Lead Source Nodes (Left Side) -->
-          
-          <!-- Facebook Node -->
-          <g id="node-facebook" class="node source-node" data-node="facebook" data-channel="facebook" style="cursor: pointer;">
-            <circle cx="100" cy="200" r="50" fill="#1877F2" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="100" cy="200" r="53" fill="none" stroke="#1877F2" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="53;58;53" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <text x="100" y="215" text-anchor="middle" fill="white" font-size="36" font-weight="bold">f</text>
-            <text x="100" y="270" text-anchor="middle" fill="var(--text-heading)" font-size="14" font-weight="600">Facebook</text>
-          </g>
-
-          <!-- Instagram Node -->
-          <g id="node-instagram" class="node source-node" data-node="instagram" data-channel="instagram" style="cursor: pointer;">
-            <circle cx="100" cy="350" r="50" fill="#E4405F" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="100" cy="350" r="53" fill="none" stroke="#E4405F" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="53;58;53" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <!-- Instagram Camera Icon -->
-            <g transform="translate(100, 350)">
-              <rect x="-18" y="-15" width="36" height="30" rx="8" fill="none" stroke="white" stroke-width="3"/>
-              <circle cx="0" cy="0" r="10" fill="none" stroke="white" stroke-width="3"/>
-              <circle cx="10" cy="-10" r="2" fill="white"/>
+          <!-- Stage 1: INPUT / ENTRADA -->
+          <g id="stage-input" class="stage-node" data-stage="input" style="cursor: pointer;">
+            <!-- Background card -->
+            <rect x="200" y="50" width="400" height="130" rx="20" fill="rgba(59, 130, 246, 0.1)" stroke="rgba(59, 130, 246, 0.3)" stroke-width="2" filter="url(#shadow)"/>
+            
+            <!-- Icons for channels -->
+            <g transform="translate(270, 115)">
+              <!-- Facebook -->
+              <circle cx="0" cy="0" r="25" fill="#1877F2" filter="url(#glow)"/>
+              <text x="0" y="10" text-anchor="middle" fill="white" font-size="20" font-weight="bold">f</text>
             </g>
-            <text x="100" y="420" text-anchor="middle" fill="var(--text-heading)" font-size="14" font-weight="600">Instagram</text>
-          </g>
-
-          <!-- Google Ads Node -->
-          <g id="node-google" class="node source-node" data-node="google" data-channel="google" style="cursor: pointer;">
-            <circle cx="100" cy="500" r="50" fill="#4285F4" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="100" cy="500" r="53" fill="none" stroke="#4285F4" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="53;58;53" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <text x="100" y="515" text-anchor="middle" fill="white" font-size="32" font-weight="bold">G</text>
-            <text x="100" y="570" text-anchor="middle" fill="var(--text-heading)" font-size="14" font-weight="600">Google Ads</text>
-          </g>
-
-          <!-- Core Node (Central Hub) -->
-          <g id="node-core" class="node" data-node="core" style="cursor: pointer;">
-            <circle cx="500" cy="350" r="80" fill="var(--color-primary)" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="500" cy="350" r="84" fill="none" stroke="var(--color-accent)" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="84;90;84" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <!-- Core Icon (Gear/Cog) -->
-            <g transform="translate(500, 350)">
-              <path d="M 0,-30 L 5,-35 L 10,-30 L 10,-20 L 5,-15 L 0,-20 Z M 21,-21 L 28,-23 L 32,-18 L 28,-10 L 21,-8 L 18,-13 Z M 21,21 L 23,28 L 18,32 L 10,28 L 8,21 L 13,18 Z M -21,21 L -28,23 L -32,18 L -28,10 L -21,8 L -18,13 Z M -21,-21 L -23,-28 L -18,-32 L -10,-28 L -8,-21 L -13,-18 Z" 
-                    fill="white" opacity="0.3"/>
-              <circle cx="0" cy="0" r="15" fill="none" stroke="white" stroke-width="3"/>
-              <circle cx="0" cy="0" r="8" fill="white"/>
+            <g transform="translate(340, 115)">
+              <!-- Instagram -->
+              <circle cx="0" cy="0" r="25" fill="#E4405F" filter="url(#glow)"/>
+              <circle cx="0" cy="0" r="12" fill="none" stroke="white" stroke-width="2.5"/>
+              <circle cx="8" cy="-8" r="2" fill="white"/>
             </g>
-            <text x="500" y="450" text-anchor="middle" fill="var(--text-heading)" font-size="16" font-weight="600">Core Engine</text>
-            <text x="500" y="470" text-anchor="middle" fill="var(--text-body)" font-size="13">Processing Hub</text>
+            <g transform="translate(410, 115)">
+              <!-- Google -->
+              <circle cx="0" cy="0" r="25" fill="#4285F4" filter="url(#glow)"/>
+              <text x="0" y="10" text-anchor="middle" fill="white" font-size="18" font-weight="bold">G</text>
+            </g>
+            <g transform="translate(480, 115)">
+              <!-- More -->
+              <circle cx="0" cy="0" r="25" fill="rgba(255, 255, 255, 0.2)" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2"/>
+              <text x="0" y="8" text-anchor="middle" fill="rgba(255, 255, 255, 0.8)" font-size="24" font-weight="bold">+</text>
+            </g>
+            
+            <!-- Label -->
+            <text x="400" y="75" text-anchor="middle" fill="rgba(255, 255, 255, 0.9)" font-size="24" font-weight="bold">📥 INPUT</text>
+            <text x="400" y="160" text-anchor="middle" fill="rgba(255, 255, 255, 0.7)" font-size="14">Multi-Channel Lead Capture</text>
           </g>
 
-          <!-- Twenty CRM Node (larger, more prominent) -->
-          <g id="node-crm" class="node" data-node="crm" style="cursor: pointer;">
-            <circle cx="1000" cy="350" r="80" fill="#8B5CF6" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="1000" cy="350" r="84" fill="none" stroke="#8B5CF6" stroke-width="3" opacity="0.4" class="node-ring">
-              <animate attributeName="r" values="84;92;84" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <!-- CRM Icon (Database/People) with Dashboard integrated -->
-            <g transform="translate(1000, 350)">
-              <circle cx="-10" cy="-12" r="9" fill="none" stroke="white" stroke-width="3"/>
-              <path d="M -10,-3 Q -10,6 -18,10 L -18,17 Q -10,13 -10,23 M -10,23 Q -10,13 -2,17 L -2,10 Q -10,6 -10,-3" fill="none" stroke="white" stroke-width="3"/>
-              <circle cx="10" cy="-12" r="9" fill="none" stroke="white" stroke-width="3"/>
-              <path d="M 10,-3 Q 10,6 2,10 L 2,17 Q 10,13 10,23 M 10,23 Q 10,13 18,17 L 18,10 Q 10,6 10,-3" fill="none" stroke="white" stroke-width="3"/>
-              <!-- Dashboard chart icon integrated -->
-              <rect x="-15" y="0" width="6" height="15" fill="white" opacity="0.5" rx="1"/>
-              <rect x="-5" y="-5" width="6" height="20" fill="white" opacity="0.5" rx="1"/>
-              <rect x="5" y="3" width="6" height="12" fill="white" opacity="0.5" rx="1"/>
+          <!-- Stage 2: DATA PROCESSING -->
+          <g id="stage-processing" class="stage-node" data-stage="processing" style="cursor: pointer;">
+            <!-- Background card -->
+            <rect x="200" y="280" width="400" height="140" rx="20" fill="rgba(139, 92, 246, 0.1)" stroke="rgba(139, 92, 246, 0.3)" stroke-width="2" filter="url(#shadow)"/>
+            
+            <!-- AI Processing Icon -->
+            <g transform="translate(400, 350)">
+              <circle cx="0" cy="0" r="40" fill="url(#modernGradient)" filter="url(#glow)"/>
+              <!-- Brain/AI icon -->
+              <circle cx="-15" cy="-10" r="8" fill="none" stroke="white" stroke-width="2.5"/>
+              <circle cx="15" cy="-10" r="8" fill="none" stroke="white" stroke-width="2.5"/>
+              <path d="M -20,-5 Q -20,10 -10,15 L -10,20 Q 0,15 0,25 Q 0,15 10,20 L 10,15 Q 20,10 20,-5" fill="none" stroke="white" stroke-width="2.5"/>
+              <!-- Sparkles for AI -->
+              <circle cx="-30" cy="0" r="3" fill="white" opacity="0.8">
+                <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+              </circle>
+              <circle cx="30" cy="0" r="3" fill="white" opacity="0.8">
+                <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+              </circle>
             </g>
-            <text x="1000" y="445" text-anchor="middle" fill="var(--text-heading)" font-size="18" font-weight="700">Twenty CRM</text>
-            <text x="1000" y="465" text-anchor="middle" fill="var(--text-body)" font-size="14">CRM + Dashboard</text>
+            
+            <!-- Label -->
+            <text x="400" y="310" text-anchor="middle" fill="rgba(255, 255, 255, 0.9)" font-size="24" font-weight="bold">⚙️ AI PROCESSING</text>
+            <text x="400" y="405" text-anchor="middle" fill="rgba(255, 255, 255, 0.7)" font-size="14">Automated enrichment, scoring & routing</text>
           </g>
 
-          <!-- Email System Node (Bottom Right) -->
-          <g id="node-email" class="node" data-node="email" style="cursor: pointer;">
-            <circle cx="680" cy="580" r="55" fill="#EA4335" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="680" cy="580" r="58" fill="none" stroke="#EA4335" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="58;64;58" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <!-- Email Icon (Envelope) -->
-            <g transform="translate(680, 580)">
-              <rect x="-22" y="-14" width="44" height="28" rx="3" fill="none" stroke="white" stroke-width="3"/>
-              <path d="M -22,-14 L 0,4 L 22,-14" fill="none" stroke="white" stroke-width="3"/>
+          <!-- Stage 3: CRM + DASHBOARD -->
+          <g id="stage-crm" class="stage-node" data-stage="crm" style="cursor: pointer;">
+            <!-- Background card -->
+            <rect x="200" y="520" width="400" height="160" rx="20" fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.3)" stroke-width="2" filter="url(#shadow)"/>
+            
+            <!-- CRM/Dashboard Icon -->
+            <g transform="translate(400, 600)">
+              <circle cx="0" cy="0" r="45" fill="#10b981" filter="url(#glow)"/>
+              <!-- Database icon -->
+              <ellipse cx="0" cy="-15" rx="25" ry="8" fill="none" stroke="white" stroke-width="3"/>
+              <path d="M -25,-15 L -25,5 Q -25,13 0,13 Q 25,13 25,5 L 25,-15" fill="none" stroke="white" stroke-width="3"/>
+              <line x1="-25" y1="-5" x2="25" y2="-5" stroke="white" stroke-width="2" opacity="0.6"/>
+              <line x1="-25" y1="5" x2="25" y2="5" stroke="white" stroke-width="2" opacity="0.6"/>
+              <!-- Chart bars overlay -->
+              <rect x="-15" y="15" width="8" height="15" fill="white" opacity="0.7" rx="2"/>
+              <rect x="-3" y="10" width="8" height="20" fill="white" opacity="0.7" rx="2"/>
+              <rect x="9" y="13" width="8" height="17" fill="white" opacity="0.7" rx="2"/>
             </g>
-            <text x="680" y="655" text-anchor="middle" fill="var(--text-heading)" font-size="15" font-weight="600">Email Automation</text>
+            
+            <!-- Label -->
+            <text x="400" y="550" text-anchor="middle" fill="rgba(255, 255, 255, 0.9)" font-size="24" font-weight="bold">💾 CRM + DASHBOARD</text>
+            <text x="400" y="665" text-anchor="middle" fill="rgba(255, 255, 255, 0.7)" font-size="14">Unified data storage & analytics</text>
           </g>
 
-          <!-- Sales Agents Node (Top Right) -->
-          <g id="node-agents" class="node" data-node="agents" style="cursor: pointer;">
-            <circle cx="680" cy="120" r="55" fill="#FF6B6B" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="680" cy="120" r="58" fill="none" stroke="#FF6B6B" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="58;64;58" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <!-- Sales Agents Icon (People) -->
-            <g transform="translate(680, 120)">
-              <circle cx="-12" cy="-6" r="7" fill="none" stroke="white" stroke-width="2.5"/>
-              <path d="M -12,2 Q -12,9 -19,11 L -19,16 Q -12,13 -12,20 M -12,20 Q -12,13 -5,16 L -5,11 Q -12,9 -12,2" fill="none" stroke="white" stroke-width="2.5"/>
-              <circle cx="12" cy="-6" r="7" fill="none" stroke="white" stroke-width="2.5"/>
-              <path d="M 12,2 Q 12,9 5,11 L 5,16 Q 12,13 12,20 M 12,20 Q 12,13 19,16 L 19,11 Q 12,9 12,2" fill="none" stroke="white" stroke-width="2.5"/>
+          <!-- Stage 4: AI AGENT -->
+          <g id="stage-agent" class="stage-node" data-stage="agent" style="cursor: pointer;">
+            <!-- Background card -->
+            <rect x="200" y="780" width="400" height="150" rx="20" fill="rgba(236, 72, 153, 0.1)" stroke="rgba(236, 72, 153, 0.3)" stroke-width="2" filter="url(#shadow)"/>
+            
+            <!-- AI Agent Icon -->
+            <g transform="translate(400, 855)">
+              <circle cx="0" cy="0" r="42" fill="#ec4899" filter="url(#glow)"/>
+              <!-- Robot/AI head -->
+              <circle cx="-12" cy="-8" r="6" fill="white"/>
+              <circle cx="12" cy="-8" r="6" fill="white"/>
+              <rect x="-20" y="5" width="40" height="15" rx="3" fill="white" opacity="0.9"/>
+              <!-- Antenna -->
+              <line x1="0" y1="-35" x2="0" y2="-25" stroke="white" stroke-width="2.5"/>
+              <circle cx="0" cy="-37" r="4" fill="white">
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="1.5s" repeatCount="indefinite"/>
+              </circle>
             </g>
-            <text x="680" y="65" text-anchor="middle" fill="var(--text-heading)" font-size="15" font-weight="600">Sales Assignment</text>
+            
+            <text x="400" y="810" text-anchor="middle" fill="rgba(255, 255, 255, 0.9)" font-size="24" font-weight="bold">🤖 AI AGENT</text>
+            <text x="400" y="915" text-anchor="middle" fill="rgba(255, 255, 255, 0.7)" font-size="14">Automated actions • Human approval when needed</text>
           </g>
         </svg>
 
-        <!-- Simulated Lead Form Modal -->
-        <div id="lead-form-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-          <div class="bg-white rounded-saas shadow-xl p-6 md:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto relative">
-            <button id="close-modal" class="absolute top-4 right-4 text-text-muted hover:text-text-heading text-2xl z-10">×</button>
-            <h3 class="font-heading text-text-heading text-xl md:text-2xl mb-3">Lead Capture Form</h3>
-            <p class="text-text-body mb-4 text-sm md:text-base">Simulated form from <span id="form-source" class="font-semibold text-color-accent"></span></p>
+        <!-- Simulated Lead Form Modal (Modern Design) -->
+        <div id="lead-form-modal" class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-white/20 p-6 md:p-8 max-w-md w-full max-h-[90vh] overflow-y-auto relative">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl z-10 transition-colors">×</button>
+            <div class="text-center mb-4">
+              <div class="inline-block px-4 py-2 bg-blue-500/20 border border-blue-500/30 rounded-full mb-3">
+                <span class="text-blue-400 text-sm font-semibold">Lead Capture Form</span>
+              </div>
+              <p class="text-gray-300 text-sm">Simulated from <span id="form-source" class="font-semibold text-blue-400"></span></p>
+            </div>
             <form id="demo-form" class="space-y-3 md:space-y-4">
               <div>
-                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Name *</label>
-                <input type="text" value="Sarah Chen" class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base" required />
+                <label class="block text-white font-medium mb-1 text-sm md:text-base">Name *</label>
+                <input type="text" value="Sarah Chen" class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400 text-sm md:text-base" required />
               </div>
               <div>
-                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Email *</label>
-                <input type="email" value="sarah.chen@example.com" class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base" required />
+                <label class="block text-white font-medium mb-1 text-sm md:text-base">Email *</label>
+                <input type="email" value="sarah.chen@example.com" class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400 text-sm md:text-base" required />
               </div>
               <div>
-                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Phone</label>
-                <input type="tel" value="+1 (604) 555-0123" class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base" />
+                <label class="block text-white font-medium mb-1 text-sm md:text-base">Phone</label>
+                <input type="tel" value="+1 (604) 555-0123" class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400 text-sm md:text-base" />
               </div>
               <div>
-                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Company</label>
-                <input type="text" value="Vancouver Home Renovations" class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base" />
+                <label class="block text-white font-medium mb-1 text-sm md:text-base">Company</label>
+                <input type="text" value="Vancouver Home Renovations" class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400 text-sm md:text-base" />
               </div>
               <div>
-                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Service Interest</label>
-                <select class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base">
-                  <option value="kitchen">Kitchen Renovation</option>
-                  <option value="bathroom">Bathroom Remodel</option>
-                  <option value="landscaping">Landscaping</option>
-                  <option value="roofing">Roofing</option>
-                  <option value="general">General Inquiry</option>
-                </select>
+                <label class="block text-white font-medium mb-1 text-sm md:text-base">Message</label>
+                <textarea rows="3" class="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-gray-400 text-sm md:text-base">Looking to renovate our kitchen in North Vancouver. Interested in getting a quote for a modern design with quartz countertops.</textarea>
               </div>
-              <div>
-                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Budget Range</label>
-                <select class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base">
-                  <option value="5-10k">$5,000 - $10,000 CAD</option>
-                  <option value="10-25k">$10,000 - $25,000 CAD</option>
-                  <option value="25-50k" selected>$25,000 - $50,000 CAD</option>
-                  <option value="50k+">$50,000+ CAD</option>
-                </select>
-              </div>
-              <div>
-                <label class="block text-text-heading font-medium mb-1 text-sm md:text-base">Message</label>
-                <textarea rows="3" class="w-full px-3 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent text-sm md:text-base">Looking to renovate our kitchen in North Vancouver. Interested in getting a quote for a modern design with quartz countertops.</textarea>
-              </div>
-              <div class="flex items-center">
-                <input type="checkbox" id="newsletter" checked class="mr-2 h-4 w-4 text-color-accent rounded focus:ring-2 focus:ring-color-accent flex-shrink-0" />
-                <label for="newsletter" class="text-text-body text-xs md:text-sm">Send me updates and promotional offers</label>
-              </div>
-              <button type="submit" class="w-full px-4 py-3 md:px-6 md:py-4 bg-color-accent text-white rounded-saas font-semibold hover:opacity-90 transition-all shadow-lg text-sm md:text-base mt-2">
+              <button type="submit" class="w-full px-4 py-3 md:px-6 md:py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all duration-300 text-sm md:text-base mt-2">
                 Submit Lead →
               </button>
             </form>
           </div>
         </div>
 
-        <!-- Info Panel -->
-        <div id="info-panel" class="mt-8 p-6 bg-bg-surface rounded-saas border border-brand-border">
-          <h3 class="font-heading text-text-heading text-xl mb-4">🎯 Streamlined Architecture • Click nodes to explore</h3>
-          <div id="node-info" class="text-text-body">
-            <p class="mb-3"><strong>Simplified LeadFlow:</strong> Direct path from lead capture to CRM with intelligent automation.</p>
-            <ul class="list-disc list-inside space-y-2">
-              <li><strong>Lead Sources →</strong> Capture from Facebook, Instagram, Google Ads</li>
-              <li><strong>Core Engine →</strong> Process, normalize, and route to CRM + parallel services</li>
-              <li><strong>Email Automation →</strong> Instant notifications and follow-up sequences</li>
-              <li><strong>Sales Assignment →</strong> Intelligent routing to available sales agents</li>
-              <li><strong>Twenty CRM →</strong> Unified CRM + Dashboard for complete lead management</li>
-            </ul>
+        <!-- Info Panel (Modern Design) -->
+        <div id="info-panel" class="mt-8 p-6 backdrop-blur-xl bg-white/5 rounded-2xl border border-white/10 relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5"></div>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-bold text-white mb-4">🤖 100% Automated System • Click stages to explore</h3>
+            <div id="stage-info" class="text-gray-300">
+              <p class="mb-4 text-lg"><strong class="text-white">AI handles everything.</strong> Humans approve only when needed.</p>
+              <ul class="space-y-3">
+                <li class="flex items-start">
+                  <span class="mr-3 text-2xl">📥</span>
+                  <div>
+                    <strong class="text-white">Input:</strong> Multi-channel lead capture (Facebook, Instagram, Google, etc.)
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-3 text-2xl">⚙️</span>
+                  <div>
+                    <strong class="text-white">AI Processing:</strong> Automated enrichment, scoring, duplicate detection, routing
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-3 text-2xl">💾</span>
+                  <div>
+                    <strong class="text-white">CRM + Dashboard:</strong> Unified storage, real-time analytics, performance tracking
+                  </div>
+                </li>
+                <li class="flex items-start">
+                  <span class="mr-3 text-2xl">🤖</span>
+                  <div>
+                    <strong class="text-white">AI Agent:</strong> Automated follow-ups, email sequences, agent assignment
+                    <span class="block text-sm text-gray-400 mt-1">→ Human approval requested for high-value decisions</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -299,68 +270,61 @@ import Layout from '../layouts/Layout.astro';
   </div>
 
   <style>
-    .node {
+    .stage-node {
       transition: all 0.3s ease;
     }
 
-    .node:hover .node-circle {
-      filter: url(#dropShadow) brightness(1.1);
+    .stage-node:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
     }
 
-    .node:hover .node-ring {
+    .stage-node.active rect {
       stroke-width: 3;
-      opacity: 0.6 !important;
-    }
-
-    .connection-line {
-      transition: stroke-width 0.3s ease;
-    }
-
-    .node.active .node-circle {
-      filter: url(#dropShadow) brightness(1.2);
-    }
-
-    .node.active .node-ring {
-      stroke-width: 4;
+      filter: url(#shadow) brightness(1.2);
     }
 
     #info-panel {
-      animation: fadeIn 0.5s ease;
+      animation: fadeInUp 0.6s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Modal styles */
+    /* Modal animation */
     #lead-form-modal.show {
       display: flex !important;
       animation: modalFadeIn 0.3s ease;
     }
 
     @keyframes modalFadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    /* Light signal animation */
+    /* Light signal glow */
     .light-signal {
       filter: url(#glow);
-      animation: pulse 0.8s ease-in-out infinite;
+      animation: pulse 1s ease-in-out infinite;
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 0.8; }
-      50% { opacity: 1; }
+      0%, 100% { opacity: 0.9; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.1); }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
     }
   </style>
 
   <script>
-    // Interactive functionality
-    const nodes = document.querySelectorAll('.node');
-    const sourceNodes = document.querySelectorAll('.source-node');
-    const infoPanel = document.getElementById('node-info');
+    // Modern Interactive functionality
+    const stageNodes = document.querySelectorAll('.stage-node');
+    const stageInfo = document.getElementById('stage-info');
     const modal = document.getElementById('lead-form-modal');
     const closeModal = document.getElementById('close-modal');
     const formSource = document.getElementById('form-source');
@@ -368,112 +332,100 @@ import Layout from '../layouts/Layout.astro';
     const startAnimationBtn = document.getElementById('start-animation');
     const lightSignalsGroup = document.getElementById('light-signals');
 
-    const nodeInfo = {
-      facebook: {
-        title: 'Facebook Lead Capture',
-        description: 'Capture leads directly from your Facebook campaigns with full UTM tracking.',
+    const stageInformation = {
+      input: {
+        title: '📥 INPUT - Multi-Channel Lead Capture',
+        description: 'Capture leads from multiple channels automatically. Zero manual data entry.',
         features: [
-          'Automatic lead capture from Facebook Ads',
-          'Complete UTM parameter tracking',
-          'Real-time lead notification',
-          'Instagram integration included',
-          'Track campaign performance',
-          'Form simulation available'
+          'Facebook & Instagram ads integration',
+          'Google Ads conversion tracking',
+          'Website form submissions',
+          'Landing page automation',
+          'Real-time lead capture',
+          'Automatic UTM tracking',
+          'Cross-platform deduplication'
         ]
       },
-      instagram: {
-        title: 'Instagram Lead Capture',
-        description: 'Convert Instagram engagement into qualified leads.',
+      processing: {
+        title: '⚙️ AI PROCESSING - Intelligent Automation',
+        description: 'AI handles 100% of data processing. No human intervention needed.',
         features: [
-          'Instagram Stories and Posts ads',
-          'Direct message lead capture',
-          'Visual content tracking',
-          'Influencer campaign tracking',
-          'Engagement metrics',
-          'Form simulation available'
-        ]
-      },
-      google: {
-        title: 'Google Ads Lead Capture',
-        description: 'Capture high-intent leads from Google Search and Display ads.',
-        features: [
-          'Search and Display ad tracking',
-          'Keyword-level attribution',
-          'Landing page optimization',
-          'Quality Score monitoring',
-          'Conversion tracking',
-          'Form simulation available'
-        ]
-      },
-      core: {
-        title: 'Core Processing Engine',
-        description: 'The heart of LeadFlow Engine - where all the magic happens.',
-        features: [
-          'Instant data normalization and cleaning',
-          'Automatic lead enrichment',
-          'Duplicate detection and merging',
-          'Smart routing to appropriate teams',
-          'Real-time CRM synchronization',
-          'Advanced UTM attribution'
+          'AI-powered lead enrichment (company, job title, socials)',
+          'Automatic lead scoring based on behavior',
+          'Duplicate detection across all sources',
+          'Data normalization and cleanup',
+          'Smart routing rules engine',
+          'Real-time qualification scoring',
+          'Automated field mapping'
         ]
       },
       crm: {
-        title: 'Twenty CRM + Dashboard',
-        description: 'Unified CRM and analytics platform for complete lead management.',
+        title: '💾 CRM + DASHBOARD - Unified Intelligence',
+        description: 'All data in one place. Real-time insights powered by AI.',
         features: [
-          'Real-time lead synchronization',
-          'Built-in analytics dashboard',
-          'Custom field mapping',
-          'Automated workflow triggers',
-          'Lead scoring and qualification',
-          'ROI tracking and reporting',
+          'Instant sync to Twenty CRM',
+          'Real-time dashboard analytics',
+          'ROI tracking by channel',
+          'Campaign performance metrics',
+          'Lead lifecycle visibility',
+          'Custom reporting automation',
           'Team collaboration tools',
-          'Activity timeline tracking',
-          'Campaign performance metrics'
+          'Mobile access for field teams',
+          'Automated data backup'
         ]
       },
-      email: {
-        title: 'Email Automation System',
-        description: 'Automated email notifications and follow-up campaigns for leads.',
+      agent: {
+        title: '🤖 AI AGENT - Maximum Automation',
+        description: 'AI handles follow-ups, emails, and routing. Humans approve strategic decisions.',
         features: [
-          'Instant lead notification emails',
-          'Automated welcome sequences',
-          'Follow-up email campaigns',
-          'Personalized email templates',
-          'Email open and click tracking',
-          'A/B testing capabilities',
-          'Integration with marketing automation'
-        ]
-      },
-      agents: {
-        title: 'Sales Agent Assignment',
-        description: 'Intelligent lead routing and assignment to your sales team.',
-        features: [
-          'Smart lead distribution',
-          'Round-robin assignment',
-          'Territory-based routing',
-          'Agent performance tracking',
-          'Lead notification system',
-          'Workload balancing',
-          'Priority lead identification'
+          'Automated email sequences (welcome, nurture, follow-up)',
+          'Smart agent assignment based on territory, workload & performance',
+          'AI-generated personalized emails',
+          'Automated meeting scheduling',
+          'Priority lead escalation',
+          'Performance-based routing',
+          '→ Human approval for: contract signing, pricing adjustments, special terms'
         ]
       }
     };
 
-    // Handle source node clicks (show form modal)
-    sourceNodes.forEach(node => {
-      node.addEventListener('click', function(e) {
-        e.preventDefault();
-        const channel = this.getAttribute('data-channel');
-        const channelNames = {
-          facebook: 'Facebook',
-          instagram: 'Instagram',
-          google: 'Google Ads'
-        };
-        if (formSource) {
-          formSource.textContent = channelNames[channel] || channel;
+    // Handle stage clicks
+    stageNodes.forEach(stage => {
+      stage.addEventListener('click', function(e) {
+        // Special handling for input stage (opens form)
+        const stageType = this.getAttribute('data-stage');
+        if (stageType === 'input') {
+          if (formSource) {
+            formSource.textContent = 'Multiple Channels';
+          }
+          modal?.classList.add('show');
+          return;
         }
-        modal?.classList.add('show');
+        
+        // Remove active class from all stages
+        stageNodes.forEach(s => s.classList.remove('active'));
+        
+        // Add active class to clicked stage
+        this.classList.add('active');
+        
+        // Update info panel
+        const info = stageInformation[stageType];
+        
+        if (info && stageInfo) {
+          stageInfo.innerHTML = `
+            <h4 class="text-xl font-bold text-white mb-3">${info.title}</h4>
+            <p class="text-gray-300 mb-4 text-lg">${info.description}</p>
+            <h5 class="font-semibold text-white text-base mb-2">Key Features:</h5>
+            <ul class="space-y-2 text-gray-300">
+              ${info.features.map((feature: string) => `
+                <li class="flex items-start">
+                  <span class="mr-2 text-blue-400">✓</span>
+                  <span>${feature}</span>
+                </li>
+              `).join('')}
+            </ul>
+          `;
+        }
       });
     });
 
@@ -500,116 +452,39 @@ import Layout from '../layouts/Layout.astro';
       // Start flow animation
       startFlowAnimation();
       
-      // Show success message with processing steps
-      if (infoPanel) {
-        infoPanel.innerHTML = `
-          <h3 class="font-heading text-text-heading text-xl mb-3">✅ Lead Captured Successfully!</h3>
-          <p class="text-text-body mb-4"><strong>Lead:</strong> ${leadName} • Watch the light signals travel through the system</p>
-          <div class="space-y-3">
-            <div class="flex items-start">
-              <span class="mr-2">⚙️</span>
+      // Show success message
+      if (stageInfo) {
+        stageInfo.innerHTML = `
+          <h3 class="text-2xl font-bold text-white mb-4">✅ Lead Processing Started!</h3>
+          <p class="text-gray-300 mb-6 text-lg"><strong class="text-white">${leadName}</strong> is moving through the automated pipeline. Watch the flow!</p>
+          <div class="space-y-4">
+            <div class="flex items-start p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
+              <span class="mr-3 text-2xl">⚙️</span>
               <div>
-                <strong class="text-text-heading">Core Processing:</strong>
-                <p class="text-sm text-text-body">Normalizing data, enriching lead info, checking for duplicates</p>
+                <strong class="text-white">AI Processing (2 seconds)</strong>
+                <p class="text-sm text-gray-400 mt-1">Enriching lead data, scoring qualification, checking duplicates...</p>
               </div>
             </div>
-            <div class="flex items-start">
-              <span class="mr-2">📊</span>
+            <div class="flex items-start p-4 bg-green-500/10 border border-green-500/20 rounded-xl">
+              <span class="mr-3 text-2xl">💾</span>
               <div>
-                <strong class="text-text-heading">Dashboard Update:</strong>
-                <p class="text-sm text-text-body">Adding to analytics, updating ROI metrics, tracking source attribution</p>
+                <strong class="text-white">CRM Sync (instant)</strong>
+                <p class="text-sm text-gray-400 mt-1">Saving to Twenty CRM, updating dashboard analytics...</p>
               </div>
             </div>
-            <div class="flex items-start">
-              <span class="mr-2">💾</span>
+            <div class="flex items-start p-4 bg-pink-500/10 border border-pink-500/20 rounded-xl">
+              <span class="mr-3 text-2xl">🤖</span>
               <div>
-                <strong class="text-text-heading">CRM Sync:</strong>
-                <p class="text-sm text-text-body">Syncing to Twenty CRM, creating contact record, assigning to pipeline</p>
+                <strong class="text-white">AI Agent Actions (automated)</strong>
+                <p class="text-sm text-gray-400 mt-1">Sending welcome email, assigning to sales agent, scheduling follow-up...</p>
               </div>
             </div>
-            <div class="flex items-start">
-              <span class="mr-2">📧</span>
-              <div>
-                <strong class="text-text-heading">Email Notification:</strong>
-                <p class="text-sm text-text-body">Sending welcome email, notifying sales team, queuing follow-up sequence</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <span class="mr-2">👥</span>
-              <div>
-                <strong class="text-text-heading">Agent Assignment:</strong>
-                <p class="text-sm text-text-body">Routing to available sales agent, notifying assigned agent, updating queue</p>
-              </div>
+            <div class="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
+              <p class="text-yellow-400 text-sm">💡 <strong>Human involved only for:</strong> Contract signing, special pricing, custom terms</p>
             </div>
           </div>
         `;
       }
-    });
-
-    // Handle non-source node clicks (show info)
-    nodes.forEach(node => {
-      if (!node.classList.contains('source-node')) {
-        node.addEventListener('click', function(e) {
-          e.preventDefault();
-          
-          // Remove active class from all nodes
-          nodes.forEach(n => n.classList.remove('active'));
-          
-          // Add active class to clicked node
-          this.classList.add('active');
-          
-          // Update info panel
-          const nodeType = this.getAttribute('data-node');
-          const info = nodeInfo[nodeType];
-          
-          if (info && infoPanel) {
-            infoPanel.innerHTML = `
-              <h3 class="font-heading text-text-heading text-xl mb-3">${info.title}</h3>
-              <p class="text-text-body mb-4">${info.description}</p>
-              <h4 class="font-heading text-text-heading text-base mb-2">Key Features:</h4>
-              <ul class="list-disc list-inside space-y-2 text-text-body">
-                ${info.features.map((feature: string) => `<li>${feature}</li>`).join('')}
-              </ul>
-            `;
-          }
-        });
-      }
-
-      // Add hover effect to connections
-      node.addEventListener('mouseenter', function() {
-        const nodeType = this.getAttribute('data-node');
-        if (nodeType === 'facebook' || nodeType === 'instagram' || nodeType === 'google') {
-          document.getElementById('line-fb-core')?.setAttribute('stroke-width', '6');
-          document.getElementById('line-ig-core')?.setAttribute('stroke-width', '6');
-          document.getElementById('line-google-core')?.setAttribute('stroke-width', '6');
-        } else if (nodeType === 'core') {
-          document.querySelectorAll('.connection-line').forEach(line => {
-            line.setAttribute('stroke-width', '7');
-          });
-        } else if (nodeType === 'email') {
-          document.getElementById('line-core-email')?.setAttribute('stroke-width', '6');
-          document.getElementById('line-email-crm')?.setAttribute('stroke-width', '5');
-        } else if (nodeType === 'agents') {
-          document.getElementById('line-core-agents')?.setAttribute('stroke-width', '6');
-          document.getElementById('line-agents-crm')?.setAttribute('stroke-width', '5');
-        } else if (nodeType === 'crm') {
-          document.getElementById('line-core-crm')?.setAttribute('stroke-width', '8');
-          document.getElementById('line-email-crm')?.setAttribute('stroke-width', '5');
-          document.getElementById('line-agents-crm')?.setAttribute('stroke-width', '5');
-        }
-      });
-
-      node.addEventListener('mouseleave', function() {
-        // Reset to original widths
-        document.getElementById('line-fb-core')?.setAttribute('stroke-width', '4');
-        document.getElementById('line-ig-core')?.setAttribute('stroke-width', '4');
-        document.getElementById('line-google-core')?.setAttribute('stroke-width', '4');
-        document.getElementById('line-core-crm')?.setAttribute('stroke-width', '6');
-        document.getElementById('line-core-email')?.setAttribute('stroke-width', '4');
-        document.getElementById('line-core-agents')?.setAttribute('stroke-width', '4');
-        document.getElementById('line-email-crm')?.setAttribute('stroke-width', '3');
-        document.getElementById('line-agents-crm')?.setAttribute('stroke-width', '3');
-      });
     });
 
     // Start animation button
@@ -622,51 +497,25 @@ import Layout from '../layouts/Layout.astro';
       // Clear existing signals
       lightSignalsGroup.innerHTML = '';
       
-      // Create signals from each source
-      const sources = [
-        { start: {x: 100, y: 200}, end: {x: 500, y: 350}, delay: 0, color: '#1877F2' },
-        { start: {x: 100, y: 350}, end: {x: 500, y: 350}, delay: 400, color: '#E4405F' },
-        { start: {x: 100, y: 500}, end: {x: 500, y: 350}, delay: 800, color: '#4285F4' }
+      // Create animated flow from top to bottom
+      const stages = [
+        { start: {x: 400, y: 180}, end: {x: 400, y: 280}, delay: 0, color: '#3b82f6' },
+        { start: {x: 400, y: 420}, end: {x: 400, y: 520}, delay: 2000, color: '#8b5cf6' },
+        { start: {x: 400, y: 680}, end: {x: 400, y: 780}, delay: 4000, color: '#10b981' }
       ];
       
-      sources.forEach(source => {
+      stages.forEach(stage => {
         setTimeout(() => {
-          createLightSignal(source.start, source.end, source.color, () => {
-            // After reaching core, split into three parallel paths
-            setTimeout(() => {
-              // Path 1: Core to CRM (main flow)
-              createLightSignal({x: 500, y: 350}, {x: 1000, y: 350}, '#8B5CF6');
-              
-              // Path 2: Core to Email System (parallel notification)
-              setTimeout(() => {
-                createLightSignal({x: 500, y: 350}, {x: 680, y: 580}, '#EA4335', () => {
-                  // Email to CRM
-                  setTimeout(() => {
-                    createLightSignal({x: 680, y: 580}, {x: 1000, y: 350}, '#EA4335');
-                  }, 300);
-                });
-              }, 150);
-              
-              // Path 3: Core to Sales Agents (parallel assignment)
-              setTimeout(() => {
-                createLightSignal({x: 500, y: 350}, {x: 680, y: 120}, '#FF6B6B', () => {
-                  // Agents to CRM
-                  setTimeout(() => {
-                    createLightSignal({x: 680, y: 120}, {x: 1000, y: 350}, '#FF6B6B');
-                  }, 300);
-                });
-              }, 300);
-            }, 200);
-          });
-        }, source.delay);
+          createLightSignal(stage.start, stage.end, stage.color);
+        }, stage.delay);
       });
     }
 
-    function createLightSignal(start: {x: number, y: number}, end: {x: number, y: number}, color: string, onComplete?: () => void) {
+    function createLightSignal(start: {x: number, y: number}, end: {x: number, y: number}, color: string) {
       if (!lightSignalsGroup) return;
       
       const signal = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      signal.setAttribute('r', '8');
+      signal.setAttribute('r', '12');
       signal.setAttribute('fill', color);
       signal.setAttribute('class', 'light-signal');
       signal.setAttribute('cx', start.x.toString());
@@ -675,14 +524,14 @@ import Layout from '../layouts/Layout.astro';
       lightSignalsGroup.appendChild(signal);
       
       // Animate the signal
-      const duration = 1500;
+      const duration = 2000;
       const startTime = Date.now();
       
       function animate() {
         const elapsed = Date.now() - startTime;
         const progress = Math.min(elapsed / duration, 1);
         
-        // Easing function
+        // Smooth easing
         const eased = 1 - Math.pow(1 - progress, 3);
         
         const currentX = start.x + (end.x - start.x) * eased;
@@ -697,8 +546,7 @@ import Layout from '../layouts/Layout.astro';
           // Remove signal after animation
           setTimeout(() => {
             signal.remove();
-            if (onComplete) onComplete();
-          }, 100);
+          }, 200);
         }
       }
       
