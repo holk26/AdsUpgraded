@@ -1,0 +1,28 @@
+---
+export interface Props {
+  title: string;
+  subtitle?: string;
+  centered?: boolean;
+  class?: string;
+}
+
+const { 
+  title, 
+  subtitle, 
+  centered = false,
+  class: className = '',
+} = Astro.props;
+
+const alignment = centered ? 'text-center mx-auto' : '';
+---
+
+<div class={`max-w-3xl ${alignment} ${className}`}>
+  <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-text-heading mb-4">
+    {title}
+  </h2>
+  {subtitle && (
+    <p class="text-lg md:text-xl text-text-muted">
+      {subtitle}
+    </p>
+  )}
+</div>

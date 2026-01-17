@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import PainPoints from '../../components/PainPoints.astro';
+import HowItWorks from '../../components/HowItWorks.astro';
+import TrustSection from '../../components/TrustSection.astro';
+import Pricing from '../../components/Pricing.astro';
+import Footer from '../../components/Footer.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<Layout 
+  title="LeadFlow Engine - Deja de Perder Leads en Vancouver"
+  description="Centraliza cada lead, rastrea el ROI real de Meta/Google Ads, y responde más rápido. Hecho para negocios de servicios locales en BC."
+  lang={lang}
+>
+  <Header lang={lang} t={t} />
+  <main>
+    <Hero t={t} />
+    <PainPoints t={t} />
+    <HowItWorks t={t} />
+    <TrustSection t={t} />
+    <Pricing t={t} />
+  </main>
+  <Footer t={t} />
+</Layout>

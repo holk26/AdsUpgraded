@@ -1,0 +1,113 @@
+---
+import Card from './ui/Card.astro';
+import Button from './ui/Button.astro';
+import SectionHeading from './ui/SectionHeading.astro';
+
+export interface Props {
+  t: (key: string) => string;
+}
+
+const { t } = Astro.props;
+
+const plans = [
+  {
+    name: 'pricing.starter.name',
+    price: 'pricing.starter.price',
+    period: 'pricing.starter.period',
+    desc: 'pricing.starter.desc',
+    features: [
+      'pricing.starter.feature1',
+      'pricing.starter.feature2',
+      'pricing.starter.feature3',
+      'pricing.starter.feature4',
+      'pricing.starter.feature5',
+    ],
+    cta: 'pricing.starter.cta',
+    featured: false,
+  },
+  {
+    name: 'pricing.growth.name',
+    price: 'pricing.growth.price',
+    period: 'pricing.growth.period',
+    desc: 'pricing.growth.desc',
+    features: [
+      'pricing.growth.feature1',
+      'pricing.growth.feature2',
+      'pricing.growth.feature3',
+      'pricing.growth.feature4',
+      'pricing.growth.feature5',
+      'pricing.growth.feature6',
+    ],
+    cta: 'pricing.growth.cta',
+    featured: true,
+  },
+];
+---
+
+<section id="pricing" class="py-20 md:py-32 bg-gradient-to-br from-gray-50 to-blue-50">
+  <div class="container mx-auto px-4">
+    <SectionHeading 
+      title={t('pricing.title')}
+      subtitle={t('pricing.subtitle')}
+      centered={true}
+      class="mb-16"
+    />
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      {plans.map((plan) => (
+        <Card variant={plan.featured ? 'border' : 'glass'} class={plan.featured ? 'relative' : ''}>
+          {plan.featured && (
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+              <span class="inline-block px-4 py-1 bg-brand-accent text-white text-sm font-semibold rounded-full">
+                Most Popular
+              </span>
+            </div>
+          )}
+          
+          <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-text-heading mb-2">
+              {t(plan.name)}
+            </h3>
+            <p class="text-text-muted mb-6">
+              {t(plan.desc)}
+            </p>
+            <div class="flex items-baseline justify-center gap-2">
+              <span class="text-5xl font-bold text-text-heading">
+                {t(plan.price)}
+              </span>
+              <span class="text-xl text-text-muted">
+                CAD{t(plan.period)}
+              </span>
+            </div>
+          </div>
+
+          <ul class="space-y-4 mb-8">
+            {plan.features.map((feature) => (
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-text-body">{t(feature)}</span>
+              </li>
+            ))}
+          </ul>
+
+          <Button 
+            variant={plan.featured ? 'primary' : 'outline'} 
+            size="lg" 
+            href="#demo"
+            class="w-full"
+          >
+            {t(plan.cta)}
+          </Button>
+        </Card>
+      ))}
+    </div>
+
+    <div class="mt-12 text-center">
+      <p class="text-text-muted">
+        All plans include a 14-day free trial. No credit card required. 🍁
+      </p>
+    </div>
+  </div>
+</section>
