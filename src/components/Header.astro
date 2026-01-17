@@ -17,13 +17,14 @@ const navItems = [
 
 <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
   <div class="container mx-auto px-4">
-    <nav class="flex items-center justify-between py-4" aria-label="Main navigation">
+    <nav class="flex items-center justify-between py-3 md:py-4 gap-2 md:gap-4" aria-label="Main navigation">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-2 group focus-visible:outline-2 focus-visible:outline-brand-accent rounded-lg">
-        <svg class="w-8 h-8 text-brand-primary transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <a href="/" class="flex items-center gap-2 group focus-visible:outline-2 focus-visible:outline-brand-accent rounded-lg flex-shrink-0">
+        <svg class="w-7 h-7 md:w-8 md:h-8 text-brand-primary transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
-        <span class="text-xl font-bold text-text-heading">LeadFlow Engine</span>
+        <span class="text-base md:text-xl font-bold text-text-heading hidden xs:inline">LeadFlow Engine</span>
+        <span class="text-base md:text-xl font-bold text-text-heading xs:hidden">LeadFlow</span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -39,12 +40,12 @@ const navItems = [
       </div>
 
       <!-- Actions -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-1.5 md:gap-3">
         <!-- Language Selector -->
-        <div class="flex gap-2" role="group" aria-label="Language selection">
+        <div class="flex gap-1 md:gap-2" role="group" aria-label="Language selection">
           <a 
             href="/" 
-            class={`px-3 py-1.5 rounded-md font-medium transition-all ${lang === 'en' ? 'bg-brand-primary text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-gray-100'}`}
+            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'en' ? 'bg-brand-primary text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-gray-100'}`}
             aria-label="Switch to English"
             aria-current={lang === 'en' ? 'true' : undefined}
           >
@@ -52,15 +53,16 @@ const navItems = [
           </a>
           <a 
             href="/es" 
-            class={`px-3 py-1.5 rounded-md font-medium transition-all ${lang === 'es' ? 'bg-brand-primary text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-gray-100'}`}
+            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'es' ? 'bg-brand-primary text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-gray-100'}`}
             aria-label="Cambiar a Español"
             aria-current={lang === 'es' ? 'true' : undefined}
           >
             ES
           </a>
         </div>
-        <Button variant="primary" size="sm" href="#demo" ariaLabel={t('nav.demo')}>
-          {t('nav.demo')}
+        <Button variant="primary" size="sm" href="#demo" ariaLabel={t('nav.demo')} class="text-xs md:text-sm px-3 md:px-4">
+          <span class="hidden sm:inline">{t('nav.demo')}</span>
+          <span class="sm:hidden">Demo</span>
         </Button>
       </div>
     </nav>
