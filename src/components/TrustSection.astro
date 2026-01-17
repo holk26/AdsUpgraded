@@ -38,10 +38,10 @@ const trustFeatures = [
 
     <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       {trustFeatures.map((feature) => (
-        <Card variant="default">
+        <Card variant="default" class="group hover:border-green-200 transition-all duration-300">
           <div class="mb-4">
-            <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center">
-              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center group-hover:bg-green-100 transition-colors">
+              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
               </svg>
             </div>
@@ -49,7 +49,7 @@ const trustFeatures = [
           <h3 class="text-xl font-bold text-text-heading mb-3">
             {t(feature.titleKey)}
           </h3>
-          <p class="text-text-muted">
+          <p class="text-text-body leading-relaxed">
             {t(feature.descKey)}
           </p>
         </Card>
@@ -58,8 +58,8 @@ const trustFeatures = [
 
     <!-- Canadian Flag Badge -->
     <div class="mt-16 text-center">
-      <div class="inline-flex items-center gap-3 px-6 py-3 bg-red-50 rounded-full">
-        <span class="text-2xl">🍁</span>
+      <div class="inline-flex items-center gap-3 px-6 py-3 bg-red-50 rounded-full border border-red-100 hover:bg-red-100 transition-colors">
+        <span class="text-2xl" role="img" aria-label="Canadian flag">🍁</span>
         <span class="font-semibold text-text-heading">Proudly Canadian</span>
       </div>
     </div>
