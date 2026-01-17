@@ -13,13 +13,16 @@ import Layout from '../layouts/Layout.astro';
       <header class="text-center mb-12">
         <h1 class="font-heading text-text-heading mb-4">LeadFlow Engine Interactive Demo</h1>
         <p class="text-text-body text-lg max-w-2xl mx-auto">
-          Explore how leads flow from Facebook through our Core system to your Dashboard
+          Watch how leads flow from multiple channels through our Core system to Dashboard and Twenty CRM
         </p>
+        <button id="start-animation" class="mt-4 px-6 py-3 bg-color-accent text-white rounded-saas font-semibold hover:opacity-90 transition-all">
+          ▶ Start Flow Animation
+        </button>
       </header>
 
       <!-- Interactive Mind Map Container -->
       <div class="bg-white rounded-saas shadow-lg border border-brand-border p-8 relative overflow-hidden">
-        <svg id="mindmap" class="w-full" style="min-height: 600px;" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
+        <svg id="mindmap" class="w-full" style="min-height: 700px;" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet">
           <defs>
             <!-- Gradient for connections -->
             <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -52,92 +55,179 @@ import Layout from '../layouts/Layout.astro';
                 <feMergeNode in="SourceGraphic"/>
               </feMerge>
             </filter>
+
+            <!-- Glow filter for light signals -->
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
           </defs>
 
           <!-- Connection Lines -->
           <g id="connections">
-            <!-- Facebook to Core -->
-            <path id="line-fb-core" 
-                  d="M 250 300 L 500 300" 
-                  stroke="url(#connectionGradient)" 
-                  stroke-width="4" 
-                  fill="none" 
-                  stroke-dasharray="10 5"
-                  class="connection-line">
-              <animate attributeName="stroke-dashoffset" from="15" to="0" dur="1s" repeatCount="indefinite" />
+            <!-- Lead Sources to Core -->
+            <path id="line-fb-core" d="M 150 200 L 450 350" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
+              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
+            </path>
+            <path id="line-ig-core" d="M 150 350 L 450 350" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
+              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
+            </path>
+            <path id="line-google-core" d="M 150 500 L 450 350" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
+              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
             </path>
             
             <!-- Core to Dashboard -->
-            <path id="line-core-dashboard" 
-                  d="M 500 300 L 750 300" 
-                  stroke="url(#connectionGradient)" 
-                  stroke-width="4" 
-                  fill="none" 
-                  stroke-dasharray="10 5"
-                  class="connection-line">
+            <path id="line-core-dashboard" d="M 550 350 L 750 350" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="10 5" class="connection-line">
+              <animate attributeName="stroke-dashoffset" from="15" to="0" dur="1s" repeatCount="indefinite" />
+            </path>
+            
+            <!-- Dashboard to CRM -->
+            <path id="line-dashboard-crm" d="M 850 350 L 1050 350" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="10 5" class="connection-line">
               <animate attributeName="stroke-dashoffset" from="15" to="0" dur="1s" repeatCount="indefinite" />
             </path>
           </g>
 
+          <!-- Light Signal Particles (hidden by default) -->
+          <g id="light-signals"></g>
+
           <!-- Nodes -->
+          <!-- Lead Source Nodes (Left Side) -->
+          
           <!-- Facebook Node -->
-          <g id="node-facebook" class="node" data-node="facebook" style="cursor: pointer;">
-            <circle cx="150" cy="300" r="70" fill="#1877F2" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="150" cy="300" r="74" fill="none" stroke="#1877F2" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="74;80;74" dur="2s" repeatCount="indefinite" />
+          <g id="node-facebook" class="node source-node" data-node="facebook" data-channel="facebook" style="cursor: pointer;">
+            <circle cx="100" cy="200" r="50" fill="#1877F2" filter="url(#dropShadow)" class="node-circle"/>
+            <circle cx="100" cy="200" r="53" fill="none" stroke="#1877F2" stroke-width="2" opacity="0.3" class="node-ring">
+              <animate attributeName="r" values="53;58;53" dur="2s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
             </circle>
-            <!-- Facebook Icon -->
-            <text x="150" y="315" text-anchor="middle" fill="white" font-size="48" font-weight="bold">f</text>
-            <text x="150" y="390" text-anchor="middle" fill="var(--text-heading)" font-size="18" font-weight="600">Facebook</text>
-            <text x="150" y="410" text-anchor="middle" fill="var(--text-body)" font-size="14">Lead Source</text>
+            <text x="100" y="215" text-anchor="middle" fill="white" font-size="36" font-weight="bold">f</text>
+            <text x="100" y="270" text-anchor="middle" fill="var(--text-heading)" font-size="14" font-weight="600">Facebook</text>
+          </g>
+
+          <!-- Instagram Node -->
+          <g id="node-instagram" class="node source-node" data-node="instagram" data-channel="instagram" style="cursor: pointer;">
+            <circle cx="100" cy="350" r="50" fill="#E4405F" filter="url(#dropShadow)" class="node-circle"/>
+            <circle cx="100" cy="350" r="53" fill="none" stroke="#E4405F" stroke-width="2" opacity="0.3" class="node-ring">
+              <animate attributeName="r" values="53;58;53" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <!-- Instagram Camera Icon -->
+            <g transform="translate(100, 350)">
+              <rect x="-18" y="-15" width="36" height="30" rx="8" fill="none" stroke="white" stroke-width="3"/>
+              <circle cx="0" cy="0" r="10" fill="none" stroke="white" stroke-width="3"/>
+              <circle cx="10" cy="-10" r="2" fill="white"/>
+            </g>
+            <text x="100" y="420" text-anchor="middle" fill="var(--text-heading)" font-size="14" font-weight="600">Instagram</text>
+          </g>
+
+          <!-- Google Ads Node -->
+          <g id="node-google" class="node source-node" data-node="google" data-channel="google" style="cursor: pointer;">
+            <circle cx="100" cy="500" r="50" fill="#4285F4" filter="url(#dropShadow)" class="node-circle"/>
+            <circle cx="100" cy="500" r="53" fill="none" stroke="#4285F4" stroke-width="2" opacity="0.3" class="node-ring">
+              <animate attributeName="r" values="53;58;53" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <text x="100" y="515" text-anchor="middle" fill="white" font-size="32" font-weight="bold">G</text>
+            <text x="100" y="570" text-anchor="middle" fill="var(--text-heading)" font-size="14" font-weight="600">Google Ads</text>
           </g>
 
           <!-- Core Node (Central Hub) -->
           <g id="node-core" class="node" data-node="core" style="cursor: pointer;">
-            <circle cx="500" cy="300" r="80" fill="var(--color-primary)" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="500" cy="300" r="84" fill="none" stroke="var(--color-accent)" stroke-width="2" opacity="0.3" class="node-ring">
+            <circle cx="500" cy="350" r="80" fill="var(--color-primary)" filter="url(#dropShadow)" class="node-circle"/>
+            <circle cx="500" cy="350" r="84" fill="none" stroke="var(--color-accent)" stroke-width="2" opacity="0.3" class="node-ring">
               <animate attributeName="r" values="84;90;84" dur="2s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
             </circle>
             <!-- Core Icon (Gear/Cog) -->
-            <g transform="translate(500, 300)">
+            <g transform="translate(500, 350)">
               <path d="M 0,-30 L 5,-35 L 10,-30 L 10,-20 L 5,-15 L 0,-20 Z M 21,-21 L 28,-23 L 32,-18 L 28,-10 L 21,-8 L 18,-13 Z M 21,21 L 23,28 L 18,32 L 10,28 L 8,21 L 13,18 Z M -21,21 L -28,23 L -32,18 L -28,10 L -21,8 L -18,13 Z M -21,-21 L -23,-28 L -18,-32 L -10,-28 L -8,-21 L -13,-18 Z" 
                     fill="white" opacity="0.3"/>
               <circle cx="0" cy="0" r="15" fill="none" stroke="white" stroke-width="3"/>
               <circle cx="0" cy="0" r="8" fill="white"/>
             </g>
-            <text x="500" y="400" text-anchor="middle" fill="var(--text-heading)" font-size="18" font-weight="600">Core Engine</text>
-            <text x="500" y="420" text-anchor="middle" fill="var(--text-body)" font-size="14">Processing Hub</text>
+            <text x="500" y="450" text-anchor="middle" fill="var(--text-heading)" font-size="16" font-weight="600">Core Engine</text>
+            <text x="500" y="470" text-anchor="middle" fill="var(--text-body)" font-size="13">Processing Hub</text>
           </g>
 
           <!-- Dashboard Node -->
           <g id="node-dashboard" class="node" data-node="dashboard" style="cursor: pointer;">
-            <circle cx="850" cy="300" r="70" fill="var(--color-secondary)" filter="url(#dropShadow)" class="node-circle"/>
-            <circle cx="850" cy="300" r="74" fill="none" stroke="var(--color-secondary)" stroke-width="2" opacity="0.3" class="node-ring">
-              <animate attributeName="r" values="74;80;74" dur="2s" repeatCount="indefinite" />
+            <circle cx="800" cy="350" r="60" fill="var(--color-secondary)" filter="url(#dropShadow)" class="node-circle"/>
+            <circle cx="800" cy="350" r="64" fill="none" stroke="var(--color-secondary)" stroke-width="2" opacity="0.3" class="node-ring">
+              <animate attributeName="r" values="64;70;64" dur="2s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
             </circle>
             <!-- Dashboard Icon (Chart) -->
-            <g transform="translate(850, 300)">
-              <rect x="-25" y="-20" width="10" height="35" fill="white" rx="2"/>
-              <rect x="-8" y="-28" width="10" height="43" fill="white" rx="2"/>
-              <rect x="9" y="-15" width="10" height="30" fill="white" rx="2"/>
+            <g transform="translate(800, 350)">
+              <rect x="-20" y="-15" width="8" height="28" fill="white" rx="2"/>
+              <rect x="-6" y="-22" width="8" height="35" fill="white" rx="2"/>
+              <rect x="8" y="-12" width="8" height="25" fill="white" rx="2"/>
             </g>
-            <text x="850" y="390" text-anchor="middle" fill="var(--text-heading)" font-size="18" font-weight="600">Dashboard</text>
-            <text x="850" y="410" text-anchor="middle" fill="var(--text-body)" font-size="14">Analytics & Insights</text>
+            <text x="800" y="425" text-anchor="middle" fill="var(--text-heading)" font-size="16" font-weight="600">Dashboard</text>
+            <text x="800" y="445" text-anchor="middle" fill="var(--text-body)" font-size="13">Analytics</text>
+          </g>
+
+          <!-- Twenty CRM Node -->
+          <g id="node-crm" class="node" data-node="crm" style="cursor: pointer;">
+            <circle cx="1050" cy="350" r="60" fill="#8B5CF6" filter="url(#dropShadow)" class="node-circle"/>
+            <circle cx="1050" cy="350" r="64" fill="none" stroke="#8B5CF6" stroke-width="2" opacity="0.3" class="node-ring">
+              <animate attributeName="r" values="64;70;64" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <!-- CRM Icon (Database/People) -->
+            <g transform="translate(1050, 350)">
+              <circle cx="-8" cy="-8" r="8" fill="none" stroke="white" stroke-width="2.5"/>
+              <path d="M -8,0 Q -8,8 -15,12 L -15,18 Q -8,14 -8,22 M -8,22 Q -8,14 -1,18 L -1,12 Q -8,8 -8,0" fill="none" stroke="white" stroke-width="2.5"/>
+              <circle cx="8" cy="-8" r="8" fill="none" stroke="white" stroke-width="2.5"/>
+              <path d="M 8,0 Q 8,8 1,12 L 1,18 Q 8,14 8,22 M 8,22 Q 8,14 15,18 L 15,12 Q 8,8 8,0" fill="none" stroke="white" stroke-width="2.5"/>
+            </g>
+            <text x="1050" y="425" text-anchor="middle" fill="var(--text-heading)" font-size="16" font-weight="600">Twenty CRM</text>
+            <text x="1050" y="445" text-anchor="middle" fill="var(--text-body)" font-size="13">Lead Management</text>
           </g>
         </svg>
 
+        <!-- Simulated Lead Form Modal -->
+        <div id="lead-form-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
+          <div class="bg-white rounded-saas shadow-xl p-8 max-w-md w-full mx-4 relative">
+            <button id="close-modal" class="absolute top-4 right-4 text-text-muted hover:text-text-heading text-2xl">×</button>
+            <h3 class="font-heading text-text-heading text-2xl mb-4">Lead Capture Form</h3>
+            <p class="text-text-body mb-6">Simulated form from <span id="form-source" class="font-semibold text-color-accent"></span></p>
+            <form id="demo-form" class="space-y-4">
+              <div>
+                <label class="block text-text-heading font-medium mb-2">Name</label>
+                <input type="text" placeholder="John Smith" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" />
+              </div>
+              <div>
+                <label class="block text-text-heading font-medium mb-2">Email</label>
+                <input type="email" placeholder="john@example.com" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" />
+              </div>
+              <div>
+                <label class="block text-text-heading font-medium mb-2">Phone</label>
+                <input type="tel" placeholder="+1 (604) 555-0123" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" />
+              </div>
+              <div>
+                <label class="block text-text-heading font-medium mb-2">Message</label>
+                <textarea rows="3" placeholder="I'm interested in your services..." class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent"></textarea>
+              </div>
+              <button type="submit" class="w-full px-6 py-3 bg-color-accent text-white rounded-saas font-semibold hover:opacity-90 transition-all">
+                Submit Lead
+              </button>
+            </form>
+          </div>
+        </div>
+
         <!-- Info Panel -->
         <div id="info-panel" class="mt-8 p-6 bg-bg-surface rounded-saas border border-brand-border">
-          <h3 class="font-heading text-text-heading text-xl mb-4">Click on any node to learn more</h3>
+          <h3 class="font-heading text-text-heading text-xl mb-4">Click on any node to learn more • Click lead sources to see form</h3>
           <div id="node-info" class="text-text-body">
-            <p class="mb-3"><strong>Interactive Mind Map:</strong> This visualization shows how LeadFlow Engine connects your marketing channels to actionable insights.</p>
+            <p class="mb-3"><strong>Interactive Mind Map:</strong> This visualization shows how LeadFlow Engine connects multiple marketing channels to actionable insights and CRM.</p>
             <ul class="list-disc list-inside space-y-2">
-              <li><strong>Facebook:</strong> Your lead generation source</li>
+              <li><strong>Lead Sources (Facebook, Instagram, Google):</strong> Click to see simulated forms</li>
               <li><strong>Core Engine:</strong> Processes, normalizes, and enriches lead data</li>
               <li><strong>Dashboard:</strong> Real-time analytics and ROI tracking</li>
+              <li><strong>Twenty CRM:</strong> Seamless lead management integration</li>
             </ul>
           </div>
         </div>
@@ -180,23 +270,77 @@ import Layout from '../layouts/Layout.astro';
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    /* Modal styles */
+    #lead-form-modal.show {
+      display: flex !important;
+      animation: modalFadeIn 0.3s ease;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Light signal animation */
+    .light-signal {
+      filter: url(#glow);
+      animation: pulse 0.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
   </style>
 
   <script>
     // Interactive functionality
     const nodes = document.querySelectorAll('.node');
+    const sourceNodes = document.querySelectorAll('.source-node');
     const infoPanel = document.getElementById('node-info');
+    const modal = document.getElementById('lead-form-modal');
+    const closeModal = document.getElementById('close-modal');
+    const formSource = document.getElementById('form-source');
+    const demoForm = document.getElementById('demo-form');
+    const startAnimationBtn = document.getElementById('start-animation');
+    const lightSignalsGroup = document.getElementById('light-signals');
 
     const nodeInfo = {
       facebook: {
-        title: 'Facebook Lead Source',
+        title: 'Facebook Lead Capture',
         description: 'Capture leads directly from your Facebook campaigns with full UTM tracking.',
         features: [
           'Automatic lead capture from Facebook Ads',
           'Complete UTM parameter tracking',
           'Real-time lead notification',
           'Instagram integration included',
-          'Track campaign performance'
+          'Track campaign performance',
+          'Form simulation available'
+        ]
+      },
+      instagram: {
+        title: 'Instagram Lead Capture',
+        description: 'Convert Instagram engagement into qualified leads.',
+        features: [
+          'Instagram Stories and Posts ads',
+          'Direct message lead capture',
+          'Visual content tracking',
+          'Influencer campaign tracking',
+          'Engagement metrics',
+          'Form simulation available'
+        ]
+      },
+      google: {
+        title: 'Google Ads Lead Capture',
+        description: 'Capture high-intent leads from Google Search and Display ads.',
+        features: [
+          'Search and Display ad tracking',
+          'Keyword-level attribution',
+          'Landing page optimization',
+          'Quality Score monitoring',
+          'Conversion tracking',
+          'Form simulation available'
         ]
       },
       core: {
@@ -222,53 +366,203 @@ import Layout from '../layouts/Layout.astro';
           'Custom reporting',
           'Export to CSV/PDF'
         ]
+      },
+      crm: {
+        title: 'Twenty CRM Integration',
+        description: 'Seamlessly manage and nurture leads in Twenty CRM.',
+        features: [
+          'Real-time lead synchronization',
+          'Custom field mapping',
+          'Automated workflow triggers',
+          'Lead scoring and qualification',
+          'Team collaboration tools',
+          'Activity timeline tracking'
+        ]
       }
     };
 
-    nodes.forEach(node => {
+    // Handle source node clicks (show form modal)
+    sourceNodes.forEach(node => {
       node.addEventListener('click', function(e) {
         e.preventDefault();
-        
-        // Remove active class from all nodes
-        nodes.forEach(n => n.classList.remove('active'));
-        
-        // Add active class to clicked node
-        this.classList.add('active');
-        
-        // Update info panel
-        const nodeType = this.getAttribute('data-node');
-        const info = nodeInfo[nodeType];
-        
-        if (info && infoPanel) {
-          infoPanel.innerHTML = `
-            <h3 class="font-heading text-text-heading text-xl mb-3">${info.title}</h3>
-            <p class="text-text-body mb-4">${info.description}</p>
-            <h4 class="font-heading text-text-heading text-base mb-2">Key Features:</h4>
-            <ul class="list-disc list-inside space-y-2 text-text-body">
-              ${info.features.map((feature: string) => `<li>${feature}</li>`).join('')}
-            </ul>
-          `;
+        const channel = this.getAttribute('data-channel');
+        const channelNames = {
+          facebook: 'Facebook',
+          instagram: 'Instagram',
+          google: 'Google Ads'
+        };
+        if (formSource) {
+          formSource.textContent = channelNames[channel] || channel;
         }
+        modal?.classList.add('show');
       });
+    });
+
+    // Close modal
+    closeModal?.addEventListener('click', () => {
+      modal?.classList.remove('show');
+    });
+
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('show');
+      }
+    });
+
+    // Handle form submission
+    demoForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      modal?.classList.remove('show');
+      
+      // Start flow animation
+      startFlowAnimation();
+      
+      // Show success message
+      if (infoPanel) {
+        infoPanel.innerHTML = `
+          <h3 class="font-heading text-text-heading text-xl mb-3">✓ Lead Captured!</h3>
+          <p class="text-text-body mb-4">Watch the light signals travel through the system as your lead is processed.</p>
+          <ul class="list-disc list-inside space-y-2 text-text-body">
+            <li>Lead data is being normalized and enriched</li>
+            <li>Checking for duplicates</li>
+            <li>Syncing with Dashboard and Twenty CRM</li>
+          </ul>
+        `;
+      }
+    });
+
+    // Handle non-source node clicks (show info)
+    nodes.forEach(node => {
+      if (!node.classList.contains('source-node')) {
+        node.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Remove active class from all nodes
+          nodes.forEach(n => n.classList.remove('active'));
+          
+          // Add active class to clicked node
+          this.classList.add('active');
+          
+          // Update info panel
+          const nodeType = this.getAttribute('data-node');
+          const info = nodeInfo[nodeType];
+          
+          if (info && infoPanel) {
+            infoPanel.innerHTML = `
+              <h3 class="font-heading text-text-heading text-xl mb-3">${info.title}</h3>
+              <p class="text-text-body mb-4">${info.description}</p>
+              <h4 class="font-heading text-text-heading text-base mb-2">Key Features:</h4>
+              <ul class="list-disc list-inside space-y-2 text-text-body">
+                ${info.features.map((feature: string) => `<li>${feature}</li>`).join('')}
+              </ul>
+            `;
+          }
+        });
+      }
 
       // Add hover effect to connections
       node.addEventListener('mouseenter', function() {
         const nodeType = this.getAttribute('data-node');
-        if (nodeType === 'facebook') {
-          document.getElementById('line-fb-core')?.setAttribute('stroke-width', '6');
+        if (nodeType === 'facebook' || nodeType === 'instagram' || nodeType === 'google') {
+          document.getElementById('line-fb-core')?.setAttribute('stroke-width', '5');
+          document.getElementById('line-ig-core')?.setAttribute('stroke-width', '5');
+          document.getElementById('line-google-core')?.setAttribute('stroke-width', '5');
         } else if (nodeType === 'core') {
-          document.getElementById('line-fb-core')?.setAttribute('stroke-width', '6');
-          document.getElementById('line-core-dashboard')?.setAttribute('stroke-width', '6');
+          document.querySelectorAll('.connection-line').forEach(line => {
+            line.setAttribute('stroke-width', '5');
+          });
         } else if (nodeType === 'dashboard') {
           document.getElementById('line-core-dashboard')?.setAttribute('stroke-width', '6');
+          document.getElementById('line-dashboard-crm')?.setAttribute('stroke-width', '6');
+        } else if (nodeType === 'crm') {
+          document.getElementById('line-dashboard-crm')?.setAttribute('stroke-width', '6');
         }
       });
 
       node.addEventListener('mouseleave', function() {
         document.querySelectorAll('.connection-line').forEach(line => {
-          line.setAttribute('stroke-width', '4');
+          line.setAttribute('stroke-width', '3');
         });
+        document.getElementById('line-core-dashboard')?.setAttribute('stroke-width', '4');
+        document.getElementById('line-dashboard-crm')?.setAttribute('stroke-width', '4');
       });
     });
+
+    // Start animation button
+    startAnimationBtn?.addEventListener('click', startFlowAnimation);
+
+    // Flow animation with light signals
+    function startFlowAnimation() {
+      if (!lightSignalsGroup) return;
+      
+      // Clear existing signals
+      lightSignalsGroup.innerHTML = '';
+      
+      // Create signals from each source
+      const sources = [
+        { start: {x: 150, y: 200}, end: {x: 450, y: 350}, delay: 0, color: '#1877F2' },
+        { start: {x: 150, y: 350}, end: {x: 450, y: 350}, delay: 400, color: '#E4405F' },
+        { start: {x: 150, y: 500}, end: {x: 450, y: 350}, delay: 800, color: '#4285F4' }
+      ];
+      
+      sources.forEach(source => {
+        setTimeout(() => {
+          createLightSignal(source.start, source.end, source.color, () => {
+            // After reaching core, continue to dashboard
+            setTimeout(() => {
+              createLightSignal({x: 550, y: 350}, {x: 750, y: 350}, '#6366F1', () => {
+                // Finally to CRM
+                setTimeout(() => {
+                  createLightSignal({x: 850, y: 350}, {x: 1050, y: 350}, '#10B981');
+                }, 300);
+              });
+            }, 200);
+          });
+        }, source.delay);
+      });
+    }
+
+    function createLightSignal(start: {x: number, y: number}, end: {x: number, y: number}, color: string, onComplete?: () => void) {
+      if (!lightSignalsGroup) return;
+      
+      const signal = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      signal.setAttribute('r', '8');
+      signal.setAttribute('fill', color);
+      signal.setAttribute('class', 'light-signal');
+      signal.setAttribute('cx', start.x.toString());
+      signal.setAttribute('cy', start.y.toString());
+      
+      lightSignalsGroup.appendChild(signal);
+      
+      // Animate the signal
+      const duration = 1500;
+      const startTime = Date.now();
+      
+      function animate() {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function
+        const eased = 1 - Math.pow(1 - progress, 3);
+        
+        const currentX = start.x + (end.x - start.x) * eased;
+        const currentY = start.y + (end.y - start.y) * eased;
+        
+        signal.setAttribute('cx', currentX.toString());
+        signal.setAttribute('cy', currentY.toString());
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          // Remove signal after animation
+          setTimeout(() => {
+            signal.remove();
+            if (onComplete) onComplete();
+          }, 100);
+        }
+      }
+      
+      requestAnimationFrame(animate);
+    }
   </script>
 </Layout>
