@@ -8,6 +8,8 @@ export default {
           primary: 'var(--brand-primary)',
           secondary: 'var(--brand-secondary)',
           accent: 'var(--brand-accent)',
+          surface: 'var(--brand-surface)',
+          border: 'var(--brand-border)',
         },
         bg: {
           surface: 'var(--bg-surface)',
@@ -17,11 +19,16 @@ export default {
         text: {
           heading: 'var(--text-heading)',
           body: 'var(--text-body)',
+          main: 'var(--text-main)',
           muted: 'var(--text-muted)',
         },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        heading: ['Geist Sans', 'Inter', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        saas: 'var(--radius-saas)',
       },
     },
   },

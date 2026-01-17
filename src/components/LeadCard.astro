@@ -1,0 +1,53 @@
+---
+import Card from './ui/Card.astro';
+import Badge from './ui/Badge.astro';
+import { Facebook, Globe, Instagram } from 'lucide-react';
+
+export interface Props {
+  name: string;
+  email: string;
+  source: 'Facebook' | 'Web' | 'Instagram';
+  utm_campaign: string;
+  status: 'New' | 'Contacted' | 'Sold';
+}
+
+const { name, email, source, utm_campaign, status } = Astro.props;
+
+// Map source to icon
+const sourceIcons = {
+  Facebook: Facebook,
+  Web: Globe,
+  Instagram: Instagram,
+};
+
+// Map status to badge variant
+const statusVariants = {
+  New: 'accent' as const,
+  Contacted: 'warning' as const,
+  Sold: 'success' as const,
+};
+
+const SourceIcon = sourceIcons[source];
+---
+
+<Card class="hover:border-brand-accent/30 transition-colors">
+  <div class="flex items-start justify-between gap-4">
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center gap-2 mb-2">
+        <SourceIcon className="w-4 h-4 text-text-muted flex-shrink-0" />
+        <h3 class="font-heading font-bold text-text-heading text-lg truncate">
+          {name}
+        </h3>
+      </div>
+      <p class="text-sm text-text-body mb-3 truncate">{email}</p>
+      <div class="flex items-center gap-2 flex-wrap">
+        <Badge variant="accent">
+          {utm_campaign}
+        </Badge>
+        <Badge variant={statusVariants[status]}>
+          {status}
+        </Badge>
+      </div>
+    </div>
+  </div>
+</Card>
