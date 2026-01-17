@@ -79,9 +79,20 @@ import Layout from '../layouts/Layout.astro';
               <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
             </path>
             
-            <!-- Core to Dashboard -->
-            <path id="line-core-dashboard" d="M 550 350 L 750 350" stroke="url(#connectionGradient)" stroke-width="4" fill="none" stroke-dasharray="10 5" class="connection-line">
-              <animate attributeName="stroke-dashoffset" from="15" to="0" dur="1s" repeatCount="indefinite" />
+            <!-- Core to Processing nodes -->
+            <path id="line-core-email" d="M 550 350 L 650 250" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
+              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
+            </path>
+            <path id="line-core-agent" d="M 550 350 L 650 450" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
+              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
+            </path>
+            
+            <!-- Processing nodes to Dashboard -->
+            <path id="line-email-dashboard" d="M 750 250 L 750 350" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
+              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
+            </path>
+            <path id="line-agent-dashboard" d="M 750 450 L 750 350" stroke="url(#connectionGradient)" stroke-width="3" fill="none" stroke-dasharray="8 4" class="connection-line">
+              <animate attributeName="stroke-dashoffset" from="12" to="0" dur="1s" repeatCount="indefinite" />
             </path>
             
             <!-- Dashboard to CRM -->
@@ -152,6 +163,40 @@ import Layout from '../layouts/Layout.astro';
             <text x="500" y="470" text-anchor="middle" fill="var(--text-body)" font-size="13">Processing Hub</text>
           </g>
 
+          <!-- Email Notification Node -->
+          <g id="node-email" class="node" data-node="email" style="cursor: pointer;">
+            <circle cx="700" cy="250" r="50" fill="#EA4335" filter="url(#dropShadow)" class="node-circle"/>
+            <circle cx="700" cy="250" r="53" fill="none" stroke="#EA4335" stroke-width="2" opacity="0.3" class="node-ring">
+              <animate attributeName="r" values="53;58;53" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <!-- Email Icon (Envelope) -->
+            <g transform="translate(700, 250)">
+              <rect x="-20" y="-12" width="40" height="24" rx="3" fill="none" stroke="white" stroke-width="2.5"/>
+              <path d="M -20,-12 L 0,2 L 20,-12" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+            </g>
+            <text x="700" y="315" text-anchor="middle" fill="var(--text-heading)" font-size="14" font-weight="600">Email Alert</text>
+            <text x="700" y="332" text-anchor="middle" fill="var(--text-body)" font-size="12">Notifications</text>
+          </g>
+
+          <!-- Sales Agent Node -->
+          <g id="node-agent" class="node" data-node="agent" style="cursor: pointer;">
+            <circle cx="700" cy="450" r="50" fill="#FF6B35" filter="url(#dropShadow)" class="node-circle"/>
+            <circle cx="700" cy="450" r="53" fill="none" stroke="#FF6B35" stroke-width="2" opacity="0.3" class="node-ring">
+              <animate attributeName="r" values="53;58;53" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <!-- Agent Icon (Person with headset) -->
+            <g transform="translate(700, 450)">
+              <circle cx="0" cy="-8" r="10" fill="none" stroke="white" stroke-width="2.5"/>
+              <path d="M -12,8 Q -12,0 -6,-2 M 12,8 Q 12,0 6,-2" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M -15,-8 Q -18,-8 -18,-12 Q -18,-15 -15,-15" fill="none" stroke="white" stroke-width="2"/>
+              <circle cx="0" cy="12" r="3" fill="white"/>
+            </g>
+            <text x="700" y="515" text-anchor="middle" fill="var(--text-heading)" font-size="14" font-weight="600">Sales Agent</text>
+            <text x="700" y="532" text-anchor="middle" fill="var(--text-body)" font-size="12">Assignment</text>
+          </g>
+
           <!-- Dashboard Node -->
           <g id="node-dashboard" class="node" data-node="dashboard" style="cursor: pointer;">
             <circle cx="800" cy="350" r="60" fill="var(--color-secondary)" filter="url(#dropShadow)" class="node-circle"/>
@@ -196,20 +241,37 @@ import Layout from '../layouts/Layout.astro';
             <p class="text-text-body mb-6">Simulated form from <span id="form-source" class="font-semibold text-color-accent"></span></p>
             <form id="demo-form" class="space-y-4">
               <div>
-                <label class="block text-text-heading font-medium mb-2">Name</label>
-                <input type="text" placeholder="John Smith" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" />
+                <label class="block text-text-heading font-medium mb-2">Name *</label>
+                <input type="text" name="name" value="Sarah Chen" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" required />
               </div>
               <div>
-                <label class="block text-text-heading font-medium mb-2">Email</label>
-                <input type="email" placeholder="john@example.com" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" />
+                <label class="block text-text-heading font-medium mb-2">Email *</label>
+                <input type="email" name="email" value="sarah.chen@example.com" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" required />
               </div>
               <div>
                 <label class="block text-text-heading font-medium mb-2">Phone</label>
-                <input type="tel" placeholder="+1 (604) 555-0123" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" />
+                <input type="tel" name="phone" value="+1 (604) 555-7890" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" />
+              </div>
+              <div>
+                <label class="block text-text-heading font-medium mb-2">Company</label>
+                <input type="text" name="company" value="Tech Innovations Ltd" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent" />
+              </div>
+              <div>
+                <label class="block text-text-heading font-medium mb-2">Service Interest</label>
+                <select name="service" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent">
+                  <option value="lead-management">Lead Management</option>
+                  <option value="analytics">Analytics & Reporting</option>
+                  <option value="automation">Marketing Automation</option>
+                  <option value="integration">CRM Integration</option>
+                </select>
               </div>
               <div>
                 <label class="block text-text-heading font-medium mb-2">Message</label>
-                <textarea rows="3" placeholder="I'm interested in your services..." class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent"></textarea>
+                <textarea name="message" rows="3" class="w-full px-4 py-2 border border-brand-border rounded-saas focus:outline-none focus:ring-2 focus:ring-color-accent">Interested in learning more about your lead tracking solutions for my Vancouver-based business.</textarea>
+              </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="consent" name="consent" checked class="w-4 h-4 text-color-accent border-brand-border rounded focus:ring-2 focus:ring-color-accent" />
+                <label for="consent" class="ml-2 text-sm text-text-body">I agree to receive communications</label>
               </div>
               <button type="submit" class="w-full px-6 py-3 bg-color-accent text-white rounded-saas font-semibold hover:opacity-90 transition-all">
                 Submit Lead
@@ -220,12 +282,14 @@ import Layout from '../layouts/Layout.astro';
 
         <!-- Info Panel -->
         <div id="info-panel" class="mt-8 p-6 bg-bg-surface rounded-saas border border-brand-border">
-          <h3 class="font-heading text-text-heading text-xl mb-4">Click on any node to learn more • Click lead sources to see form</h3>
+          <h3 class="font-heading text-text-heading text-xl mb-4">Click on any node to learn more • Click lead sources to see form with sample data</h3>
           <div id="node-info" class="text-text-body">
-            <p class="mb-3"><strong>Interactive Mind Map:</strong> This visualization shows how LeadFlow Engine connects multiple marketing channels to actionable insights and CRM.</p>
+            <p class="mb-3"><strong>Interactive Mind Map:</strong> This visualization shows how LeadFlow Engine connects multiple marketing channels through automated processing to your CRM.</p>
             <ul class="list-disc list-inside space-y-2">
-              <li><strong>Lead Sources (Facebook, Instagram, Google):</strong> Click to see simulated forms</li>
+              <li><strong>Lead Sources (Facebook, Instagram, Google):</strong> Click to see pre-filled forms</li>
               <li><strong>Core Engine:</strong> Processes, normalizes, and enriches lead data</li>
+              <li><strong>Email Alerts:</strong> Instant notifications to your team</li>
+              <li><strong>Sales Agent:</strong> Automatic assignment to available agents</li>
               <li><strong>Dashboard:</strong> Real-time analytics and ROI tracking</li>
               <li><strong>Twenty CRM:</strong> Seamless lead management integration</li>
             </ul>
@@ -355,6 +419,30 @@ import Layout from '../layouts/Layout.astro';
           'Advanced UTM attribution'
         ]
       },
+      email: {
+        title: 'Email Notification System',
+        description: 'Instant email alerts to keep your team informed of new leads.',
+        features: [
+          'Real-time email notifications',
+          'Customizable email templates',
+          'Multi-recipient support',
+          'Lead summary in email',
+          'Mobile-optimized emails',
+          'Delivery tracking and logs'
+        ]
+      },
+      agent: {
+        title: 'Sales Agent Assignment',
+        description: 'Automatically assign leads to available sales agents based on intelligent routing.',
+        features: [
+          'Smart round-robin distribution',
+          'Territory-based assignment',
+          'Workload balancing',
+          'Agent availability tracking',
+          'Performance-based routing',
+          'Manual reassignment option'
+        ]
+      },
       dashboard: {
         title: 'Analytics Dashboard',
         description: 'Get actionable insights and track your ROI in real-time.',
@@ -471,8 +559,15 @@ import Layout from '../layouts/Layout.astro';
           document.querySelectorAll('.connection-line').forEach(line => {
             line.setAttribute('stroke-width', '5');
           });
+        } else if (nodeType === 'email') {
+          document.getElementById('line-core-email')?.setAttribute('stroke-width', '5');
+          document.getElementById('line-email-dashboard')?.setAttribute('stroke-width', '5');
+        } else if (nodeType === 'agent') {
+          document.getElementById('line-core-agent')?.setAttribute('stroke-width', '5');
+          document.getElementById('line-agent-dashboard')?.setAttribute('stroke-width', '5');
         } else if (nodeType === 'dashboard') {
-          document.getElementById('line-core-dashboard')?.setAttribute('stroke-width', '6');
+          document.getElementById('line-email-dashboard')?.setAttribute('stroke-width', '5');
+          document.getElementById('line-agent-dashboard')?.setAttribute('stroke-width', '5');
           document.getElementById('line-dashboard-crm')?.setAttribute('stroke-width', '6');
         } else if (nodeType === 'crm') {
           document.getElementById('line-dashboard-crm')?.setAttribute('stroke-width', '6');
@@ -508,14 +603,30 @@ import Layout from '../layouts/Layout.astro';
       sources.forEach(source => {
         setTimeout(() => {
           createLightSignal(source.start, source.end, source.color, () => {
-            // After reaching core, continue to dashboard
+            // After reaching core, split to email and agent
             setTimeout(() => {
-              createLightSignal({x: 500, y: 350}, {x: 800, y: 350}, '#6366F1', () => {
-                // Finally to CRM
+              // Signal to email notification
+              createLightSignal({x: 500, y: 350}, {x: 700, y: 250}, '#EA4335', () => {
+                // Email to dashboard
                 setTimeout(() => {
-                  createLightSignal({x: 800, y: 350}, {x: 1050, y: 350}, '#10B981');
-                }, 300);
+                  createLightSignal({x: 700, y: 250}, {x: 800, y: 350}, '#10B981');
+                }, 200);
               });
+              
+              // Signal to sales agent
+              setTimeout(() => {
+                createLightSignal({x: 500, y: 350}, {x: 700, y: 450}, '#FF6B35', () => {
+                  // Agent to dashboard
+                  setTimeout(() => {
+                    createLightSignal({x: 700, y: 450}, {x: 800, y: 350}, '#10B981', () => {
+                      // Finally to CRM
+                      setTimeout(() => {
+                        createLightSignal({x: 800, y: 350}, {x: 1050, y: 350}, '#8B5CF6');
+                      }, 300);
+                    });
+                  }, 200);
+                });
+              }, 150);
             }, 200);
           });
         }, source.delay);
