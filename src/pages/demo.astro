@@ -1,0 +1,198 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import Badge from '../components/ui/Badge.astro';
+import Card from '../components/ui/Card.astro';
+import LeadCard from '../components/LeadCard.astro';
+
+// SVG icon strings
+const arrowRightIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+const downloadIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>';
+const starIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+---
+
+<Layout 
+  title="LeadFlow Engine - Design System Demo"
+  description="Design system showcase with Pacific Tech & Slate palette"
+>
+  <div class="min-h-screen bg-bg-surface py-12 px-4">
+    <div class="max-w-6xl mx-auto space-y-16">
+      
+      <!-- Header -->
+      <header class="text-center">
+        <h1 class="font-heading text-text-heading mb-4">LeadFlow Engine Design System</h1>
+        <p class="text-text-body text-lg max-w-2xl mx-auto">
+          Pacific Tech & Slate palette - A modern B2B SaaS design system built with Astro and Tailwind CSS
+        </p>
+      </header>
+
+      <!-- Color Palette Section -->
+      <section>
+        <h2 class="font-heading text-text-heading mb-6">Color Palette</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="space-y-3">
+            <div class="h-24 rounded-saas shadow-sm border border-brand-border" style="background-color: var(--color-primary);"></div>
+            <div class="text-sm">
+              <p class="font-semibold text-text-heading">Pacific Night</p>
+              <p class="text-text-body font-mono text-xs">#0F172A</p>
+              <p class="text-text-muted text-xs">Primary</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="h-24 rounded-saas shadow-sm border border-brand-border" style="background-color: var(--color-secondary);"></div>
+            <div class="text-sm">
+              <p class="font-semibold text-text-heading">Vancouver Growth</p>
+              <p class="text-text-body font-mono text-xs">#10B981</p>
+              <p class="text-text-muted text-xs">Secondary</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="h-24 rounded-saas shadow-sm border border-brand-border" style="background-color: var(--color-accent);"></div>
+            <div class="text-sm">
+              <p class="font-semibold text-text-heading">Electric Indigo</p>
+              <p class="text-text-body font-mono text-xs">#6366F1</p>
+              <p class="text-text-muted text-xs">Accent</p>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="h-24 rounded-saas shadow-sm border border-brand-border" style="background-color: var(--color-surface);"></div>
+            <div class="text-sm">
+              <p class="font-semibold text-text-heading">Ice Flow</p>
+              <p class="text-text-body font-mono text-xs">#F1F5F9</p>
+              <p class="text-text-muted text-xs">Surface</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Buttons Gallery -->
+      <section>
+        <h2 class="font-heading text-text-heading mb-6">Button Components</h2>
+        <Card>
+          <div class="space-y-6">
+            <!-- Primary Buttons -->
+            <div>
+              <h3 class="font-heading text-text-heading text-base mb-3">Primary Variant</h3>
+              <div class="flex flex-wrap gap-4 items-center">
+                <Button variant="primary" size="sm">
+                  Small Button
+                </Button>
+                <Button variant="primary" size="md">
+                  <span set:html={arrowRightIcon} />
+                  Medium with Icon
+                </Button>
+                <Button variant="primary" size="lg">
+                  Large Button
+                </Button>
+              </div>
+            </div>
+
+            <!-- Outline Buttons -->
+            <div>
+              <h3 class="font-heading text-text-heading text-base mb-3">Outline Variant</h3>
+              <div class="flex flex-wrap gap-4 items-center">
+                <Button variant="outline" size="sm">
+                  Small Outline
+                </Button>
+                <Button variant="outline" size="md">
+                  <span set:html={downloadIcon} />
+                  Download Report
+                </Button>
+                <Button variant="outline" size="lg">
+                  Large Outline
+                </Button>
+              </div>
+            </div>
+
+            <!-- Ghost Buttons -->
+            <div>
+              <h3 class="font-heading text-text-heading text-base mb-3">Ghost Variant</h3>
+              <div class="flex flex-wrap gap-4 items-center">
+                <Button variant="ghost" size="sm">
+                  Small Ghost
+                </Button>
+                <Button variant="ghost" size="md">
+                  <span set:html={starIcon} />
+                  Medium Ghost
+                </Button>
+                <Button variant="ghost" size="lg">
+                  Large Ghost
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </section>
+
+      <!-- Badges Gallery -->
+      <section>
+        <h2 class="font-heading text-text-heading mb-6">Badge Components</h2>
+        <Card>
+          <div class="flex flex-wrap gap-3">
+            <Badge variant="primary">Primary Badge</Badge>
+            <Badge variant="secondary">Secondary Badge</Badge>
+            <Badge variant="accent">Accent Badge</Badge>
+            <Badge variant="success">Success</Badge>
+            <Badge variant="warning">Warning</Badge>
+            <Badge variant="info">Info</Badge>
+          </div>
+        </Card>
+      </section>
+
+      <!-- LeadCard Examples -->
+      <section>
+        <h2 class="font-heading text-text-heading mb-6">Lead Card Examples - Vancouver Market</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <LeadCard 
+            name="Sarah Chen"
+            email="sarah.chen@gmail.com"
+            source="Facebook"
+            utm_campaign="Summer_Renovations_2024"
+            status="New"
+          />
+          <LeadCard 
+            name="Michael Thompson"
+            email="m.thompson@outlook.com"
+            source="Web"
+            utm_campaign="Spring_Landscaping_YVR"
+            status="Contacted"
+          />
+          <LeadCard 
+            name="Jessica Park"
+            email="jessica.park@yahoo.ca"
+            source="Instagram"
+            utm_campaign="Kitchen_Reno_Vancouver"
+            status="Sold"
+          />
+        </div>
+      </section>
+
+      <!-- Design Tokens Reference -->
+      <section>
+        <h2 class="font-heading text-text-heading mb-6">Design Tokens Reference</h2>
+        <Card>
+          <div class="space-y-4">
+            <div>
+              <h3 class="font-heading text-text-heading text-base mb-2">Typography</h3>
+              <p class="text-text-body mb-1">Body Text: Inter (sans), Deep Slate (#334155)</p>
+              <p class="font-heading text-text-heading">Heading Text: Geist Sans/Inter (heading), Pacific Night (#0F172A)</p>
+            </div>
+            <div>
+              <h3 class="font-heading text-text-heading text-base mb-2">Border Radius</h3>
+              <p class="text-text-body">SaaS Radius: 0.75rem (12px)</p>
+            </div>
+            <div>
+              <h3 class="font-heading text-text-heading text-base mb-2">Shadows</h3>
+              <div class="flex gap-4 items-center mt-2">
+                <div class="h-16 w-16 rounded-saas shadow-sm border border-brand-border bg-white"></div>
+                <div class="h-16 w-16 rounded-saas shadow-md border border-brand-border bg-white"></div>
+                <div class="h-16 w-16 rounded-saas shadow-lg border border-brand-border bg-white"></div>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </section>
+
+    </div>
+  </div>
+</Layout>
