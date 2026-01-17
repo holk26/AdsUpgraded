@@ -189,7 +189,7 @@ import Layout from '../layouts/Layout.astro';
         </svg>
 
         <!-- Simulated Lead Form Modal -->
-        <div id="lead-form-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
+        <div id="lead-form-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
           <div class="bg-white rounded-saas shadow-xl p-8 max-w-md w-full mx-4 relative">
             <button id="close-modal" class="absolute top-4 right-4 text-text-muted hover:text-text-heading text-2xl">×</button>
             <h3 class="font-heading text-text-heading text-2xl mb-4">Lead Capture Form</h3>
@@ -500,9 +500,9 @@ import Layout from '../layouts/Layout.astro';
       
       // Create signals from each source
       const sources = [
-        { start: {x: 150, y: 200}, end: {x: 450, y: 350}, delay: 0, color: '#1877F2' },
-        { start: {x: 150, y: 350}, end: {x: 450, y: 350}, delay: 400, color: '#E4405F' },
-        { start: {x: 150, y: 500}, end: {x: 450, y: 350}, delay: 800, color: '#4285F4' }
+        { start: {x: 100, y: 200}, end: {x: 500, y: 350}, delay: 0, color: '#1877F2' },
+        { start: {x: 100, y: 350}, end: {x: 500, y: 350}, delay: 400, color: '#E4405F' },
+        { start: {x: 100, y: 500}, end: {x: 500, y: 350}, delay: 800, color: '#4285F4' }
       ];
       
       sources.forEach(source => {
@@ -510,10 +510,10 @@ import Layout from '../layouts/Layout.astro';
           createLightSignal(source.start, source.end, source.color, () => {
             // After reaching core, continue to dashboard
             setTimeout(() => {
-              createLightSignal({x: 550, y: 350}, {x: 750, y: 350}, '#6366F1', () => {
+              createLightSignal({x: 500, y: 350}, {x: 800, y: 350}, '#6366F1', () => {
                 // Finally to CRM
                 setTimeout(() => {
-                  createLightSignal({x: 850, y: 350}, {x: 1050, y: 350}, '#10B981');
+                  createLightSignal({x: 800, y: 350}, {x: 1050, y: 350}, '#10B981');
                 }, 300);
               });
             }, 200);
