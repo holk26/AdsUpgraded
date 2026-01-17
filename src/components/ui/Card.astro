@@ -10,12 +10,12 @@ const {
 } = Astro.props;
 
 const variants = {
-  default: 'bg-white border border-brand-border shadow-sm',
-  glass: 'bg-white/80 backdrop-blur-sm border border-brand-border shadow-sm',
-  border: 'bg-bg-surface border-2 border-brand-primary',
+  default: 'bg-white border border-brand-border shadow-sm hover:shadow-md',
+  glass: 'bg-white/90 backdrop-blur-sm border border-brand-border/50 shadow-sm hover:shadow-md',
+  border: 'bg-bg-surface border-2 border-brand-primary shadow-sm hover:shadow-lg',
 };
 
-const classes = `rounded-saas p-6 transition-all duration-200 hover:shadow-md ${variants[variant]} ${className}`;
+const classes = `rounded-lg p-6 transition-all duration-200 ${variants[variant]} ${className}`;
 ---
 
 <div class={classes}>
