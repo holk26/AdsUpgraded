@@ -35,13 +35,112 @@ const { t } = Astro.props;
       </div>
 
       <div class="relative mx-auto max-w-5xl">
-        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-gray-200 bg-white p-4">
-          <div class="aspect-video bg-gradient-to-br from-blue-100 to-indigo-100 rounded-lg flex items-center justify-center">
-            <div class="text-center">
-              <svg class="w-24 h-24 mx-auto mb-4 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-              </svg>
-              <p class="text-text-muted">Dashboard Preview</p>
+        <div class="relative rounded-xl overflow-hidden shadow-2xl border border-brand-border bg-white">
+          <!-- Dashboard Header -->
+          <div class="bg-gradient-to-r from-brand-primary to-slate-800 text-white px-6 py-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <h3 class="text-lg font-semibold">LeadFlow Dashboard</h3>
+                <p class="text-sm text-white/80">Vancouver Leads - January 2026</p>
+              </div>
+              <div class="flex gap-4 text-sm">
+                <div class="text-center">
+                  <div class="text-2xl font-bold">47</div>
+                  <div class="text-white/70">New Leads</div>
+                </div>
+                <div class="text-center border-l border-white/20 pl-4">
+                  <div class="text-2xl font-bold text-brand-secondary">$23K</div>
+                  <div class="text-white/70">Revenue</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Dashboard Content -->
+          <div class="p-6 bg-brand-surface">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Lead Card 1 -->
+              <div class="bg-white rounded-saas p-4 border border-brand-border shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex items-start gap-3 mb-3">
+                  <svg class="w-4 h-4 text-blue-600 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                  </svg>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-bold text-text-heading text-sm truncate">Sarah Chen</h4>
+                    <p class="text-xs text-text-body truncate">sarah.chen@gmail.com</p>
+                  </div>
+                </div>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-brand-accent/10 text-brand-accent">
+                    Summer_Renos_2024
+                  </span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-brand-accent/10 text-brand-accent">
+                    New
+                  </span>
+                </div>
+              </div>
+              
+              <!-- Lead Card 2 -->
+              <div class="bg-white rounded-saas p-4 border border-brand-border shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex items-start gap-3 mb-3">
+                  <svg class="w-4 h-4 text-slate-600 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                    <path d="M2 12h20"/>
+                  </svg>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-bold text-text-heading text-sm truncate">Mike Thompson</h4>
+                    <p class="text-xs text-text-body truncate">m.thompson@outlook.com</p>
+                  </div>
+                </div>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-brand-accent/10 text-brand-accent">
+                    Spring_Landscaping
+                  </span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-amber-100 text-amber-700">
+                    Contacted
+                  </span>
+                </div>
+              </div>
+              
+              <!-- Lead Card 3 -->
+              <div class="bg-white rounded-saas p-4 border border-brand-border shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex items-start gap-3 mb-3">
+                  <svg class="w-4 h-4 text-pink-600 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                  </svg>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-bold text-text-heading text-sm truncate">Jessica Park</h4>
+                    <p class="text-xs text-text-body truncate">jessica.park@yahoo.ca</p>
+                  </div>
+                </div>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-brand-accent/10 text-brand-accent">
+                    Kitchen_Reno_YVR
+                  </span>
+                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">
+                    Sold
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Mini Stats Bar -->
+            <div class="mt-4 grid grid-cols-3 gap-4">
+              <div class="bg-white rounded-lg p-3 text-center border border-brand-border">
+                <div class="text-lg font-bold text-brand-primary">73%</div>
+                <div class="text-xs text-text-muted">Response Rate</div>
+              </div>
+              <div class="bg-white rounded-lg p-3 text-center border border-brand-border">
+                <div class="text-lg font-bold text-brand-secondary">$487</div>
+                <div class="text-xs text-text-muted">Avg Deal Size</div>
+              </div>
+              <div class="bg-white rounded-lg p-3 text-center border border-brand-border">
+                <div class="text-lg font-bold text-brand-accent">2.4h</div>
+                <div class="text-xs text-text-muted">Avg Response</div>
+              </div>
             </div>
           </div>
         </div>

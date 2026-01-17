@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  variant?: 'primary' | 'secondary' | 'outline';
+  variant?: 'primary' | 'outline' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
   type?: 'button' | 'submit' | 'reset';
@@ -16,12 +16,12 @@ const {
   ...props 
 } = Astro.props;
 
-const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
+const baseStyles = 'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2';
 
 const variants = {
-  primary: 'bg-brand-primary text-white hover:bg-brand-secondary focus:ring-brand-primary',
-  secondary: 'bg-brand-accent text-white hover:opacity-90 focus:ring-brand-accent',
+  primary: 'bg-brand-secondary text-white hover:bg-emerald-700 focus:ring-brand-secondary shadow-sm',
   outline: 'border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white focus:ring-brand-primary',
+  ghost: 'text-brand-primary hover:bg-brand-surface focus:ring-brand-primary',
 };
 
 const sizes = {
