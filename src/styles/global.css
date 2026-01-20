@@ -4,17 +4,18 @@
 
 @layer base {
   :root {
-    /* Nyxok Brand Identity - Dark Mode Professional */
-    --color-primary: #0D0D0D; /* Obsidian / Deep Background */
+    /* Nyxok Brand Identity - Modern Dark Mode with Depth */
+    --color-primary: #0A0E27; /* Deep Navy - More sophisticated than pure black */
     --color-secondary: #00FFC2; /* Cyber Mint (Clean Code) */
     --color-accent: #5D5DFF; /* Electric Indigo (Tech Power) */
-    --color-bg: #0D0D0D; /* Dark background */
-    --color-surface: #1A1A1A; /* Slightly lighter surface */
-    --color-text-body: #F2F2F2; /* Off-White (Readability) */
-    --color-text-heading: #F2F2F2; /* Off-White headings */
-    --color-border: #2A2A2A;
-    --color-text-muted: #888888; /* Silver Gray (Comments/Metadata) */
-    --radius-saas: 0.875rem; /* Slightly larger for modern feel */
+    --color-bg: #0A0E27; /* Dark background with depth */
+    --color-surface: #131829; /* Elevated surface */
+    --color-surface-elevated: #1A1F3A; /* More elevated surface */
+    --color-text-body: #E8EAED; /* Softer white for better readability */
+    --color-text-heading: #FFFFFF; /* Pure white for headings */
+    --color-border: #2A2F4A;
+    --color-text-muted: #9CA3AF; /* Lighter muted text */
+    --radius-saas: 1rem; /* Modern rounded corners */
     
     /* Mapped for backward compatibility */
     --brand-primary: var(--color-primary);
@@ -25,18 +26,19 @@
     
     --bg-surface: var(--color-bg);
     --bg-card: var(--color-surface);
-    --bg-dark: #0D0D0D; /* Consistent with primary */
+    --bg-dark: #0A0E27;
     
     --text-heading: var(--color-text-heading);
     --text-body: var(--color-text-body);
     --text-main: var(--color-text-body);
     --text-muted: var(--color-text-muted);
     
-    /* Shadow system - more refined */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.08), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+    /* Modern shadow system with colored shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(93 93 255 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(93 93 255 / 0.15), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(93 93 255 / 0.2), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-glow: 0 0 20px rgb(93 93 255 / 0.3);
   }
 
   /* Respect user preferences for reduced motion */
@@ -56,17 +58,23 @@
     font-feature-settings: 'rlig' 1, 'calt' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(180deg, #0A0E27 0%, #131829 50%, #0A0E27 100%);
+    background-attachment: fixed;
   }
 
   /* Improved typography scale with better line heights */
   h1, h2, h3, h4, h5, h6 {
     @apply text-text-heading font-bold;
-    letter-spacing: -0.02em; /* Tighter tracking for headings */
+    letter-spacing: -0.02em;
   }
 
   h1 {
     @apply text-4xl md:text-5xl lg:text-6xl;
     line-height: 1.1;
+    background: linear-gradient(135deg, #FFFFFF 0%, #E8EAED 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   h2 {
@@ -79,14 +87,14 @@
     line-height: 1.3;
   }
 
-  /* Focus visible for keyboard navigation - WCAG requirement */
+  /* Focus visible for keyboard navigation */
   *:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 0.25rem;
   }
 
-  /* Screen reader only utility - for accessibility */
+  /* Screen reader only utility */
   .sr-only {
     position: absolute;
     width: 1px;
@@ -110,7 +118,7 @@
     white-space: normal;
   }
 
-  /* Smooth scrolling with anchor links */
+  /* Smooth scrolling */
   html {
     scroll-behavior: smooth;
   }
@@ -119,5 +127,43 @@
     html {
       scroll-behavior: auto;
     }
+  }
+}
+
+/* Modern utility classes */
+@layer utilities {
+  .glass-effect {
+    background: rgba(26, 31, 58, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .gradient-border {
+    position: relative;
+    border-radius: 1rem;
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 1rem;
+    padding: 1px;
+    background: linear-gradient(135deg, #5D5DFF, #00FFC2);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(93, 93, 255, 0.3), 0 0 40px rgba(0, 255, 194, 0.2);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, #5D5DFF 0%, #00FFC2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 }

@@ -27,8 +27,12 @@ const painPoints = [
 ];
 ---
 
-<section id="features" class="py-20 md:py-32 bg-color-surface">
-  <div class="container mx-auto px-4">
+<section id="features" class="py-20 md:py-32 relative overflow-hidden">
+  <!-- Background effects -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(93,93,255,0.08),transparent_50%)]"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(0,255,194,0.08),transparent_50%)]"></div>
+  
+  <div class="container mx-auto px-4 relative z-10">
     <SectionHeading 
       title={t('pain.title')}
       subtitle={t('pain.subtitle')}
@@ -38,10 +42,10 @@ const painPoints = [
 
     <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       {painPoints.map((point) => (
-        <Card variant="default" class="group hover:border-color-accent transition-all duration-300 bg-color-primary">
+        <Card variant="default" class="group hover:border-color-accent transition-all duration-300 glass-effect hover:shadow-xl hover:-translate-y-1">
           <div class="mb-4">
-            <div class="w-14 h-14 bg-color-accent/20 rounded-xl flex items-center justify-center group-hover:bg-color-accent/30 transition-colors">
-              <svg class="w-8 h-8 text-color-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <div class="w-14 h-14 bg-gradient-to-br from-color-accent/20 to-color-secondary/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-gradient" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={point.icon} />
               </svg>
             </div>
