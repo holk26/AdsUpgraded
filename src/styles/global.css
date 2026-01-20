@@ -4,15 +4,16 @@
 
 @layer base {
   :root {
-    /* 2026 Modern Design System - Refined Color Palette */
-    --color-primary: #0F172A; /* Pacific Night - Deep, trustworthy */
-    --color-secondary: #10B981; /* Emerald - Growth & success */
-    --color-accent: #6366F1; /* Indigo - Premium & modern */
-    --color-bg: #FFFFFF;
-    --color-surface: #F8FAFC; /* Softer surface */
-    --color-text-body: #475569; /* Better contrast for WCAG AA */
-    --color-text-heading: #0F172A;
-    --color-border: #E2E8F0;
+    /* Nyxok Brand Identity - Dark Mode Professional */
+    --color-primary: #0D0D0D; /* Obsidian / Deep Background */
+    --color-secondary: #00FFC2; /* Cyber Mint (Clean Code) */
+    --color-accent: #5D5DFF; /* Electric Indigo (Tech Power) */
+    --color-bg: #0D0D0D; /* Dark background */
+    --color-surface: #1A1A1A; /* Slightly lighter surface */
+    --color-text-body: #F2F2F2; /* Off-White (Readability) */
+    --color-text-heading: #F2F2F2; /* Off-White headings */
+    --color-border: #2A2A2A;
+    --color-text-muted: #888888; /* Silver Gray (Comments/Metadata) */
     --radius-saas: 0.875rem; /* Slightly larger for modern feel */
     
     /* Mapped for backward compatibility */
@@ -24,12 +25,12 @@
     
     --bg-surface: var(--color-bg);
     --bg-card: var(--color-surface);
-    --bg-dark: #0F172A; /* Consistent with primary */
+    --bg-dark: #0D0D0D; /* Consistent with primary */
     
     --text-heading: var(--color-text-heading);
     --text-body: var(--color-text-body);
     --text-main: var(--color-text-body);
-    --text-muted: #64748B;
+    --text-muted: var(--color-text-muted);
     
     /* Shadow system - more refined */
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
