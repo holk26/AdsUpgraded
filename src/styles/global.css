@@ -139,10 +139,19 @@
 /* Modern utility classes */
 @layer utilities {
   .glass-effect {
-    background: rgba(26, 31, 58, 0.6);
+    background: rgba(26, 31, 58, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Stronger glass effect for mobile header */
+  @media (max-width: 768px) {
+    .glass-effect {
+      background: rgba(10, 14, 39, 0.98);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
   }
   
   .gradient-border {
