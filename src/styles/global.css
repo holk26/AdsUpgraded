@@ -74,6 +74,13 @@
     background-color: #0A0E27; /* Prevents white background on overscroll */
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   /* Improved typography scale with better line heights */
@@ -130,17 +137,6 @@
     overflow: visible;
     clip: auto;
     white-space: normal;
-  }
-
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
   }
 }
 
