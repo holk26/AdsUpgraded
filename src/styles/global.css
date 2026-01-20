@@ -60,12 +60,20 @@
     -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(180deg, #0A0E27 0%, #131829 50%, #0A0E27 100%);
     background-attachment: fixed;
-    min-height: 100vh;
+    background-color: #0A0E27; /* Explicit fallback to prevent white flash */
+    min-height: 100vh; /* Fallback for older browsers */
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
     overflow-x: hidden;
+    overscroll-behavior-y: none; /* Prevents white bounce effect on mobile */
+    margin: 0;
+    padding: 0;
   }
   
   html {
     overflow-x: hidden;
+    background-color: #0A0E27; /* Prevents white background on overscroll */
+    margin: 0;
+    padding: 0;
   }
 
   /* Improved typography scale with better line heights */
