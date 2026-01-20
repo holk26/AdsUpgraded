@@ -146,7 +146,7 @@
   }
   
   /* Stronger glass effect for mobile header */
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .glass-effect {
       background: rgba(10, 14, 39, 0.98);
       backdrop-filter: blur(8px);
