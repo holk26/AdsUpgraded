@@ -27,7 +27,7 @@ const trustFeatures = [
 ];
 ---
 
-<section id="about" class="py-20 md:py-32 bg-white">
+<section id="about" class="py-20 md:py-32 bg-color-surface">
   <div class="container mx-auto px-4">
     <SectionHeading 
       title={t('trust.title')}
@@ -38,10 +38,10 @@ const trustFeatures = [
 
     <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       {trustFeatures.map((feature) => (
-        <Card variant="default" class="group hover:border-green-200 transition-all duration-300">
+        <Card variant="default" class="group hover:border-color-secondary transition-all duration-300 bg-color-primary">
           <div class="mb-4">
-            <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center group-hover:bg-green-100 transition-colors">
-              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <div class="w-14 h-14 bg-color-secondary/20 rounded-xl flex items-center justify-center group-hover:bg-color-secondary/30 transition-colors">
+              <svg class="w-8 h-8 text-color-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
               </svg>
             </div>
@@ -58,7 +58,7 @@ const trustFeatures = [
 
     <!-- Canadian Flag Badge -->
     <div class="mt-16 text-center">
-      <div class="inline-flex items-center gap-3 px-6 py-3 bg-red-50 rounded-full border border-red-100 hover:bg-red-100 transition-colors">
+      <div class="inline-flex items-center gap-3 px-6 py-3 bg-color-primary rounded-full border border-color-border hover:bg-color-surface transition-colors">
         <span class="text-2xl" role="img" aria-label="Canadian company">🍁</span>
         <span class="font-semibold text-text-heading">Proudly Canadian</span>
       </div>

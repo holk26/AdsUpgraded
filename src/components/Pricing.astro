@@ -44,7 +44,7 @@ const plans = [
 ];
 ---
 
-<section id="pricing" class="py-20 md:py-32 bg-gradient-to-br from-gray-50/50 to-blue-50/50">
+<section id="pricing" class="py-20 md:py-32 bg-gradient-to-br from-color-primary to-color-surface">
   <div class="container mx-auto px-4">
     <SectionHeading 
       title={t('pricing.title')}
@@ -57,11 +57,11 @@ const plans = [
       {plans.map((plan) => (
         <Card 
           variant={plan.featured ? 'border' : 'default'} 
-          class={`relative ${plan.featured ? 'md:scale-105 shadow-xl' : ''}`}
+          class={`relative bg-color-primary ${plan.featured ? 'md:scale-105 shadow-xl' : ''}`}
         >
           {plan.featured && (
             <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-              <span class="inline-block px-4 py-1 bg-brand-accent text-white text-sm font-semibold rounded-full shadow-md">
+              <span class="inline-block px-4 py-1 bg-color-accent text-white text-sm font-semibold rounded-full shadow-md">
                 Most Popular
               </span>
             </div>

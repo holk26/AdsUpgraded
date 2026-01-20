@@ -29,7 +29,7 @@ const steps = [
 ];
 ---
 
-<section id="how-it-works" class="py-20 md:py-32 bg-gradient-to-br from-blue-50/50 to-indigo-50/50">
+<section id="how-it-works" class="py-20 md:py-32 bg-gradient-to-br from-color-surface to-color-primary">
   <div class="container mx-auto px-4">
     <SectionHeading 
       title={t('how.title')}
@@ -42,16 +42,16 @@ const steps = [
       <div class="grid md:grid-cols-3 gap-8">
         {steps.map((step, index) => (
           <div class="relative">
-            <div class="bg-white rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 h-full border border-gray-100 group">
+            <div class="bg-color-primary rounded-xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 h-full border border-color-border group">
               <div class="mb-6">
-                <span class="text-5xl font-bold bg-gradient-to-br from-brand-primary to-brand-accent bg-clip-text text-transparent opacity-20 group-hover:opacity-30 transition-opacity">
+                <span class="text-5xl font-bold bg-gradient-to-br from-color-accent to-color-secondary bg-clip-text text-transparent opacity-20 group-hover:opacity-30 transition-opacity">
                   {step.number}
                 </span>
               </div>
               
               <div class="mb-4">
-                <div class="w-14 h-14 bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg class="w-8 h-8 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <div class="w-14 h-14 bg-gradient-to-br from-color-accent/20 to-color-secondary/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg class="w-8 h-8 text-color-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon} />
                   </svg>
                 </div>
@@ -68,7 +68,7 @@ const steps = [
 
             {index < steps.length - 1 && (
               <div class="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10" aria-hidden="true">
-                <svg class="w-8 h-8 text-brand-accent opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-8 h-8 text-color-secondary opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </div>

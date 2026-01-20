@@ -15,7 +15,7 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+<header class="fixed top-0 left-0 right-0 z-50 bg-color-primary/95 backdrop-blur-md border-b border-color-border shadow-sm">
   <div class="container mx-auto px-4">
     <nav class="flex items-center justify-between py-3 md:py-4 gap-2 md:gap-4" aria-label="Main navigation">
       <!-- Logo -->
@@ -32,7 +32,7 @@ const navItems = [
         {navItems.map((item) => (
           <a 
             href={item.href} 
-            class="text-text-body hover:text-brand-primary transition-colors font-medium focus-visible:outline-2 focus-visible:outline-brand-accent rounded px-2 py-1"
+            class="text-text-body hover:text-color-secondary transition-colors font-medium focus-visible:outline-2 focus-visible:outline-color-accent rounded px-2 py-1"
           >
             {t(item.key)}
           </a>
@@ -45,7 +45,7 @@ const navItems = [
         <div class="flex gap-1 md:gap-2" role="group" aria-label="Language selection">
           <a 
             href="/" 
-            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'en' ? 'bg-brand-primary text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-gray-100'}`}
+            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'en' ? 'bg-color-accent text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-color-surface'}`}
             aria-label="Switch to English"
             aria-current={lang === 'en' ? 'true' : undefined}
           >
@@ -53,7 +53,7 @@ const navItems = [
           </a>
           <a 
             href="/es" 
-            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'es' ? 'bg-brand-primary text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-gray-100'}`}
+            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'es' ? 'bg-color-accent text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-color-surface'}`}
             aria-label="Cambiar a Español"
             aria-current={lang === 'es' ? 'true' : undefined}
           >
