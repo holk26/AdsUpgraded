@@ -81,6 +81,8 @@ export const ui = {
     'footer.contact': 'Contact',
     'footer.privacy': 'Privacy Policy',
     'footer.terms': 'Terms of Service',
+    
+    'pricing.footer': 'Contact us for custom pricing and enterprise solutions.',
   },
   es: {
     'nav.demo': 'Contáctanos',
@@ -157,6 +159,8 @@ export const ui = {
     'footer.contact': 'Contacto',
     'footer.privacy': 'Política de Privacidad',
     'footer.terms': 'Términos de Servicio',
+    
+    'pricing.footer': 'Contáctanos para precios personalizados y soluciones empresariales.',
   },
 } as const;
 
