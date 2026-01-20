@@ -1,6 +1,6 @@
 # Customization Guide
 
-This guide will help you customize and iterate on the LeadFlow Engine landing page.
+This guide will help you customize and iterate on the Nyxok landing page.
 
 ## 🎨 Quick Color Theme Changes
 
@@ -8,12 +8,12 @@ The entire color palette is defined in one place: `src/styles/global.css`
 
 ### To change the primary brand color:
 ```css
---brand-primary: #2563eb;  /* Change this value */
+--color-primary: #0D0D0D;  /* Change this value */
 ```
 
 ### To change the accent color:
 ```css
---brand-accent: #f59e0b;   /* Change this value */
+--color-accent: #5D5DFF;   /* Change this value */
 ```
 
 All buttons, links, and branded elements will automatically update.
@@ -52,7 +52,7 @@ Edit `src/i18n/ui.ts` and update:
 - `pricing.starter.feature1-5`: The feature list
 - Repeat for `pricing.growth.*`
 
-### To add a new pain point:
+### To add a new technical challenge:
 Edit `src/components/PainPoints.astro` and add to the `painPoints` array:
 ```typescript
 {

@@ -15,16 +15,82 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+<header class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5 shadow-lg">
   <div class="container mx-auto px-4">
     <nav class="flex items-center justify-between py-3 md:py-4 gap-2 md:gap-4" aria-label="Main navigation">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 group focus-visible:outline-2 focus-visible:outline-brand-accent rounded-lg flex-shrink-0">
-        <svg class="w-7 h-7 md:w-8 md:h-8 text-brand-primary transition-transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        <svg class="w-7 h-7 md:w-8 md:h-8 transition-transform group-hover:scale-110" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <filter id="glowIndigo" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <filter id="glowCyan" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+            <radialGradient id="indigoGrad" cx="50%" cy="50%">
+              <stop offset="0%" style="stop-color:#7B7BFF;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#5D5DFF;stop-opacity:0.8" />
+            </radialGradient>
+            <radialGradient id="cyanGrad" cx="50%" cy="50%">
+              <stop offset="0%" style="stop-color:#00FFDB;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#00FFC2;stop-opacity:0.7" />
+            </radialGradient>
+          </defs>
+          
+          <!-- Hexagons with fill and glow -->
+          <g filter="url(#glowIndigo)">
+            <path d="M60 8 L68 13 L68 23 L60 28 L52 23 L52 13 Z" fill="url(#indigoGrad)" opacity="0.85"/>
+          </g>
+          <g filter="url(#glowCyan)">
+            <path d="M86 28 L94 33 L94 43 L86 48 L78 43 L78 33 Z" fill="url(#cyanGrad)" opacity="0.75"/>
+          </g>
+          <g filter="url(#glowCyan)">
+            <path d="M86 72 L94 77 L94 87 L86 92 L78 87 L78 77 Z" fill="url(#cyanGrad)" opacity="0.75"/>
+          </g>
+          <g filter="url(#glowIndigo)">
+            <path d="M60 92 L68 97 L68 107 L60 112 L52 107 L52 97 Z" fill="url(#indigoGrad)" opacity="0.85"/>
+          </g>
+          <g filter="url(#glowIndigo)">
+            <path d="M34 72 L42 77 L42 87 L34 92 L26 87 L26 77 Z" fill="url(#indigoGrad)" opacity="0.85"/>
+          </g>
+          <g filter="url(#glowCyan)">
+            <path d="M34 28 L42 33 L42 43 L34 48 L26 43 L26 33 Z" fill="url(#cyanGrad)" opacity="0.75"/>
+          </g>
+          
+          <!-- Connection lines -->
+          <line x1="60" y1="28" x2="60" y2="40" stroke="#5D5DFF" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.6"/>
+          <line x1="78" y1="43" x2="68" y2="50" stroke="#00FFC2" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.5"/>
+          <line x1="78" y1="77" x2="68" y2="70" stroke="#00FFC2" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.5"/>
+          <line x1="60" y1="92" x2="60" y2="80" stroke="#5D5DFF" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.6"/>
+          <line x1="42" y1="77" x2="52" y2="70" stroke="#5D5DFF" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.6"/>
+          <line x1="42" y1="43" x2="52" y2="50" stroke="#00FFC2" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.5"/>
+          
+          <!-- Central white circle -->
+          <circle cx="60" cy="60" r="18" fill="#F2F2F2" opacity="0.98"/>
+          <circle cx="60" cy="60" r="18" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.5"/>
+          
+          <!-- Inner ring -->
+          <circle cx="60" cy="60" r="22" fill="none" stroke="#5D5DFF" stroke-width="1.5" opacity="0.3"/>
+          
+          <!-- Connection nodes -->
+          <circle cx="60" cy="8" r="2.5" fill="#5D5DFF" filter="url(#glowIndigo)"/>
+          <circle cx="86" cy="28" r="2.5" fill="#00FFC2" filter="url(#glowCyan)"/>
+          <circle cx="86" cy="92" r="2.5" fill="#00FFC2" filter="url(#glowCyan)"/>
+          <circle cx="60" cy="112" r="2.5" fill="#5D5DFF" filter="url(#glowIndigo)"/>
+          <circle cx="34" cy="92" r="2.5" fill="#5D5DFF" filter="url(#glowIndigo)"/>
+          <circle cx="34" cy="28" r="2.5" fill="#00FFC2" filter="url(#glowCyan)"/>
         </svg>
-        <span class="text-base md:text-xl font-bold text-text-heading hidden xs:inline">LeadFlow Engine</span>
-        <span class="text-base md:text-xl font-bold text-text-heading xs:hidden">LeadFlow</span>
+        <span class="text-base md:text-xl font-bold text-color-accent hidden xs:inline" style="letter-spacing: 0.05em;">NYXOK</span>
+        <span class="text-base md:text-xl font-bold text-color-accent xs:hidden" style="letter-spacing: 0.05em;">NYXOK</span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -32,7 +98,7 @@ const navItems = [
         {navItems.map((item) => (
           <a 
             href={item.href} 
-            class="text-text-body hover:text-brand-primary transition-colors font-medium focus-visible:outline-2 focus-visible:outline-brand-accent rounded px-2 py-1"
+            class="text-text-body hover:text-color-secondary transition-colors font-medium focus-visible:outline-2 focus-visible:outline-color-accent rounded px-2 py-1"
           >
             {t(item.key)}
           </a>
@@ -45,7 +111,7 @@ const navItems = [
         <div class="flex gap-1 md:gap-2" role="group" aria-label="Language selection">
           <a 
             href="/" 
-            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'en' ? 'bg-brand-primary text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-gray-100'}`}
+            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'en' ? 'bg-color-accent text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-color-surface'}`}
             aria-label="Switch to English"
             aria-current={lang === 'en' ? 'true' : undefined}
           >
@@ -53,7 +119,7 @@ const navItems = [
           </a>
           <a 
             href="/es" 
-            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'es' ? 'bg-brand-primary text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-gray-100'}`}
+            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'es' ? 'bg-color-accent text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-color-surface'}`}
             aria-label="Cambiar a Español"
             aria-current={lang === 'es' ? 'true' : undefined}
           >

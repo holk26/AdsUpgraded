@@ -1,14 +1,14 @@
-# LeadFlow Engine - Landing Page
+# Nyxok - Software Engineering Solutions
 
-High-conversion landing page for LeadFlow Engine, a B2B SaaS product focused on lead acquisition, traceability, and management for small and medium-sized businesses in Canada, with initial emphasis on Vancouver.
+High-performance landing page for Nyxok, a B2B software engineering powerhouse specializing in custom solutions and high-scale automation for the US tech market.
 
 ## 🚀 Features
 
 - **Modern Tech Stack**: Built with Astro and Tailwind CSS
-- **Design System**: Centralized CSS variables for rapid iteration
+- **Design System**: Dark mode professional aesthetic with Electric Indigo and Cyber Mint accents
 - **Internationalization**: Full support for English and Spanish
 - **Modular Components**: Reusable UI components (Button, Card, SectionHeading)
-- **Responsive Design**: Mobile-first approach with beautiful gradients
+- **Responsive Design**: Mobile-first approach with high-contrast dark theme
 - **Fast Performance**: Static site generation for optimal loading speeds
 
 ## 🏗️ Project Structure
@@ -52,15 +52,14 @@ The entire color palette is defined in `src/styles/global.css` using CSS variabl
 
 ```css
 :root {
-  --brand-primary: #2563eb;    /* Blue 600 */
-  --brand-secondary: #1e40af;   /* Blue 700 */
-  --brand-accent: #f59e0b;      /* Amber 500 */
-  --bg-surface: #ffffff;
-  --bg-card: #f9fafb;
-  --bg-dark: #111827;
-  --text-heading: #111827;
-  --text-body: #374151;
-  --text-muted: #6b7280;
+  --color-primary: #0D0D0D;    /* Obsidian / Deep Background */
+  --color-secondary: #00FFC2;   /* Cyber Mint (Clean Code) */
+  --color-accent: #5D5DFF;      /* Electric Indigo (Tech Power) */
+  --color-bg: #0D0D0D;
+  --color-surface: #1A1A1A;
+  --color-text-body: #F2F2F2;
+  --color-text-heading: #F2F2F2;
+  --color-text-muted: #888888;
 }
 ```
 
@@ -106,11 +105,11 @@ Language support is handled through a simple i18n system:
 
 ## 🎯 Key Sections
 
-1. **Hero**: High-impact headline targeting Vancouver businesses
-2. **Pain Points**: Three key problems (Fragmented Data, Blind Marketing Spend, Slow Response)
-3. **How It Works**: 3-step process (Capture & Track, Normalization, CRM Sync)
-4. **Trust & Compliance**: Canadian data hosting, PIPEDA ready, enterprise security
-5. **Pricing**: Two plans (Starter $99 CAD, Growth $249 CAD)
+1. **Hero**: "Engineering the Unseen" - Positioning as a B2B software engineering powerhouse
+2. **Architecture Challenge**: Three key problems (Fragmented Systems, Technical Debt, Manual Overhead)
+3. **How It Works**: 3-step process (Architecture First, Seamless Automation, Custom Development)
+4. **Trust & Excellence**: Enterprise Security, Clean Architecture, High Performance
+5. **Services**: Backend Engineering, Workflow Automation, API Integration, Custom SaaS Development
 
 ## 🎨 Customization
 
@@ -143,10 +142,11 @@ All content is in the translation files (`src/i18n/ui.ts`). Update the strings t
 - **Accessibility**: Semantic HTML and proper ARIA labels
 - **Maintainability**: Well-organized component structure
 
-## 🇨🇦 Canadian Focus
+## 🌍 Brand Focus
 
 The landing page emphasizes:
-- Data hosted in Canada
-- PIPEDA compliance
-- Pricing in Canadian Dollars (CAD)
-- Focus on Vancouver and BC businesses
+- Engineering excellence and precision logic
+- Custom software engineering solutions
+- Architecture-first approach
+- Scalable, high-performance systems
+- US B2B Tech Sector specialization

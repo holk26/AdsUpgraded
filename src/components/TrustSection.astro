@@ -27,8 +27,11 @@ const trustFeatures = [
 ];
 ---
 
-<section id="about" class="py-20 md:py-32 bg-white">
-  <div class="container mx-auto px-4">
+<section id="about" class="py-20 md:py-32 relative overflow-hidden">
+  <!-- Background effects -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,255,194,0.08),transparent_50%)]"></div>
+  
+  <div class="container mx-auto px-4 relative z-10">
     <SectionHeading 
       title={t('trust.title')}
       subtitle={t('trust.subtitle')}
@@ -38,10 +41,10 @@ const trustFeatures = [
 
     <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       {trustFeatures.map((feature) => (
-        <Card variant="default" class="group hover:border-green-200 transition-all duration-300">
+        <Card variant="default" class="group hover:border-color-secondary transition-all duration-300 glass-effect hover:shadow-xl hover:-translate-y-1">
           <div class="mb-4">
-            <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center group-hover:bg-green-100 transition-colors">
-              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <div class="w-14 h-14 bg-gradient-to-br from-color-secondary/20 to-color-accent/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-8 h-8 text-gradient" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
               </svg>
             </div>
@@ -56,11 +59,11 @@ const trustFeatures = [
       ))}
     </div>
 
-    <!-- Canadian Flag Badge -->
+    <!-- US Tech Badge -->
     <div class="mt-16 text-center">
-      <div class="inline-flex items-center gap-3 px-6 py-3 bg-red-50 rounded-full border border-red-100 hover:bg-red-100 transition-colors">
-        <span class="text-2xl" role="img" aria-label="Canadian company">🍁</span>
-        <span class="font-semibold text-text-heading">Proudly Canadian</span>
+      <div class="inline-flex items-center gap-3 px-6 py-3 glass-effect rounded-full border border-white/10 hover:border-color-secondary/50 transition-all duration-300">
+        <span class="text-2xl" role="img" aria-label="US Tech">🇺🇸</span>
+        <span class="font-semibold text-text-heading">Built for US Tech Sector</span>
       </div>
     </div>
   </div>

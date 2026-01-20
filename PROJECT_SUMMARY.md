@@ -1,8 +1,8 @@
-# LeadFlow Engine - Project Summary
+# Nyxok - Project Summary
 
 ## 🎯 Project Overview
 
-A high-conversion B2B SaaS landing page for LeadFlow Engine, targeting small and medium-sized businesses in Vancouver, BC, Canada. The product helps businesses centralize leads, track ROI from Meta/Google Ads, and improve response times.
+A high-performance B2B software engineering landing page for Nyxok, targeting the US tech sector. The brand focuses on custom software solutions, backend engineering, workflow automation, and systems integration for businesses requiring robust, scalable architecture.
 
 ## ✅ Delivered Components
 
@@ -18,11 +18,11 @@ A high-conversion B2B SaaS landing page for LeadFlow Engine, targeting small and
 
 ### Landing Page Sections
 1. **Header**: Navigation with language switcher (EN/ES)
-2. **Hero**: High-impact headline, CTAs, and dashboard preview
-3. **Pain Points**: Three key problems (Fragmented Data, Blind Marketing Spend, Slow Response)
-4. **How It Works**: 3-step solution (Capture & Track, Normalization, CRM Sync)
-5. **Trust & Compliance**: Canadian data hosting, PIPEDA ready, enterprise security
-6. **Pricing**: Two plans - Starter ($99 CAD), Growth ($249 CAD)
+2. **Hero**: "Engineering the Unseen" - High-impact technical positioning
+3. **Architecture Challenge**: Three key problems (Fragmented Systems, Technical Debt, Manual Overhead)
+4. **How It Works**: 3-step solution (Architecture First, Seamless Automation, Custom Development)
+5. **Trust & Excellence**: Enterprise Security, Clean Architecture, High Performance
+6. **Services**: Backend Engineering and Workflow Automation services
 7. **Footer**: Links, social media, copyright
 
 ### Internationalization
@@ -63,15 +63,14 @@ src/
 
 ### Color Tokens (CSS Variables)
 ```css
---brand-primary: #2563eb     /* Main brand color */
---brand-secondary: #1e40af   /* Secondary brand */
---brand-accent: #f59e0b      /* Accent/highlights */
---bg-surface: #ffffff        /* Main background */
---bg-card: #f9fafb          /* Card background */
---bg-dark: #111827          /* Dark sections */
---text-heading: #111827      /* Headings */
---text-body: #374151         /* Body text */
---text-muted: #6b7280        /* Secondary text */
+--color-primary: #0D0D0D       /* Obsidian / Deep Background */
+--color-secondary: #00FFC2     /* Cyber Mint (Clean Code) */
+--color-accent: #5D5DFF        /* Electric Indigo (Tech Power) */
+--color-bg: #0D0D0D            /* Dark background */
+--color-surface: #1A1A1A       /* Slightly lighter surface */
+--color-text-body: #F2F2F2     /* Off-White (Readability) */
+--color-text-heading: #F2F2F2  /* Off-White headings */
+--color-text-muted: #888888    /* Silver Gray (Comments/Metadata) */
 ```
 
 ### Tailwind Usage
@@ -127,16 +126,16 @@ npm run preview
 ✅ Easy to extend  
 
 ### For Designers
-✅ Centralized design system  
-✅ Quick theme changes  
+✅ Dark mode professional aesthetic  
+✅ Electric Indigo and Cyber Mint accents  
+✅ High-contrast design system  
 ✅ Consistent spacing/typography  
-✅ Beautiful gradients  
-✅ Responsive design  
+✅ Minimalist, technical focus  
 
 ### For Business
-✅ High-conversion layout  
-✅ Canadian B2B focus  
-✅ Bilingual support  
+✅ B2B tech sector positioning  
+✅ US market focus  
+✅ Bilingual support (EN/ES)  
 ✅ SEO-ready  
 ✅ Fast loading  
 
