@@ -21,7 +21,7 @@ const features = [
     size: 'medium',
   },
   {
-    icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+    icon: 'M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4',
     titleKey: 'bento.feature3.title',
     descKey: 'bento.feature3.desc',
     size: 'medium',
@@ -59,7 +59,7 @@ const sizeClasses = {
       class="mb-16"
     />
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto auto-rows-fr">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto" style="grid-auto-rows: minmax(280px, auto);">
       {features.map((feature) => (
         <div 
           class={`group relative ${sizeClasses[feature.size]} min-h-[280px] md:min-h-[320px]`}
