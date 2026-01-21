@@ -21,8 +21,25 @@ const plans = [
       'pricing.starter.feature3',
       'pricing.starter.feature4',
       'pricing.starter.feature5',
+      'pricing.starter.feature6',
     ],
     cta: 'pricing.starter.cta',
+    featured: false,
+  },
+  {
+    name: 'pricing.frontend.name',
+    price: 'pricing.frontend.price',
+    period: 'pricing.frontend.period',
+    desc: 'pricing.frontend.desc',
+    features: [
+      'pricing.frontend.feature1',
+      'pricing.frontend.feature2',
+      'pricing.frontend.feature3',
+      'pricing.frontend.feature4',
+      'pricing.frontend.feature5',
+      'pricing.frontend.feature6',
+    ],
+    cta: 'pricing.frontend.cta',
     featured: false,
   },
   {
@@ -41,6 +58,38 @@ const plans = [
     cta: 'pricing.growth.cta',
     featured: true,
   },
+  {
+    name: 'pricing.migrations.name',
+    price: 'pricing.migrations.price',
+    period: 'pricing.migrations.period',
+    desc: 'pricing.migrations.desc',
+    features: [
+      'pricing.migrations.feature1',
+      'pricing.migrations.feature2',
+      'pricing.migrations.feature3',
+      'pricing.migrations.feature4',
+      'pricing.migrations.feature5',
+      'pricing.migrations.feature6',
+    ],
+    cta: 'pricing.migrations.cta',
+    featured: false,
+  },
+  {
+    name: 'pricing.ads.name',
+    price: 'pricing.ads.price',
+    period: 'pricing.ads.period',
+    desc: 'pricing.ads.desc',
+    features: [
+      'pricing.ads.feature1',
+      'pricing.ads.feature2',
+      'pricing.ads.feature3',
+      'pricing.ads.feature4',
+      'pricing.ads.feature5',
+      'pricing.ads.feature6',
+    ],
+    cta: 'pricing.ads.cta',
+    featured: false,
+  },
 ];
 ---
 
@@ -57,11 +106,11 @@ const plans = [
       class="mb-16"
     />
 
-    <div class="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
       {plans.map((plan) => (
         <Card 
           variant={plan.featured ? 'border' : 'default'} 
-          class={`relative glass-effect hover:shadow-2xl transition-all duration-500 ${plan.featured ? 'md:scale-105 glow-effect border-color-accent' : 'hover:-translate-y-1'}`}
+          class={`relative glass-effect hover:shadow-2xl transition-all duration-500 ${plan.featured ? 'lg:scale-105 glow-effect border-color-accent lg:col-span-3 lg:max-w-md lg:mx-auto' : 'hover:-translate-y-1'}`}
         >
           {plan.featured && (
             <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
