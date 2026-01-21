@@ -46,28 +46,30 @@ const steps = [
       <div class="grid md:grid-cols-3 gap-8">
         {steps.map((step, index) => (
           <div class="relative">
-            <div class="glass-effect rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 h-full border border-white/10 group hover:border-color-accent/50 hover:-translate-y-2">
-              <div class="mb-6">
-                <span class="text-5xl font-bold text-gradient opacity-30 group-hover:opacity-50 transition-opacity">
-                  {step.number}
-                </span>
-              </div>
-              
-              <div class="mb-4">
-                <div class="w-14 h-14 bg-gradient-to-br from-color-accent/30 to-color-secondary/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 glow-effect">
-                  <svg class="w-8 h-8 text-gradient" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon} />
-                  </svg>
+            <div class="gradient-border h-full">
+              <div class="glass-effect rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 h-full border border-white/10 group hover:border-color-accent/50 hover:-translate-y-2 glow-effect">
+                <div class="mb-6">
+                  <span class="text-5xl font-bold text-gradient opacity-30 group-hover:opacity-50 transition-opacity">
+                    {step.number}
+                  </span>
                 </div>
-              </div>
+                
+                <div class="mb-4">
+                  <div class="w-14 h-14 bg-gradient-to-br from-color-accent/30 to-color-secondary/30 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-8 h-8 text-gradient" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon} />
+                    </svg>
+                  </div>
+                </div>
 
-              <h3 class="text-2xl font-bold text-text-heading mb-4">
-                {t(step.titleKey)}
-              </h3>
-              
-              <p class="text-text-body leading-relaxed">
-                {t(step.descKey)}
-              </p>
+                <h3 class="text-2xl font-bold text-text-heading mb-4">
+                  {t(step.titleKey)}
+                </h3>
+                
+                <p class="text-text-body leading-relaxed">
+                  {t(step.descKey)}
+                </p>
+              </div>
             </div>
 
             {index < steps.length - 1 && (

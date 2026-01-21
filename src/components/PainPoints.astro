@@ -42,21 +42,25 @@ const painPoints = [
 
     <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
       {painPoints.map((point) => (
-        <Card variant="default" class="group hover:border-color-accent transition-all duration-300 glass-effect hover:shadow-xl hover:-translate-y-1">
-          <div class="mb-4">
-            <div class="w-14 h-14 bg-gradient-to-br from-color-accent/20 to-color-secondary/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-              <svg class="w-8 h-8 text-gradient" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={point.icon} />
-              </svg>
-            </div>
+        <div class="group relative">
+          <div class="gradient-border h-full">
+            <Card variant="glass" class="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 glow-effect">
+              <div class="mb-4">
+                <div class="w-14 h-14 bg-gradient-to-br from-color-accent/20 to-color-secondary/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <svg class="w-8 h-8 text-gradient" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={point.icon} />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-text-heading mb-3">
+                {t(point.titleKey)}
+              </h3>
+              <p class="text-text-body leading-relaxed">
+                {t(point.descKey)}
+              </p>
+            </Card>
           </div>
-          <h3 class="text-xl font-bold text-text-heading mb-3">
-            {t(point.titleKey)}
-          </h3>
-          <p class="text-text-body leading-relaxed">
-            {t(point.descKey)}
-          </p>
-        </Card>
+        </div>
       ))}
     </div>
   </div>

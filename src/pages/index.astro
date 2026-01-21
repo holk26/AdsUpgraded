@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import BentoGrid from '../components/BentoGrid.astro';
 import PainPoints from '../components/PainPoints.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import TrustSection from '../components/TrustSection.astro';
@@ -21,6 +22,7 @@ const t = useTranslations(lang);
   <Header lang={lang} t={t} />
   <main id="main-content">
     <Hero t={t} />
+    <BentoGrid t={t} />
     <PainPoints t={t} />
     <HowItWorks t={t} />
     <TrustSection t={t} />
