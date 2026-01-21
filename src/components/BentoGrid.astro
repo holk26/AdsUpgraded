@@ -12,7 +12,7 @@ const features = [
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
     titleKey: 'bento.feature1.title',
     descKey: 'bento.feature1.desc',
-    size: 'large', // 2 columns on desktop
+    size: 'medium',
   },
   {
     icon: 'M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4',
@@ -30,7 +30,7 @@ const features = [
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
     titleKey: 'bento.feature4.title',
     descKey: 'bento.feature4.desc',
-    size: 'large',
+    size: 'medium',
   },
   {
     icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
@@ -41,7 +41,6 @@ const features = [
 ];
 
 const sizeClasses = {
-  large: 'md:col-span-2 md:row-span-2',
   medium: 'md:col-span-1',
 };
 ---
@@ -59,10 +58,10 @@ const sizeClasses = {
       class="mb-16"
     />
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto" style="grid-auto-rows: minmax(280px, auto);">
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 max-w-7xl mx-auto">
       {features.map((feature) => (
         <div 
-          class={`group relative ${sizeClasses[feature.size]} min-h-[280px] md:min-h-[320px]`}
+          class={`group relative ${sizeClasses[feature.size]} min-h-[280px]`}
         >
           <!-- Gradient border wrapper -->
           <div class="gradient-border h-full">
