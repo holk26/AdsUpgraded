@@ -60,6 +60,27 @@
     -moz-osx-font-smoothing: grayscale;
     background: linear-gradient(180deg, #0A0E27 0%, #131829 50%, #0A0E27 100%);
     background-attachment: fixed;
+    background-color: #0A0E27; /* Explicit fallback to prevent white flash */
+    min-height: 100vh; /* Fallback for older browsers */
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    overflow-x: hidden;
+    overscroll-behavior-y: none; /* Prevents white bounce effect on mobile */
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    overflow-x: hidden;
+    background-color: #0A0E27; /* Prevents white background on overscroll */
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 
   /* Improved typography scale with better line heights */
@@ -117,26 +138,24 @@
     clip: auto;
     white-space: normal;
   }
-
-  /* Smooth scrolling */
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-  }
 }
 
 /* Modern utility classes */
 @layer utilities {
   .glass-effect {
-    background: rgba(26, 31, 58, 0.6);
+    background: rgba(26, 31, 58, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Stronger glass effect for mobile header */
+  @media (max-width: 767px) {
+    .glass-effect {
+      background: rgba(10, 14, 39, 0.98);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
   }
   
   .gradient-border {

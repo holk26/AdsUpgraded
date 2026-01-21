@@ -15,7 +15,7 @@ const {
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} class="h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
@@ -35,7 +35,7 @@ const {
     <meta name="generator" content={Astro.generator} />
     
     <!-- Theme color for mobile browsers -->
-    <meta name="theme-color" content="#0D0D0D" />
+    <meta name="theme-color" content="#0A0E27" />
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website" />
@@ -44,7 +44,7 @@ const {
     
     <title>{title}</title>
   </head>
-  <body class="antialiased">
+  <body class="antialiased min-h-full">
     <slot />
   </body>
 </html>
