@@ -74,22 +74,6 @@ const plans = [
     cta: 'pricing.migrations.cta',
     featured: false,
   },
-  {
-    name: 'pricing.ads.name',
-    price: 'pricing.ads.price',
-    period: 'pricing.ads.period',
-    desc: 'pricing.ads.desc',
-    features: [
-      'pricing.ads.feature1',
-      'pricing.ads.feature2',
-      'pricing.ads.feature3',
-      'pricing.ads.feature4',
-      'pricing.ads.feature5',
-      'pricing.ads.feature6',
-    ],
-    cta: 'pricing.ads.cta',
-    featured: false,
-  },
 ];
 ---
 
@@ -106,12 +90,12 @@ const plans = [
       class="mb-16"
     />
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
+    <div class="grid md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
       {plans.map((plan) => {
         const isFeatured = plan.featured;
-        // Position featured card in the center of second row
+        // Position featured card with highlight
         const featuredClasses = isFeatured 
-          ? 'md:col-span-2 lg:col-span-1 lg:col-start-2 lg:scale-105 glow-effect border-color-accent' 
+          ? 'md:col-span-2 glow-effect border-color-accent' 
           : 'hover:-translate-y-1';
         
         return (
