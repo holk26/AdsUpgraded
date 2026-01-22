@@ -108,18 +108,6 @@ export const ui = {
     'pricing.migrations.feature6': 'Future-proof architecture for 2026+',
     'pricing.migrations.cta': 'Contact Us',
     
-    'pricing.ads.name': 'Digital Ads & Growth',
-    'pricing.ads.price': 'Custom',
-    'pricing.ads.period': '',
-    'pricing.ads.desc': 'Data-driven marketing and scalable lead generation',
-    'pricing.ads.feature1': 'Ad Campaign Management (Google, Meta)',
-    'pricing.ads.feature2': 'Conversion Rate Optimization (CRO)',
-    'pricing.ads.feature3': 'Advanced tracking & Analytics setup',
-    'pricing.ads.feature4': 'Strategic retargeting & Audience segmentation',
-    'pricing.ads.feature5': 'Landing page performance & UX audits',
-    'pricing.ads.feature6': 'ROI-focused digital growth strategy',
-    'pricing.ads.cta': 'Contact Us',
-    
     'footer.tagline': 'Nyxok - Engineering the Unseen',
     'footer.rights': 'All rights reserved.',
     'footer.product': 'Services',
