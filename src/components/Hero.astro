@@ -10,9 +10,9 @@ const { t } = Astro.props;
 
 <section class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden">
   <!-- Gradient mesh background -->
-  <div class="absolute inset-0 bg-gradient-to-br from-color-accent/10 via-transparent to-color-secondary/10"></div>
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(93,93,255,0.15),transparent_50%)]"></div>
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,255,194,0.1),transparent_50%)]"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-color-accent/10 via-transparent to-color-secondary/10 pointer-events-none"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(93,93,255,0.15),transparent_50%)] pointer-events-none"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(0,255,194,0.1),transparent_50%)] pointer-events-none"></div>
   
   <div class="container mx-auto px-4 relative z-10">
     <div class="max-w-4xl mx-auto text-center">
