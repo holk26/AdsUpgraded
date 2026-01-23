@@ -78,7 +78,7 @@ const steps = [
               </div>
             </div>
 
-            {index < steps.length - 1 && index % 2 === 0 && (
+            {index < steps.length - 1 && index % 4 !== 3 && (
               <div class="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10" aria-hidden="true">
                 <svg class="w-6 h-6 text-color-secondary opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
