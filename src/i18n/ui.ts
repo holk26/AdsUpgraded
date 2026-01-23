@@ -13,6 +13,7 @@ export const ui = {
     'nav.about': 'About',
     
     'hero.title': 'Engineering the Unseen',
+    'hero.tagline': 'Fast, modern, and AI-powered simplicity.',
     'hero.subtitle': 'We automate complexity so you can scale success. High-performance architectures built with precision engineering.',
     'hero.cta': 'Start Your Project',
     'hero.demo': 'Contact Us',
@@ -129,6 +130,7 @@ export const ui = {
     'nav.about': 'Acerca de',
     
     'hero.title': 'Ingeniería de lo Invisible',
+    'hero.tagline': 'Rápido, moderno y simplicidad impulsada por IA.',
     'hero.subtitle': 'Automatizamos la complejidad para que tú escales el éxito. Arquitecturas de alto rendimiento construidas con ingeniería de precisión.',
     'hero.cta': 'Inicia Tu Proyecto',
     'hero.demo': 'Contáctanos',

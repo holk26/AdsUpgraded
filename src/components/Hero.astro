@@ -28,13 +28,18 @@ const { t } = Astro.props;
         {t('hero.title')}
       </h1>
       
+      <!-- Tagline -->
+      <p class="text-lg sm:text-xl md:text-2xl text-color-secondary font-semibold mb-4 animate-fade-in-up" style="animation-delay: 0.1s">
+        {t('hero.tagline')}
+      </p>
+      
       <!-- Subtitle -->
-      <p class="text-base sm:text-lg md:text-xl text-text-body mb-10 max-w-3xl mx-auto leading-relaxed animate-fade-in-up opacity-90 px-4" style="animation-delay: 0.1s">
+      <p class="text-base sm:text-lg md:text-xl text-text-body mb-10 max-w-3xl mx-auto leading-relaxed animate-fade-in-up opacity-90 px-4" style="animation-delay: 0.2s">
         {t('hero.subtitle')}
       </p>
 
       <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-16 animate-fade-in-up px-4 max-w-lg mx-auto" style="animation-delay: 0.2s">
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-16 animate-fade-in-up px-4 max-w-lg mx-auto" style="animation-delay: 0.3s">
         <Button variant="primary" size="lg" href="#demo" ariaLabel={t('hero.cta')}>
           {t('hero.cta')}
           <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -47,7 +52,7 @@ const { t } = Astro.props;
       </div>
 
       <!-- Interactive Hexagonal Logo Network -->
-      <div class="relative mx-auto max-w-6xl animate-fade-in-up px-4" style="animation-delay: 0.3s">
+      <div class="relative mx-auto max-w-6xl animate-fade-in-up px-4" style="animation-delay: 0.4s">
         <div id="hexagon-network" class="relative py-12 sm:py-20 md:py-32">
           <!-- SVG Container -->
           <svg class="w-full h-auto" viewBox="0 0 1000 800" fill="none" xmlns="http://www.w3.org/2000/svg" aria-labelledby="network-title" preserveAspectRatio="xMidYMid meet">
