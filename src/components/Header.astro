@@ -1,5 +1,6 @@
 ---
 import Button from './ui/Button.astro';
+import HamburgerMenu from './HamburgerMenu.astro';
 
 export interface Props {
   lang?: string;
@@ -107,8 +108,8 @@ const navItems = [
 
       <!-- Actions -->
       <div class="flex items-center gap-1.5 md:gap-3">
-        <!-- Language Selector -->
-        <div class="flex gap-1 md:gap-2" role="group" aria-label="Language selection">
+        <!-- Language Selector - Desktop -->
+        <div class="hidden md:flex gap-1 md:gap-2" role="group" aria-label="Language selection">
           <a 
             href="/" 
             class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'en' ? 'bg-color-accent text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-color-surface'}`}
@@ -126,10 +127,13 @@ const navItems = [
             ES
           </a>
         </div>
-        <Button variant="primary" size="sm" href="#demo" ariaLabel={t('nav.demo')} class="text-xs md:text-sm px-3 md:px-4">
+        <Button variant="primary" size="sm" href="#demo" ariaLabel={t('nav.demo')} class="hidden md:inline-flex text-xs md:text-sm px-3 md:px-4">
           <span class="hidden sm:inline">{t('nav.demo')}</span>
           <span class="sm:hidden">Demo</span>
         </Button>
+        
+        <!-- Hamburger Menu -->
+        <HamburgerMenu lang={lang} t={t} />
       </div>
     </nav>
   </div>
