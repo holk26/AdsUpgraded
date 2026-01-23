@@ -403,7 +403,7 @@ const navItems = [
         clone.style.top = `${firstRect.top}px`;
         clone.style.fontSize = window.getComputedStyle(link).fontSize;
         
-        document.body.appendChild(clone);
+        this.morphingContainer.appendChild(clone);
         this.clonedLinks.push(clone);
 
         // FLIP - Last: Calculate target position (center of screen)
