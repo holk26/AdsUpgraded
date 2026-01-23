@@ -67,6 +67,8 @@
     overscroll-behavior-y: none; /* Prevents white bounce effect on mobile */
     margin: 0;
     padding: 0;
+    touch-action: pan-y; /* Ensures vertical scroll is always allowed on mobile */
+    -webkit-overflow-scrolling: touch; /* Smooth momentum scrolling on iOS */
   }
   
   html {
