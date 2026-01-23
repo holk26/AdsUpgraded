@@ -192,16 +192,16 @@ const navItems = [
         <!-- Hamburger Button -->
         <button
           id="hamburger-btn"
-          class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent group"
+          class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent"
           aria-label="Toggle navigation menu"
           aria-expanded="false"
           aria-controls="mobile-nav"
           type="button"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path class="transition-all duration-300 ease-in-out origin-center group-aria-[expanded=true]:translate-y-1.5 group-aria-[expanded=true]:rotate-45" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16" />
-            <path class="transition-all duration-300 ease-in-out group-aria-[expanded=true]:opacity-0 group-aria-[expanded=true]:scale-x-0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16" />
-            <path class="transition-all duration-300 ease-in-out origin-center group-aria-[expanded=true]:-translate-y-1.5 group-aria-[expanded=true]:-rotate-45" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16" />
+            <path id="hamburger-top" class="transition-all duration-300 ease-in-out origin-center" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16" />
+            <path id="hamburger-middle" class="transition-all duration-300 ease-in-out" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16" />
+            <path id="hamburger-bottom" class="transition-all duration-300 ease-in-out origin-center" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16" />
           </svg>
         </button>
       </div>
@@ -232,6 +232,9 @@ const navItems = [
     private clonedLinks: HTMLAnchorElement[] = [];
     private scrollY = 0;
     private prefersReducedMotion: boolean;
+    private hamburgerTop: SVGPathElement;
+    private hamburgerMiddle: SVGPathElement;
+    private hamburgerBottom: SVGPathElement;
 
     constructor() {
       this.mobileNav = document.getElementById('mobile-nav') as HTMLElement;
@@ -242,6 +245,9 @@ const navItems = [
       this.navLinks = document.querySelectorAll('[data-nav-link]');
       this.morphingContainer = document.getElementById('morphing-nav-container') as HTMLElement;
       this.navFooter = document.getElementById('nav-footer') as HTMLElement;
+      this.hamburgerTop = document.getElementById('hamburger-top') as unknown as SVGPathElement;
+      this.hamburgerMiddle = document.getElementById('hamburger-middle') as unknown as SVGPathElement;
+      this.hamburgerBottom = document.getElementById('hamburger-bottom') as unknown as SVGPathElement;
       this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       this.init();
@@ -274,6 +280,11 @@ const navItems = [
       // Update ARIA
       this.hamburgerBtn.setAttribute('aria-expanded', 'true');
       this.mobileNav.setAttribute('aria-hidden', 'false');
+
+      // Transform hamburger to X
+      this.hamburgerTop.classList.add('translate-y-[6px]', 'rotate-45');
+      this.hamburgerMiddle.classList.add('opacity-0', 'scale-x-0');
+      this.hamburgerBottom.classList.add('-translate-y-[6px]', '-rotate-45');
 
       // Preserve scroll position
       this.scrollY = window.scrollY;
@@ -381,6 +392,11 @@ const navItems = [
       // Update ARIA
       this.hamburgerBtn.setAttribute('aria-expanded', 'false');
       this.mobileNav.setAttribute('aria-hidden', 'true');
+
+      // Transform X back to hamburger
+      this.hamburgerTop.classList.remove('translate-y-[6px]', 'rotate-45');
+      this.hamburgerMiddle.classList.remove('opacity-0', 'scale-x-0');
+      this.hamburgerBottom.classList.remove('-translate-y-[6px]', '-rotate-45');
 
       // Hide footer
       this.navFooter.style.opacity = '0';
