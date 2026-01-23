@@ -99,7 +99,6 @@ const navItems = [
           <a 
             href={item.href}
             data-nav-link
-            data-nav-key={item.key}
             class="text-text-body hover:text-color-secondary transition-colors font-medium focus-visible:outline-2 focus-visible:outline-color-accent rounded px-2 py-1"
           >
             {t(item.key)}
@@ -108,14 +107,14 @@ const navItems = [
       </div>
 
       <!-- Mobile Navigation - Simple -->
-      <nav class="fixed inset-0 z-[60] bg-background-dark hidden transition-all duration-300" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Mobile navigation">
-        <div class="flex flex-col h-full p-6">
+      <nav class="fixed inset-0 z-[60] bg-slate-950 hidden" id="mobile-nav" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+        <div class="flex flex-col h-full w-full p-6">
           <!-- Navigation Links -->
-          <div class="flex-1 flex flex-col justify-center gap-6">
+          <div class="flex-1 flex flex-col justify-center items-center gap-8">
             {navItems.map((item) => (
               <a
                 href={item.href}
-                class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors"
+                class="text-3xl font-bold text-white hover:text-cyan-400 transition-colors"
               >
                 {t(item.key)}
               </a>
@@ -123,7 +122,7 @@ const navItems = [
           </div>
 
           <!-- Language & CTA -->
-          <div class="flex flex-col gap-6 pb-6">
+          <div class="flex flex-col items-center gap-6 pb-8">
             <div class="flex gap-4" role="group" aria-label="Language selection">
               <a
                 href="/"
