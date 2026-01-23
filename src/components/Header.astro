@@ -107,36 +107,23 @@ const navItems = [
         ))}
       </div>
 
-      <!-- Mobile Navigation (Shared Elements) -->
-      <nav class="fixed inset-0 z-[60] pointer-events-none opacity-0" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Mobile navigation">
-        <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-xl opacity-0 transition-opacity duration-500" id="nav-backdrop"></div>
-        
-        <!-- Menu Content -->
-        <div class="relative h-full flex flex-col items-center justify-center p-8 overflow-hidden">
-          <!-- Background Effects -->
-          <div class="absolute inset-0 overflow-hidden opacity-30">
-            <div class="absolute top-1/4 right-1/4 w-64 h-64 bg-cyan-400/30 rounded-full blur-3xl animate-pulse-slow"></div>
-            <div class="absolute bottom-1/4 left-1/4 w-64 h-64 bg-purple-400/30 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+      <!-- Mobile Navigation - Simple -->
+      <nav class="fixed inset-0 z-[60] bg-background-dark hidden transition-all duration-300" id="mobile-nav" aria-hidden="true" role="dialog" aria-label="Mobile navigation">
+        <div class="flex flex-col h-full p-6">
+          <!-- Navigation Links -->
+          <div class="flex-1 flex flex-col justify-center gap-6">
+            {navItems.map((item) => (
+              <a
+                href={item.href}
+                class="text-2xl font-bold text-white hover:text-cyan-400 transition-colors"
+              >
+                {t(item.key)}
+              </a>
+            ))}
           </div>
 
-          <!-- Close Button -->
-          <button
-            id="menu-close-btn"
-            class="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent z-10"
-            aria-label="Close navigation menu"
-            type="button"
-          >
-            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-
-          <!-- Morphing Navigation Links Container -->
-          <div class="relative z-10 flex flex-col items-center gap-8 w-full max-w-md" id="morphing-nav-container"></div>
-
           <!-- Language & CTA -->
-          <div class="relative z-10 mt-12 flex flex-col items-center gap-6 opacity-0 transition-opacity duration-500" id="nav-footer">
+          <div class="flex flex-col gap-6 pb-6">
             <div class="flex gap-4" role="group" aria-label="Language selection">
               <a
                 href="/"
@@ -155,7 +142,7 @@ const navItems = [
             </div>
             <a
               href="#demo"
-              class="px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-cyan-400/50 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-400"
+              class="px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-cyan-400/50 transition-all duration-300 text-center"
             >
               {t('nav.demo')}
             </a>
@@ -218,63 +205,52 @@ const navItems = [
 </a>
 
 <script>
-  // Shared-Element Hamburger Menu with FLIP Animation
-  class SharedElementMenu {
+  // Simple Hamburger Menu
+  class SimpleMenu {
     private isOpen = false;
     private mobileNav: HTMLElement;
-    private backdrop: HTMLElement;
     private hamburgerBtn: HTMLButtonElement;
-    private closeBtn: HTMLButtonElement;
-    private desktopNav: HTMLElement;
-    private navLinks: NodeListOf<HTMLAnchorElement>;
-    private morphingContainer: HTMLElement;
-    private navFooter: HTMLElement;
-    private clonedLinks: HTMLAnchorElement[] = [];
-    private scrollY = 0;
-    private prefersReducedMotion: boolean;
     private hamburgerTop: SVGPathElement;
     private hamburgerMiddle: SVGPathElement;
     private hamburgerBottom: SVGPathElement;
+    private scrollY = 0;
 
     constructor() {
       this.mobileNav = document.getElementById('mobile-nav') as HTMLElement;
-      this.backdrop = document.getElementById('nav-backdrop') as HTMLElement;
       this.hamburgerBtn = document.getElementById('hamburger-btn') as HTMLButtonElement;
-      this.closeBtn = document.getElementById('menu-close-btn') as HTMLButtonElement;
-      this.desktopNav = document.getElementById('desktop-nav') as HTMLElement;
-      this.navLinks = document.querySelectorAll('[data-nav-link]');
-      this.morphingContainer = document.getElementById('morphing-nav-container') as HTMLElement;
-      this.navFooter = document.getElementById('nav-footer') as HTMLElement;
       this.hamburgerTop = document.getElementById('hamburger-top') as unknown as SVGPathElement;
       this.hamburgerMiddle = document.getElementById('hamburger-middle') as unknown as SVGPathElement;
       this.hamburgerBottom = document.getElementById('hamburger-bottom') as unknown as SVGPathElement;
-      this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       this.init();
     }
 
     private init() {
       this.hamburgerBtn.addEventListener('click', () => this.toggle());
-      this.closeBtn.addEventListener('click', () => this.close());
-      this.backdrop.addEventListener('click', () => this.close());
-      document.addEventListener('keydown', (e) => this.handleKeyDown(e));
+      
+      // Close on navigation link click
+      const navLinks = this.mobileNav.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => this.close());
+      });
 
-      // Listen for reduced motion changes
-      const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-      motionQuery.addEventListener('change', (e) => {
-        this.prefersReducedMotion = e.matches;
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen) {
+          this.close();
+        }
       });
     }
 
-    private async toggle() {
+    private toggle() {
       if (this.isOpen) {
-        await this.close();
+        this.close();
       } else {
-        await this.open();
+        this.open();
       }
     }
 
-    private async open() {
+    private open() {
       this.isOpen = true;
       
       // Update ARIA
@@ -294,97 +270,11 @@ const navItems = [
       document.body.style.width = '100%';
 
       // Show mobile nav
-      this.mobileNav.classList.remove('pointer-events-none', 'opacity-0');
-      this.mobileNav.classList.add('pointer-events-auto', 'opacity-100');
-
-      // Animate backdrop
-      requestAnimationFrame(() => {
-        this.backdrop.style.opacity = '1';
-      });
-
-      // Clone and morph links using FLIP
-      await this.morphLinksToFullscreen();
-
-      // Show footer
-      setTimeout(() => {
-        this.navFooter.style.opacity = '1';
-      }, this.prefersReducedMotion ? 100 : 400);
-
-      // Focus close button
-      setTimeout(() => {
-        this.closeBtn.focus();
-      }, 100);
+      this.mobileNav.classList.remove('hidden');
+      this.mobileNav.classList.add('block');
     }
 
-    private async morphLinksToFullscreen() {
-      // Clear previous clones
-      this.morphingContainer.innerHTML = '';
-      this.clonedLinks = [];
-
-      this.navLinks.forEach((link, index) => {
-        // FLIP - First: Record initial position
-        const firstRect = link.getBoundingClientRect();
-        const linkText = link.textContent || '';
-
-        // Create morphing clone with Tailwind classes
-        const clone = document.createElement('a');
-        clone.href = link.getAttribute('href') || '#';
-        clone.className = 'fixed no-underline font-bold text-white z-[61] whitespace-nowrap hover:text-cyan-400 transition-all duration-300';
-        clone.textContent = '';
-
-        // Split text into letters
-        linkText.split('').forEach((char, charIndex) => {
-          const span = document.createElement('span');
-          span.className = 'inline-block transition-all duration-[600ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] opacity-0 translate-y-5 scale-75 -rotate-[5deg] blur-sm motion-reduce:transition-opacity motion-reduce:duration-200';
-          span.textContent = char === ' ' ? '\u00A0' : char;
-          span.style.transitionDelay = `${index * 0.05 + charIndex * 0.02}s`;
-          clone.appendChild(span);
-        });
-
-        // Position clone at original location
-        clone.style.left = `${firstRect.left}px`;
-        clone.style.top = `${firstRect.top}px`;
-        clone.style.fontSize = window.getComputedStyle(link).fontSize;
-        
-        this.morphingContainer.appendChild(clone);
-        this.clonedLinks.push(clone);
-
-        // FLIP - Last: Calculate target position (center of screen)
-        const targetTop = window.innerHeight / 2 - 150 + index * 100;
-        const targetLeft = window.innerWidth / 2;
-
-        // FLIP - Invert & Play: Animate to target
-        requestAnimationFrame(() => {
-          if (this.prefersReducedMotion) {
-            clone.classList.add('duration-300', 'ease-linear');
-          } else {
-            clone.classList.add('duration-[800ms]', 'ease-[cubic-bezier(0.34,1.56,0.64,1)]');
-          }
-          
-          clone.style.left = `${targetLeft}px`;
-          clone.style.top = `${targetTop}px`;
-          clone.style.transform = 'translateX(-50%)';
-          clone.style.fontSize = '3rem';
-
-          // Animate letters - remove animation classes
-          const letters = clone.querySelectorAll('span');
-          letters.forEach((letter) => {
-            letter.classList.remove('opacity-0', 'translate-y-5', 'scale-75', '-rotate-[5deg]', 'blur-sm');
-            letter.classList.add('opacity-100', 'translate-y-0', 'scale-100', 'rotate-0', 'blur-0');
-          });
-        });
-
-        // Add click handler
-        clone.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.close().then(() => {
-            window.location.href = clone.href;
-          });
-        });
-      });
-    }
-
-    private async close() {
+    private close() {
       if (!this.isOpen) return;
       
       this.isOpen = false;
@@ -398,22 +288,9 @@ const navItems = [
       this.hamburgerMiddle.classList.remove('opacity-0', 'scale-x-0');
       this.hamburgerBottom.classList.remove('-translate-y-[6px]', '-rotate-45');
 
-      // Hide footer
-      this.navFooter.style.opacity = '0';
-
-      // Animate backdrop
-      this.backdrop.style.opacity = '0';
-
-      // Morph links back to original position
-      await this.morphLinksToOriginal();
-
-      // Wait for animation
-      const duration = this.prefersReducedMotion ? 300 : 800;
-      await new Promise(resolve => setTimeout(resolve, duration));
-
       // Hide mobile nav
-      this.mobileNav.classList.add('pointer-events-none', 'opacity-0');
-      this.mobileNav.classList.remove('pointer-events-auto', 'opacity-100');
+      this.mobileNav.classList.add('hidden');
+      this.mobileNav.classList.remove('block');
 
       // Restore scroll
       document.body.style.overflow = '';
@@ -425,49 +302,12 @@ const navItems = [
       // Restore focus
       this.hamburgerBtn.focus();
     }
-
-    private async morphLinksToOriginal() {
-      this.navLinks.forEach((link, index) => {
-        const clone = this.clonedLinks[index];
-        if (!clone) return;
-
-        const firstRect = link.getBoundingClientRect();
-
-        // Animate letters out - add animation classes back
-        const letters = clone.querySelectorAll('span');
-        letters.forEach((letter) => {
-          letter.classList.remove('opacity-100', 'translate-y-0', 'scale-100', 'rotate-0', 'blur-0');
-          letter.classList.add('opacity-0', 'translate-y-5', 'scale-75', '-rotate-[5deg]', 'blur-sm');
-        });
-
-        // Animate back to original position
-        clone.style.left = `${firstRect.left}px`;
-        clone.style.top = `${firstRect.top}px`;
-        clone.style.transform = 'none';
-        clone.style.fontSize = window.getComputedStyle(link).fontSize;
-      });
-
-      // Remove clones after animation
-      setTimeout(() => {
-        this.clonedLinks.forEach(clone => clone.remove());
-        this.clonedLinks = [];
-      }, this.prefersReducedMotion ? 300 : 800);
-    }
-
-    private handleKeyDown(e: KeyboardEvent) {
-      if (!this.isOpen) return;
-
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        this.close();
-      }
-    }
   }
 
   // Initialize
   if (typeof window !== 'undefined') {
     document.addEventListener('DOMContentLoaded', () => {
-      new SharedElementMenu();
+      new SimpleMenu();
     });
   }
 </script>
