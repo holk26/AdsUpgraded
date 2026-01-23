@@ -94,11 +94,10 @@ const navItems = [
       </a>
 
       <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-8" id="desktop-nav">
+      <div class="hidden md:flex items-center gap-8">
         {navItems.map((item) => (
           <a 
-            href={item.href}
-            data-nav-link
+            href={item.href} 
             class="text-text-body hover:text-color-secondary transition-colors font-medium focus-visible:outline-2 focus-visible:outline-color-accent rounded px-2 py-1"
           >
             {t(item.key)}
@@ -106,53 +105,10 @@ const navItems = [
         ))}
       </div>
 
-      <!-- Mobile Navigation - Simple -->
-      <nav class="fixed inset-0 z-[60] bg-slate-950 hidden" id="mobile-nav" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-        <div class="flex flex-col h-full w-full p-6">
-          <!-- Navigation Links -->
-          <div class="flex-1 flex flex-col justify-center items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                href={item.href}
-                class="text-3xl font-bold text-white hover:text-cyan-400 transition-colors"
-              >
-                {t(item.key)}
-              </a>
-            ))}
-          </div>
-
-          <!-- Language & CTA -->
-          <div class="flex flex-col items-center gap-6 pb-8">
-            <div class="flex gap-4" role="group" aria-label="Language selection">
-              <a
-                href="/"
-                class={`px-6 py-3 rounded-lg text-lg font-medium transition-all ${lang === 'en' ? 'bg-cyan-400 text-black' : 'text-white border border-white/20 hover:border-cyan-400'}`}
-                aria-label="Switch to English"
-              >
-                EN
-              </a>
-              <a
-                href="/es"
-                class={`px-6 py-3 rounded-lg text-lg font-medium transition-all ${lang === 'es' ? 'bg-cyan-400 text-black' : 'text-white border border-white/20 hover:border-cyan-400'}`}
-                aria-label="Cambiar a Español"
-              >
-                ES
-              </a>
-            </div>
-            <a
-              href="#demo"
-              class="px-8 py-4 bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-bold rounded-lg hover:shadow-lg hover:shadow-cyan-400/50 transition-all duration-300 text-center"
-            >
-              {t('nav.demo')}
-            </a>
-          </div>
-        </div>
-      </nav>
-
       <!-- Actions -->
       <div class="flex items-center gap-1.5 md:gap-3">
-        <!-- Language Selector - Desktop -->
-        <div class="hidden md:flex gap-1 md:gap-2" role="group" aria-label="Language selection">
+        <!-- Language Selector -->
+        <div class="flex gap-1 md:gap-2" role="group" aria-label="Language selection">
           <a 
             href="/" 
             class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'en' ? 'bg-color-accent text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-color-surface'}`}
@@ -170,26 +126,10 @@ const navItems = [
             ES
           </a>
         </div>
-        <Button variant="primary" size="sm" href="#demo" ariaLabel={t('nav.demo')} class="hidden md:inline-flex text-xs md:text-sm px-3 md:px-4">
+        <Button variant="primary" size="sm" href="#demo" ariaLabel={t('nav.demo')} class="text-xs md:text-sm px-3 md:px-4">
           <span class="hidden sm:inline">{t('nav.demo')}</span>
           <span class="sm:hidden">Demo</span>
         </Button>
-        
-        <!-- Hamburger Button -->
-        <button
-          id="hamburger-btn"
-          class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent"
-          aria-label="Toggle navigation menu"
-          aria-expanded="false"
-          aria-controls="mobile-nav"
-          type="button"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path id="hamburger-top" class="transition-all duration-300 ease-in-out origin-center" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16" />
-            <path id="hamburger-middle" class="transition-all duration-300 ease-in-out" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16" />
-            <path id="hamburger-bottom" class="transition-all duration-300 ease-in-out origin-center" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16" />
-          </svg>
-        </button>
       </div>
     </nav>
   </div>
@@ -202,111 +142,3 @@ const navItems = [
 >
   Skip to main content
 </a>
-
-<script>
-  // Simple Hamburger Menu
-  class SimpleMenu {
-    private isOpen = false;
-    private mobileNav: HTMLElement;
-    private hamburgerBtn: HTMLButtonElement;
-    private hamburgerTop: SVGPathElement;
-    private hamburgerMiddle: SVGPathElement;
-    private hamburgerBottom: SVGPathElement;
-    private scrollY = 0;
-
-    constructor() {
-      this.mobileNav = document.getElementById('mobile-nav') as HTMLElement;
-      this.hamburgerBtn = document.getElementById('hamburger-btn') as HTMLButtonElement;
-      this.hamburgerTop = document.getElementById('hamburger-top') as unknown as SVGPathElement;
-      this.hamburgerMiddle = document.getElementById('hamburger-middle') as unknown as SVGPathElement;
-      this.hamburgerBottom = document.getElementById('hamburger-bottom') as unknown as SVGPathElement;
-
-      this.init();
-    }
-
-    private init() {
-      this.hamburgerBtn.addEventListener('click', () => this.toggle());
-      
-      // Close on navigation link click
-      const navLinks = this.mobileNav.querySelectorAll('a');
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => this.close());
-      });
-
-      // Close on Escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && this.isOpen) {
-          this.close();
-        }
-      });
-    }
-
-    private toggle() {
-      if (this.isOpen) {
-        this.close();
-      } else {
-        this.open();
-      }
-    }
-
-    private open() {
-      this.isOpen = true;
-      
-      // Update ARIA
-      this.hamburgerBtn.setAttribute('aria-expanded', 'true');
-      this.mobileNav.setAttribute('aria-hidden', 'false');
-
-      // Transform hamburger to X
-      this.hamburgerTop.classList.add('translate-y-[6px]', 'rotate-45');
-      this.hamburgerMiddle.classList.add('opacity-0', 'scale-x-0');
-      this.hamburgerBottom.classList.add('-translate-y-[6px]', '-rotate-45');
-
-      // Preserve scroll position
-      this.scrollY = window.scrollY;
-      document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.top = `-${this.scrollY}px`;
-      document.body.style.width = '100%';
-
-      // Show mobile nav
-      this.mobileNav.classList.remove('hidden');
-      this.mobileNav.classList.add('block');
-    }
-
-    private close() {
-      if (!this.isOpen) return;
-      
-      this.isOpen = false;
-
-      // Update ARIA
-      this.hamburgerBtn.setAttribute('aria-expanded', 'false');
-      this.mobileNav.setAttribute('aria-hidden', 'true');
-
-      // Transform X back to hamburger
-      this.hamburgerTop.classList.remove('translate-y-[6px]', 'rotate-45');
-      this.hamburgerMiddle.classList.remove('opacity-0', 'scale-x-0');
-      this.hamburgerBottom.classList.remove('-translate-y-[6px]', '-rotate-45');
-
-      // Hide mobile nav
-      this.mobileNav.classList.add('hidden');
-      this.mobileNav.classList.remove('block');
-
-      // Restore scroll
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.top = '';
-      document.body.style.width = '';
-      window.scrollTo(0, this.scrollY);
-
-      // Restore focus
-      this.hamburgerBtn.focus();
-    }
-  }
-
-  // Initialize
-  if (typeof window !== 'undefined') {
-    document.addEventListener('DOMContentLoaded', () => {
-      new SimpleMenu();
-    });
-  }
-</script>
