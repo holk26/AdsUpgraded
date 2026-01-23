@@ -1,3 +1,70 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Modern 2026 Design Tokens */
+:root {
+  /* Brand Colors - Tech Aesthetic */
+  --brand-primary: #00FFC2;
+  --brand-secondary: #5D5DFF;
+  --brand-accent: #0ea5e9;
+  --brand-surface: #1a1a2e;
+  --brand-border: rgba(0, 255, 194, 0.2);
+  
+  /* Background Colors */
+  --bg-dark: #0a0e1a;
+  --bg-surface: #1a1a2e;
+  --bg-card: rgba(26, 26, 46, 0.8);
+  
+  /* Text Colors */
+  --text-heading: #ffffff;
+  --text-body: #e5e7eb;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  
+  /* Effects */
+  --radius-saas: 16px;
+}
+
+/* Glass Morphism Utility */
+@layer utilities {
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .gradient-mesh {
+    background: 
+      radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 0.2) 0px, transparent 50%),
+      radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 0.2) 0px, transparent 50%);
+  }
+}
+
+/* Base Styles */
+body {
+  @apply bg-[#0a0e1a] text-gray-100;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
