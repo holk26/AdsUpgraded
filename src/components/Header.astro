@@ -192,16 +192,16 @@ const navItems = [
         <!-- Hamburger Button -->
         <button
           id="hamburger-btn"
-          class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent"
+          class="md:hidden flex items-center justify-center w-10 h-10 rounded-lg hover:bg-white/5 transition-colors focus-visible:outline-2 focus-visible:outline-brand-accent group"
           aria-label="Toggle navigation menu"
           aria-expanded="false"
           aria-controls="mobile-nav"
           type="button"
         >
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path class="hamburger-line hamburger-line-top" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16" />
-            <path class="hamburger-line hamburger-line-middle" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16" />
-            <path class="hamburger-line hamburger-line-bottom" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16" />
+            <path class="transition-all duration-300 ease-in-out origin-center group-aria-[expanded=true]:translate-y-1.5 group-aria-[expanded=true]:rotate-45" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16" />
+            <path class="transition-all duration-300 ease-in-out group-aria-[expanded=true]:opacity-0 group-aria-[expanded=true]:scale-x-0" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16" />
+            <path class="transition-all duration-300 ease-in-out origin-center group-aria-[expanded=true]:-translate-y-1.5 group-aria-[expanded=true]:-rotate-45" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16" />
           </svg>
         </button>
       </div>
@@ -216,74 +216,6 @@ const navItems = [
 >
   Skip to main content
 </a>
-
-<style>
-  /* Hamburger Icon Animation */
-  .hamburger-line {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
-  }
-
-  [aria-expanded="true"] .hamburger-line-top {
-    transform: translateY(6px) rotate(45deg);
-  }
-
-  [aria-expanded="true"] .hamburger-line-middle {
-    opacity: 0;
-    transform: scaleX(0);
-  }
-
-  [aria-expanded="true"] .hamburger-line-bottom {
-    transform: translateY(-6px) rotate(-45deg);
-  }
-
-  /* Morphing navigation links */
-  .morphing-nav-link {
-    position: fixed;
-    text-decoration: none;
-    font-weight: 700;
-    color: white;
-    text-shadow: 0 0 20px rgba(0, 255, 194, 0);
-    transition: text-shadow 0.3s ease;
-    z-index: 61;
-    white-space: nowrap;
-  }
-
-  .morphing-nav-link:hover {
-    color: #00FFC2;
-    text-shadow: 0 0 20px rgba(0, 255, 194, 0.6);
-  }
-
-  .morphing-nav-link.morphing {
-    pointer-events: none;
-  }
-
-  /* Letter morphing animation */
-  .letter-morph {
-    display: inline-block;
-    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  .letter-morph.animating {
-    opacity: 0;
-    transform: translateY(20px) scale(0.8) rotate(-5deg);
-    filter: blur(4px);
-  }
-
-  /* Reduced Motion */
-  @media (prefers-reduced-motion: reduce) {
-    .hamburger-line,
-    .morphing-nav-link,
-    .letter-morph {
-      transition: opacity 0.2s ease !important;
-    }
-
-    .letter-morph {
-      transform: none !important;
-      filter: none !important;
-    }
-  }
-</style>
 
 <script>
   // Shared-Element Hamburger Menu with FLIP Animation
@@ -383,16 +315,16 @@ const navItems = [
         const firstRect = link.getBoundingClientRect();
         const linkText = link.textContent || '';
 
-        // Create morphing clone
+        // Create morphing clone with Tailwind classes
         const clone = document.createElement('a');
         clone.href = link.getAttribute('href') || '#';
-        clone.className = 'morphing-nav-link morphing';
+        clone.className = 'fixed no-underline font-bold text-white z-[61] whitespace-nowrap hover:text-cyan-400 transition-all duration-300';
         clone.textContent = '';
 
         // Split text into letters
         linkText.split('').forEach((char, charIndex) => {
           const span = document.createElement('span');
-          span.className = 'letter-morph animating';
+          span.className = 'inline-block transition-all duration-[600ms] ease-[cubic-bezier(0.34,1.56,0.64,1)] opacity-0 translate-y-5 scale-75 -rotate-[5deg] blur-sm motion-reduce:transition-opacity motion-reduce:duration-200';
           span.textContent = char === ' ' ? '\u00A0' : char;
           span.style.transitionDelay = `${index * 0.05 + charIndex * 0.02}s`;
           clone.appendChild(span);
@@ -412,19 +344,22 @@ const navItems = [
 
         // FLIP - Invert & Play: Animate to target
         requestAnimationFrame(() => {
-          clone.classList.remove('morphing');
-          clone.style.transition = this.prefersReducedMotion 
-            ? 'all 0.3s ease'
-            : 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+          if (this.prefersReducedMotion) {
+            clone.classList.add('duration-300', 'ease-linear');
+          } else {
+            clone.classList.add('duration-[800ms]', 'ease-[cubic-bezier(0.34,1.56,0.64,1)]');
+          }
+          
           clone.style.left = `${targetLeft}px`;
           clone.style.top = `${targetTop}px`;
           clone.style.transform = 'translateX(-50%)';
           clone.style.fontSize = '3rem';
 
-          // Animate letters
-          const letters = clone.querySelectorAll('.letter-morph');
+          // Animate letters - remove animation classes
+          const letters = clone.querySelectorAll('span');
           letters.forEach((letter) => {
-            (letter as HTMLElement).classList.remove('animating');
+            letter.classList.remove('opacity-0', 'translate-y-5', 'scale-75', '-rotate-[5deg]', 'blur-sm');
+            letter.classList.add('opacity-100', 'translate-y-0', 'scale-100', 'rotate-0', 'blur-0');
           });
         });
 
@@ -482,10 +417,11 @@ const navItems = [
 
         const firstRect = link.getBoundingClientRect();
 
-        // Animate letters out
-        const letters = clone.querySelectorAll('.letter-morph');
+        // Animate letters out - add animation classes back
+        const letters = clone.querySelectorAll('span');
         letters.forEach((letter) => {
-          (letter as HTMLElement).classList.add('animating');
+          letter.classList.remove('opacity-100', 'translate-y-0', 'scale-100', 'rotate-0', 'blur-0');
+          letter.classList.add('opacity-0', 'translate-y-5', 'scale-75', '-rotate-[5deg]', 'blur-sm');
         });
 
         // Animate back to original position
