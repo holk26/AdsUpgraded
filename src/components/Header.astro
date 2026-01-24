@@ -15,7 +15,7 @@ const navItems = [
 ];
 ---
 
-<header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+<header id="header" class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5 shadow-lg transition-all duration-300">
   <div class="container mx-auto px-4">
     <nav class="flex items-center justify-between py-3 md:py-4 gap-2 md:gap-4" aria-label="Main navigation">
       <!-- Logo -->
@@ -180,31 +180,12 @@ const navItems = [
 
 <script>
   // Header scroll behavior
-  const header = document.getElementById('header');
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
   const line1 = document.getElementById('line1');
   const line2 = document.getElementById('line2');
   const line3 = document.getElementById('line3');
   let isMenuOpen = false;
-
-  // Classes to add/remove for header background
-  const HEADER_BG_CLASSES = ['glass-effect', 'border-b', 'border-white/5', 'shadow-lg'];
-
-  // Add background on scroll
-  function handleScroll() {
-    const heroSection = document.getElementById('hero');
-    if (!heroSection) return;
-    
-    const heroHeight = heroSection.offsetHeight;
-    const scrollY = window.scrollY;
-    
-    if (scrollY > heroHeight * 0.3) {
-      header?.classList.add(...HEADER_BG_CLASSES);
-    } else {
-      header?.classList.remove(...HEADER_BG_CLASSES);
-    }
-  }
 
   // Toggle mobile menu
   function toggleMobileMenu() {
@@ -255,7 +236,6 @@ const navItems = [
   }
 
   // Event listeners
-  window.addEventListener('scroll', handleScroll);
   mobileMenuButton?.addEventListener('click', toggleMobileMenu);
   
   // Close menu when clicking on links
@@ -263,7 +243,4 @@ const navItems = [
   menuLinks.forEach(link => {
     link.addEventListener('click', handleMenuLinkClick);
   });
-  
-  // Initial check
-  handleScroll();
 </script>
