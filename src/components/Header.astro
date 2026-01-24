@@ -170,6 +170,14 @@ const navItems = [
   </div>
 </header>
 
+<!-- Skip to main content link for accessibility -->
+<a 
+  href="#main-content" 
+  class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-primary text-white px-4 py-2 rounded-lg z-[100] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+>
+  Skip to main content
+</a>
+
 <script>
   // Header scroll behavior
   const header = document.getElementById('header');
@@ -180,18 +188,21 @@ const navItems = [
   const line3 = document.getElementById('line3');
   let isMenuOpen = false;
 
+  // Classes to add/remove for header background
+  const HEADER_BG_CLASSES = ['glass-effect', 'border-b', 'border-white/5', 'shadow-lg'];
+
   // Add background on scroll
   function handleScroll() {
-    const heroSection = document.querySelector('section'); // First section is Hero
+    const heroSection = document.getElementById('hero');
     if (!heroSection) return;
     
     const heroHeight = heroSection.offsetHeight;
     const scrollY = window.scrollY;
     
     if (scrollY > heroHeight * 0.3) {
-      header?.classList.add('glass-effect', 'border-b', 'border-white/5', 'shadow-lg');
+      header?.classList.add(...HEADER_BG_CLASSES);
     } else {
-      header?.classList.remove('glass-effect', 'border-b', 'border-white/5', 'shadow-lg');
+      header?.classList.remove(...HEADER_BG_CLASSES);
     }
   }
 
