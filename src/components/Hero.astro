@@ -8,7 +8,7 @@ export interface Props {
 const { t } = Astro.props;
 ---
 
-<section class="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden min-h-screen flex items-center">
+<section class="relative pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-20 lg:pt-40 lg:pb-24 overflow-hidden min-h-[100svh] flex items-center">
   <!-- Futuristic Tech Background - Inspired by digital globe cityscape -->
   <div class="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#0d1428] to-[#1a1a2e]"></div>
   
@@ -17,54 +17,44 @@ const { t } = Astro.props;
     <div class="absolute inset-0" style="background-image: linear-gradient(rgba(93, 93, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(93, 93, 255, 0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
   </div>
   
-  <!-- Digital Globe Effect - Right Side -->
-  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] opacity-40">
-    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/30 via-blue-500/20 to-transparent blur-3xl animate-pulse-slow"></div>
-    <div class="absolute inset-0 rounded-full border border-cyan-400/20 animate-spin-slow"></div>
-    <div class="absolute inset-8 rounded-full border border-cyan-400/10 animate-spin-slow" style="animation-duration: 20s; animation-direction: reverse;"></div>
+  <!-- Digital Globe Effect - Right Side (Simplified) -->
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] opacity-30">
+    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/20 via-blue-500/10 to-transparent blur-3xl animate-pulse-slow"></div>
   </div>
   
-  <!-- Network Connections -->
-  <div class="absolute inset-0 overflow-hidden opacity-30">
-    <svg class="absolute top-1/4 right-1/4 w-64 h-64" viewBox="0 0 200 200">
+  <!-- Network Connections (Simplified) -->
+  <div class="absolute inset-0 overflow-hidden opacity-20 hidden lg:block">
+    <svg class="absolute top-1/4 right-1/4 w-48 h-48 lg:w-64 lg:h-64" viewBox="0 0 200 200">
       <line x1="20" y1="20" x2="180" y2="180" stroke="url(#lineGradient1)" stroke-width="1" class="animate-dash" />
-      <line x1="180" y1="20" x2="20" y2="180" stroke="url(#lineGradient2)" stroke-width="1" class="animate-dash" style="animation-delay: 0.5s;" />
       <defs>
         <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style="stop-color:#00FFC2;stop-opacity:0" />
           <stop offset="50%" style="stop-color:#00FFC2;stop-opacity:1" />
           <stop offset="100%" style="stop-color:#00FFC2;stop-opacity:0" />
         </linearGradient>
-        <linearGradient id="lineGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#5D5DFF;stop-opacity:0" />
-          <stop offset="50%" style="stop-color:#5D5DFF;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#5D5DFF;stop-opacity:0" />
-        </linearGradient>
       </defs>
     </svg>
   </div>
   
-  <!-- Floating Particles -->
-  <div class="absolute inset-0 overflow-hidden">
+  <!-- Floating Particles (Reduced) -->
+  <div class="absolute inset-0 overflow-hidden hidden md:block">
     <div class="particle particle-1"></div>
     <div class="particle particle-2"></div>
     <div class="particle particle-3"></div>
-    <div class="particle particle-4"></div>
-    <div class="particle particle-5"></div>
   </div>
   
   <!-- Gradient Overlays -->
   <div class="absolute inset-0" style="background: radial-gradient(circle at center, transparent 0%, transparent 50%, rgba(10, 14, 26, 0.8) 100%);"></div>
   <div class="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0a0e1a] to-transparent"></div>
   
-  <div class="container mx-auto px-4 relative z-10">
+  <div class="container mx-auto px-4 sm:px-6 relative z-10">
     <div class="max-w-6xl mx-auto">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
         <!-- Left Content -->
-        <div class="text-left space-y-8">
+        <div class="text-left space-y-4 sm:space-y-6 md:space-y-8">
           <!-- Badge with Glass Morphism -->
           <div class="animate-fade-in">
-            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold text-cyan-400 bg-cyan-400/10 backdrop-blur-md border border-cyan-400/20 shadow-lg shadow-cyan-400/10">
+            <span class="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs font-semibold text-cyan-400 bg-cyan-400/10 backdrop-blur-md border border-cyan-400/20">
               <span class="relative flex h-2 w-2">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-cyan-400"></span>
@@ -74,24 +64,24 @@ const { t } = Astro.props;
           </div>
           
           <!-- Main Heading with Gradient -->
-          <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-fade-in-up">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight animate-fade-in-up">
             <span class="block bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent">
               {t('hero.title')}
             </span>
           </h1>
           
           <!-- Tagline with Glow -->
-          <p class="text-xl sm:text-2xl md:text-3xl font-semibold animate-fade-in-up text-cyan-400" style="animation-delay: 0.1s; text-shadow: 0 0 30px rgba(0, 255, 194, 0.3);">
+          <p class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold animate-fade-in-up text-cyan-400" style="animation-delay: 0.1s; text-shadow: 0 0 30px rgba(0, 255, 194, 0.3);">
             {t('hero.tagline')}
           </p>
           
           <!-- Subtitle -->
-          <p class="text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed animate-fade-in-up max-w-2xl" style="animation-delay: 0.2s">
+          <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 leading-relaxed animate-fade-in-up max-w-2xl" style="animation-delay: 0.2s">
             {t('hero.subtitle')}
           </p>
 
           <!-- CTA Buttons -->
-          <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style="animation-delay: 0.3s">
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in-up" style="animation-delay: 0.3s">
             <Button variant="primary" size="lg" href="#demo" ariaLabel={t('hero.cta')}>
               {t('hero.cta')}
               <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -103,16 +93,14 @@ const { t } = Astro.props;
             </Button>
           </div>
         </div>
-        <!-- Right Content - Tech Visualization -->
-        <div class="relative lg:block hidden animate-fade-in-up" style="animation-delay: 0.4s">
-          <div class="relative aspect-square max-w-xl mx-auto">
+        <!-- Right Content - Tech Visualization (Simplified) -->
+        <div class="relative hidden lg:block animate-fade-in-up" style="animation-delay: 0.4s">
+          <div class="relative aspect-square max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
             <!-- Central Orb -->
             <div class="absolute inset-0 flex items-center justify-center">
-              <div class="relative w-48 h-48">
+              <div class="relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48">
                 <div class="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 opacity-80 animate-pulse-glow"></div>
                 <div class="absolute inset-2 rounded-full bg-gradient-to-br from-cyan-300 to-blue-500 opacity-60 blur-xl"></div>
-                <div class="absolute inset-0 rounded-full border-2 border-cyan-400/30 animate-spin-slow"></div>
-                <div class="absolute inset-4 rounded-full border border-cyan-400/20 animate-spin-slow" style="animation-duration: 15s; animation-direction: reverse;"></div>
               </div>
             </div>
             
@@ -121,7 +109,7 @@ const { t } = Astro.props;
               <!-- Backend -->
               <div class="tech-service tech-service-1">
                 <div class="service-icon">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
                   </svg>
                 </div>
@@ -130,7 +118,7 @@ const { t } = Astro.props;
               <!-- Frontend -->
               <div class="tech-service tech-service-2">
                 <div class="service-icon">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
                 </div>
@@ -139,7 +127,7 @@ const { t } = Astro.props;
               <!-- Automation -->
               <div class="tech-service tech-service-3">
                 <div class="service-icon">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
@@ -148,31 +136,11 @@ const { t } = Astro.props;
               <!-- AI -->
               <div class="tech-service tech-service-4">
                 <div class="service-icon">
-                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg class="w-5 h-5 lg:w-6 lg:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                   </svg>
                 </div>
               </div>
-              
-              <!-- Connection Lines -->
-              <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
-                <line x1="200" y1="200" x2="200" y2="50" stroke="url(#techGrad)" stroke-width="1" opacity="0.3" class="animate-dash" />
-                <line x1="200" y1="200" x2="350" y2="150" stroke="url(#techGrad2)" stroke-width="1" opacity="0.3" class="animate-dash" style="animation-delay: 0.5s;" />
-                <line x1="200" y1="200" x2="350" y2="250" stroke="url(#techGrad)" stroke-width="1" opacity="0.3" class="animate-dash" style="animation-delay: 1s;" />
-                <line x1="200" y1="200" x2="200" y2="350" stroke="url(#techGrad2)" stroke-width="1" opacity="0.3" class="animate-dash" style="animation-delay: 1.5s;" />
-                <defs>
-                  <linearGradient id="techGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#00FFC2;stop-opacity:0" />
-                    <stop offset="50%" style="stop-color:#00FFC2;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#00FFC2;stop-opacity:0" />
-                  </linearGradient>
-                  <linearGradient id="techGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" style="stop-color:#5D5DFF;stop-opacity:0" />
-                    <stop offset="50%" style="stop-color:#5D5DFF;stop-opacity:1" />
-                    <stop offset="100%" style="stop-color:#5D5DFF;stop-opacity:0" />
-                  </linearGradient>
-                </defs>
-              </svg>
             </div>
           </div>
         </div>
@@ -289,8 +257,8 @@ const { t } = Astro.props;
   .tech-service-4 { animation-delay: -15s; }
 
   .service-icon {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -299,27 +267,49 @@ const { t } = Astro.props;
     border: 1px solid rgba(0, 255, 194, 0.3);
     border-radius: 12px;
     color: #00FFC2;
-    transform: translateX(-28px) translateY(-28px);
+    transform: translateX(-24px) translateY(-24px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 4px 20px rgba(0, 255, 194, 0.2);
   }
 
+  @media (min-width: 1024px) {
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      transform: translateX(-28px) translateY(-28px);
+    }
+  }
+
   .service-icon:hover {
-    transform: translateX(-28px) translateY(-28px) scale(1.2);
-    box-shadow: 0 8px 30px rgba(0, 255, 194, 0.4);
+    transform: translateX(-24px) translateY(-24px) scale(1.1);
+    box-shadow: 0 6px 25px rgba(0, 255, 194, 0.3);
     background: linear-gradient(135deg, rgba(0, 255, 194, 0.3), rgba(93, 93, 255, 0.3));
+  }
+
+  @media (min-width: 1024px) {
+    .service-icon:hover {
+      transform: translateX(-28px) translateY(-28px) scale(1.1);
+    }
   }
 
   /* Floating Particles */
   .particle {
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
     background: linear-gradient(135deg, #00FFC2, #5D5DFF);
     border-radius: 50%;
-    opacity: 0.6;
+    opacity: 0.5;
     animation: float 6s ease-in-out infinite;
-    box-shadow: 0 0 10px currentColor;
+    box-shadow: 0 0 8px currentColor;
+  }
+
+  @media (min-width: 768px) {
+    .particle {
+      width: 4px;
+      height: 4px;
+      opacity: 0.6;
+    }
   }
 
   .particle-1 {
@@ -350,25 +340,16 @@ const { t } = Astro.props;
     animation-duration: 9s;
   }
 
-  .particle-5 {
-    top: 30%;
-    left: 50%;
-    animation-delay: 1.5s;
-    animation-duration: 7.5s;
-  }
-
   /* Responsive adjustments */
   @media (max-width: 1024px) {
     .tech-service {
       animation: orbit 20s linear infinite;
-      transform-origin: 150px center;
     }
   }
 
   @media (max-width: 640px) {
-    .particle {
-      width: 3px;
-      height: 3px;
+    .animate-fade-in-up {
+      animation-duration: 0.6s;
     }
   }
 
