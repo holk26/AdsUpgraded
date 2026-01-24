@@ -15,7 +15,7 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5 shadow-lg">
+<header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
   <div class="container mx-auto px-4">
     <nav class="flex items-center justify-between py-3 md:py-4 gap-2 md:gap-4" aria-label="Main navigation">
       <!-- Logo -->
@@ -126,19 +126,133 @@ const navItems = [
             ES
           </a>
         </div>
-        <Button variant="primary" size="sm" href="#demo" ariaLabel={t('nav.demo')} class="text-xs md:text-sm px-3 md:px-4">
-          <span class="hidden sm:inline">{t('nav.demo')}</span>
-          <span class="sm:hidden">Demo</span>
-        </Button>
+        
+        <!-- Mobile Menu Button (Hamburger) -->
+        <button 
+          id="mobile-menu-button"
+          class="md:hidden p-2 text-text-body hover:text-color-secondary transition-colors focus-visible:outline-2 focus-visible:outline-color-accent rounded"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <svg id="hamburger-icon" class="w-6 h-6 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <line id="line1" x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
+            <line id="line2" x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
+            <line id="line3" x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
+          </svg>
+        </button>
       </div>
+    </nav>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div 
+    id="mobile-menu" 
+    class="md:hidden fixed inset-x-0 top-[60px] glass-effect border-b border-white/5 shadow-lg overflow-hidden transition-all duration-300 max-h-0 opacity-0"
+    aria-hidden="true"
+  >
+    <nav class="container mx-auto px-4 py-4 flex flex-col gap-3">
+      {navItems.map((item) => (
+        <a 
+          href={item.href} 
+          class="text-text-body hover:text-color-secondary transition-colors font-medium py-2 px-3 rounded hover:bg-white/5 mobile-menu-link"
+        >
+          {t(item.key)}
+        </a>
+      ))}
+      <a 
+        href="#demo"
+        class="text-text-body hover:text-color-secondary transition-colors font-medium py-2 px-3 rounded hover:bg-white/5 mobile-menu-link"
+      >
+        {t('nav.demo')}
+      </a>
     </nav>
   </div>
 </header>
 
-<!-- Skip to main content link for accessibility -->
-<a 
-  href="#main-content" 
-  class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-primary text-white px-4 py-2 rounded-lg z-[100] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
->
-  Skip to main content
-</a>
+<script>
+  // Header scroll behavior
+  const header = document.getElementById('header');
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const line1 = document.getElementById('line1');
+  const line2 = document.getElementById('line2');
+  const line3 = document.getElementById('line3');
+  let isMenuOpen = false;
+
+  // Add background on scroll
+  function handleScroll() {
+    const heroSection = document.querySelector('section'); // First section is Hero
+    if (!heroSection) return;
+    
+    const heroHeight = heroSection.offsetHeight;
+    const scrollY = window.scrollY;
+    
+    if (scrollY > heroHeight * 0.3) {
+      header?.classList.add('glass-effect', 'border-b', 'border-white/5', 'shadow-lg');
+    } else {
+      header?.classList.remove('glass-effect', 'border-b', 'border-white/5', 'shadow-lg');
+    }
+  }
+
+  // Toggle mobile menu
+  function toggleMobileMenu() {
+    isMenuOpen = !isMenuOpen;
+    
+    if (isMenuOpen) {
+      // Open menu
+      mobileMenu?.classList.remove('max-h-0', 'opacity-0');
+      mobileMenu?.classList.add('max-h-96', 'opacity-100');
+      mobileMenu?.setAttribute('aria-hidden', 'false');
+      mobileMenuButton?.setAttribute('aria-expanded', 'true');
+      
+      // Transform to X
+      line1?.setAttribute('transform', 'rotate(45 12 12)');
+      line1?.setAttribute('y1', '12');
+      line1?.setAttribute('y2', '12');
+      
+      line2?.setAttribute('opacity', '0');
+      
+      line3?.setAttribute('transform', 'rotate(-45 12 12)');
+      line3?.setAttribute('y1', '12');
+      line3?.setAttribute('y2', '12');
+    } else {
+      // Close menu
+      mobileMenu?.classList.add('max-h-0', 'opacity-0');
+      mobileMenu?.classList.remove('max-h-96', 'opacity-100');
+      mobileMenu?.setAttribute('aria-hidden', 'true');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+      
+      // Transform back to hamburger
+      line1?.setAttribute('transform', 'rotate(0 12 12)');
+      line1?.setAttribute('y1', '7');
+      line1?.setAttribute('y2', '7');
+      
+      line2?.setAttribute('opacity', '1');
+      
+      line3?.setAttribute('transform', 'rotate(0 12 12)');
+      line3?.setAttribute('y1', '17');
+      line3?.setAttribute('y2', '17');
+    }
+  }
+
+  // Close menu when clicking on a link
+  function handleMenuLinkClick() {
+    if (isMenuOpen) {
+      toggleMobileMenu();
+    }
+  }
+
+  // Event listeners
+  window.addEventListener('scroll', handleScroll);
+  mobileMenuButton?.addEventListener('click', toggleMobileMenu);
+  
+  // Close menu when clicking on links
+  const menuLinks = document.querySelectorAll('.mobile-menu-link');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', handleMenuLinkClick);
+  });
+  
+  // Initial check
+  handleScroll();
+</script>
