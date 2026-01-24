@@ -152,22 +152,22 @@ const navItems = [
     aria-hidden="true"
   >
     <!-- Backdrop -->
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm"></div>
     
     <!-- Menu Content -->
-    <nav class="absolute inset-0 flex flex-col pt-20 px-4 pb-8 overflow-y-auto glass-effect translate-y-0 transition-transform duration-300 ease-out">
-      <div class="flex flex-col gap-2">
+    <nav class="relative h-full flex flex-col justify-center items-center px-6 py-20">
+      <div class="flex flex-col gap-4 w-full max-w-sm">
         {navItems.map((item) => (
           <a 
             href={item.href} 
-            class="text-text-body hover:text-color-secondary transition-colors font-medium py-3 px-4 rounded-lg hover:bg-white/10 mobile-menu-link text-lg"
+            class="text-white text-center hover:text-color-accent transition-colors font-medium py-4 px-6 rounded-lg bg-white/5 hover:bg-white/10 mobile-menu-link text-xl backdrop-blur-md border border-white/10"
           >
             {t(item.key)}
           </a>
         ))}
         <a 
           href="#demo"
-          class="text-text-body hover:text-color-secondary transition-colors font-medium py-3 px-4 rounded-lg hover:bg-white/10 mobile-menu-link text-lg"
+          class="text-white text-center hover:text-color-accent transition-colors font-medium py-4 px-6 rounded-lg bg-white/5 hover:bg-white/10 mobile-menu-link text-xl backdrop-blur-md border border-white/10"
         >
           {t('nav.demo')}
         </a>
