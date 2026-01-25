@@ -136,29 +136,24 @@ const navItems = [
           aria-expanded="false"
           aria-controls="mobile-menu"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path class="hamburger-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          <svg id="hamburger-icon" class="w-6 h-6 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <line id="line1" x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
+            <line id="line2" x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
+            <line id="line3" x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
           </svg>
         </button>
       </div>
     </nav>
   </div>
   
-  <!-- Mobile Menu Overlay -->
-  <div 
-    id="mobile-menu-overlay" 
-    class="md:hidden fixed inset-0 z-[55] bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"
-    aria-hidden="true"
-  ></div>
-
   <!-- Mobile Menu -->
   <div 
     id="mobile-menu" 
-    class="md:hidden fixed left-0 right-0 top-[60px] z-[55] opacity-0 pointer-events-none translate-y-2 transition-all duration-300 ease-out"
+    class="md:hidden fixed left-0 right-0 top-[60px] z-[60] pointer-events-none opacity-0 translate-y-[-10px] transition-all duration-200 ease-out"
     aria-hidden="true"
   >
-    <nav class="bg-[#0A0E27]/95 backdrop-blur-md border-b border-white/10 shadow-xl mobile-menu-panel overflow-y-auto max-h-[calc(100vh-60px)]">
-      <div class="container mx-auto px-4 py-6 flex flex-col">
+    <nav class="bg-[#0A0E27]/95 backdrop-blur-md border-b border-white/10 shadow-xl mobile-menu-panel">
+      <div class="container mx-auto px-4 py-2 flex flex-col">
         {navItems.map((item) => (
           <a 
             href={item.href} 
@@ -186,107 +181,79 @@ const navItems = [
   Skip to main content
 </a>
 
-<script is:inline>
-  // Mobile menu management - runs immediately when script loads
-  (function() {
-    // Wait for elements to be available
-    function initMenu() {
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      
-      if (!mobileMenuButton || !mobileMenu) {
-        // Elements not ready yet, try again
-        setTimeout(initMenu, 50);
-        return;
-      }
-      
-      const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-      const body = document.body;
-      let isMenuOpen = false;
+<script>
+  // Mobile menu management
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const line1 = document.getElementById('line1');
+  const line2 = document.getElementById('line2');
+  const line3 = document.getElementById('line3');
+  let isMenuOpen = false;
 
-      // Toggle mobile menu
-      function toggleMobileMenu() {
-        isMenuOpen = !isMenuOpen;
-        
-        if (isMenuOpen) {
-          // Open menu
-          mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
-          mobileMenu.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
-          mobileMenu.setAttribute('aria-hidden', 'false');
-          
-          if (mobileMenuOverlay) {
-            mobileMenuOverlay.classList.remove('opacity-0', 'pointer-events-none');
-            mobileMenuOverlay.classList.add('opacity-100', 'pointer-events-auto');
-            mobileMenuOverlay.setAttribute('aria-hidden', 'false');
-          }
-          
-          mobileMenuButton.setAttribute('aria-expanded', 'true');
-          mobileMenuButton.classList.add('menu-open');
-          
-          // Prevent body scroll
-          body.classList.add('overflow-hidden');
-        } else {
-          // Close menu
-          mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
-          mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-          mobileMenu.setAttribute('aria-hidden', 'true');
-          
-          if (mobileMenuOverlay) {
-            mobileMenuOverlay.classList.add('opacity-0', 'pointer-events-none');
-            mobileMenuOverlay.classList.remove('opacity-100', 'pointer-events-auto');
-            mobileMenuOverlay.setAttribute('aria-hidden', 'true');
-          }
-          
-          mobileMenuButton.setAttribute('aria-expanded', 'false');
-          mobileMenuButton.classList.remove('menu-open');
-          
-          // Restore body scroll
-          body.classList.remove('overflow-hidden');
-        }
-      }
-
-      // Close menu when clicking on a link
-      function handleMenuLinkClick() {
-        if (isMenuOpen) {
-          toggleMobileMenu();
-        }
-      }
-
-      // Close menu when clicking overlay
-      function handleOverlayClick() {
-        if (isMenuOpen) {
-          toggleMobileMenu();
-        }
-      }
-
-      // Close menu with Escape key
-      function handleEscapeKey(event) {
-        if (event.key === 'Escape' && isMenuOpen) {
-          toggleMobileMenu();
-        }
-      }
-
-      // Event listeners
-      mobileMenuButton.addEventListener('click', toggleMobileMenu);
-      if (mobileMenuOverlay) {
-        mobileMenuOverlay.addEventListener('click', handleOverlayClick);
-      }
-      document.addEventListener('keydown', handleEscapeKey);
-      
-      // Close menu when clicking on links
-      const menuLinks = document.querySelectorAll('.mobile-menu-link');
-      menuLinks.forEach(link => {
-        link.addEventListener('click', handleMenuLinkClick);
-      });
-    }
+  // Toggle mobile menu
+  function toggleMobileMenu() {
+    isMenuOpen = !isMenuOpen;
     
-    // Start initialization
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initMenu);
+    if (isMenuOpen) {
+      // Open menu
+      mobileMenu?.classList.remove('pointer-events-none', 'opacity-0', 'translate-y-[-10px]');
+      mobileMenu?.classList.add('pointer-events-auto', 'opacity-100', 'translate-y-0');
+      mobileMenu?.setAttribute('aria-hidden', 'false');
+      mobileMenuButton?.setAttribute('aria-expanded', 'true');
+      
+      // Transform to X
+      line1?.setAttribute('transform', 'rotate(45 12 12)');
+      line1?.setAttribute('y1', '12');
+      line1?.setAttribute('y2', '12');
+      
+      line2?.setAttribute('opacity', '0');
+      
+      line3?.setAttribute('transform', 'rotate(-45 12 12)');
+      line3?.setAttribute('y1', '12');
+      line3?.setAttribute('y2', '12');
     } else {
-      initMenu();
+      // Close menu
+      mobileMenu?.classList.add('pointer-events-none', 'opacity-0', 'translate-y-[-10px]');
+      mobileMenu?.classList.remove('pointer-events-auto', 'opacity-100', 'translate-y-0');
+      mobileMenu?.setAttribute('aria-hidden', 'true');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+      
+      // Transform back to hamburger
+      line1?.setAttribute('transform', 'rotate(0 12 12)');
+      line1?.setAttribute('y1', '7');
+      line1?.setAttribute('y2', '7');
+      
+      line2?.setAttribute('opacity', '1');
+      
+      line3?.setAttribute('transform', 'rotate(0 12 12)');
+      line3?.setAttribute('y1', '17');
+      line3?.setAttribute('y2', '17');
     }
-  })();
+  }
+
+  // Close menu when clicking on a link
+  function handleMenuLinkClick() {
+    if (isMenuOpen) {
+      toggleMobileMenu();
+    }
+  }
+
+  // Close menu with Escape key
+  function handleEscapeKey(event: KeyboardEvent) {
+    if (event.key === 'Escape' && isMenuOpen) {
+      toggleMobileMenu();
+    }
+  }
+
+  // Event listeners
+  mobileMenuButton?.addEventListener('click', toggleMobileMenu);
+  document.addEventListener('keydown', handleEscapeKey);
+  
+  // Close menu when clicking on links
+  const menuLinks = document.querySelectorAll('.mobile-menu-link');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', handleMenuLinkClick);
+  });
 </script>
 
 <style>
@@ -294,7 +261,6 @@ const navItems = [
   .header-with-glow {
     position: relative;
     overflow: hidden;
-    --header-height: 60px;
   }
   
   .header-with-glow::before {
@@ -441,15 +407,6 @@ const navItems = [
       transparent 100%
     );
     box-shadow: 0 0 10px rgba(0, 255, 194, 0.3);
-  }
-  
-  /* Hamburger icon animation */
-  #mobile-menu-button svg {
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  #mobile-menu-button.menu-open svg {
-    transform: rotate(90deg);
   }
   
   /* Mobile menu link hover effect */
