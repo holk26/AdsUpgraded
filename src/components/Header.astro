@@ -5,12 +5,6 @@ export interface Props {
 }
 
 const { lang = 'en', t } = Astro.props;
-
-const navItems = [
-  { key: 'nav.features', href: '#features' },
-  { key: 'nav.pricing', href: '#pricing' },
-  { key: 'nav.about', href: '#about' },
-];
 ---
 
 <header id="header" class="fixed top-0 left-0 right-0 z-header glass-effect border-b border-white/5 shadow-lg transition-all duration-300 header-with-glow">
@@ -48,35 +42,17 @@ const navItems = [
           </defs>
           
           <!-- Hexagons with fill and glow -->
-          <g filter="url(#glowIndigo)">
-            <path d="M60 8 L68 13 L68 23 L60 28 L52 23 L52 13 Z" fill="url(#indigoGrad)" opacity="0.85"/>
-          </g>
-          <g filter="url(#glowCyan)">
-            <path d="M86 28 L94 33 L94 43 L86 48 L78 43 L78 33 Z" fill="url(#cyanGrad)" opacity="0.75"/>
-          </g>
-          <g filter="url(#glowCyan)">
-            <path d="M86 72 L94 77 L94 87 L86 92 L78 87 L78 77 Z" fill="url(#cyanGrad)" opacity="0.75"/>
-          </g>
-          <g filter="url(#glowIndigo)">
-            <path d="M60 92 L68 97 L68 107 L60 112 L52 107 L52 97 Z" fill="url(#indigoGrad)" opacity="0.85"/>
-          </g>
-          <g filter="url(#glowIndigo)">
-            <path d="M34 72 L42 77 L42 87 L34 92 L26 87 L26 77 Z" fill="url(#indigoGrad)" opacity="0.85"/>
-          </g>
-          <g filter="url(#glowCyan)">
-            <path d="M34 28 L42 33 L42 43 L34 48 L26 43 L26 33 Z" fill="url(#cyanGrad)" opacity="0.75"/>
-          </g>
+          <polygon points="60,15 80,28 80,54 60,67 40,54 40,28" fill="url(#indigoGrad)" filter="url(#glowIndigo)" opacity="0.9"/>
+          <polygon points="60,53 80,66 80,92 60,105 40,92 40,66" fill="url(#cyanGrad)" filter="url(#glowCyan)" opacity="0.8"/>
+          
+          <!-- Hexagons outlines with enhanced glow -->
+          <polygon points="60,15 80,28 80,54 60,67 40,54 40,28" fill="none" stroke="#7B7BFF" stroke-width="2" opacity="0.7"/>
+          <polygon points="60,53 80,66 80,92 60,105 40,92 40,66" fill="none" stroke="#00FFC2" stroke-width="2" opacity="0.7"/>
           
           <!-- Connection lines -->
-          <line x1="60" y1="28" x2="60" y2="40" stroke="#5D5DFF" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.6"/>
-          <line x1="78" y1="43" x2="68" y2="50" stroke="#00FFC2" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.5"/>
-          <line x1="78" y1="77" x2="68" y2="70" stroke="#00FFC2" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.5"/>
-          <line x1="60" y1="92" x2="60" y2="80" stroke="#5D5DFF" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.6"/>
-          <line x1="42" y1="77" x2="52" y2="70" stroke="#5D5DFF" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.6"/>
-          <line x1="42" y1="43" x2="52" y2="50" stroke="#00FFC2" stroke-width="1.5" stroke-dasharray="2,3" opacity="0.5"/>
+          <line x1="60" y1="67" x2="60" y2="53" stroke="#FFFFFF" stroke-width="2" opacity="0.6"/>
           
-          <!-- Central white circle -->
-          <circle cx="60" cy="60" r="18" fill="#F2F2F2" opacity="0.98"/>
+          <!-- Outer ring -->
           <circle cx="60" cy="60" r="18" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.5"/>
           
           <!-- Inner ring -->
@@ -90,83 +66,26 @@ const navItems = [
           <circle cx="34" cy="92" r="2.5" fill="#5D5DFF" filter="url(#glowIndigo)"/>
           <circle cx="34" cy="28" r="2.5" fill="#00FFC2" filter="url(#glowCyan)"/>
         </svg>
-        <span class="text-base md:text-xl font-bold text-color-accent hidden xs:inline tracking-wider">NYXOK</span>
-        <span class="text-base md:text-xl font-bold text-color-accent xs:hidden tracking-wider">NYXOK</span>
+        <span class="text-base md:text-xl font-bold text-color-accent tracking-wider">NYXOK</span>
       </a>
 
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center gap-8">
-        {navItems.map((item) => (
-          <a 
-            href={item.href} 
-            class="text-text-body hover:text-color-secondary transition-colors font-medium focus-visible:outline-2 focus-visible:outline-color-accent rounded px-2 py-1"
-          >
-            {t(item.key)}
-          </a>
-        ))}
-      </div>
-
-      <!-- Actions -->
-      <div class="flex items-center gap-1.5 md:gap-3">
-        <!-- Language Selector -->
-        <div class="flex gap-1 md:gap-2" role="group" aria-label="Language selection">
-          <a 
-            href="/" 
-            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'en' ? 'bg-color-accent text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-color-surface'}`}
-            aria-label="Switch to English"
-            aria-current={lang === 'en' ? 'true' : undefined}
-          >
-            EN
-          </a>
-          <a 
-            href="/es" 
-            class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'es' ? 'bg-color-accent text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-color-surface'}`}
-            aria-label="Cambiar a Español"
-            aria-current={lang === 'es' ? 'true' : undefined}
-          >
-            ES
-          </a>
-        </div>
-        
-        <!-- Mobile Menu Button (Hamburger) -->
-        <button 
-          id="mobile-menu-button"
-          class="md:hidden p-2 text-text-body hover:text-color-secondary transition-colors focus-visible:outline-2 focus-visible:outline-color-accent rounded"
-          aria-label="Toggle menu"
-          aria-expanded="false"
-          aria-controls="mobile-menu"
-        >
-          <svg id="hamburger-icon" class="w-6 h-6 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <line id="line1" x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
-            <line id="line2" x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
-            <line id="line3" x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
-          </svg>
-        </button>
-      </div>
-    </nav>
-  </div>
-  
-  <!-- Mobile Menu -->
-  <div 
-    id="mobile-menu" 
-    class="md:hidden fixed left-0 right-0 top-[60px] z-overlay pointer-events-none opacity-0 translate-y-[-10px] transition-all duration-200 ease-out"
-    aria-hidden="true"
-  >
-    <nav class="bg-[#0A0E27]/95 backdrop-blur-md border-b border-white/10 shadow-xl mobile-menu-panel">
-      <div class="container mx-auto px-4 py-2 flex flex-col">
-        {navItems.map((item) => (
-          <a 
-            href={item.href} 
-            class="text-white hover:text-brand-primary transition-all duration-300 font-medium py-3 px-4 border-b border-white/5 last:border-0 mobile-menu-link rounded-md hover:bg-white/5 hover:pl-6"
-          >
-            {t(item.key)}
-          </a>
-        ))}
+      <!-- Language Selector -->
+      <div class="flex gap-1 md:gap-2" role="group" aria-label="Language selection">
         <a 
-          href="#demo"
-          class="text-white hover:text-brand-primary transition-all duration-300 font-medium py-3 px-4 mobile-menu-link rounded-md hover:bg-white/5 hover:pl-6"
+          href="/" 
+          class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'en' ? 'bg-color-accent text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-color-surface'}`}
+          aria-label="Switch to English"
+          aria-current={lang === 'en' ? 'true' : undefined}
         >
-          {t('nav.demo')}
+          EN
+        </a>
+        <a 
+          href="/es" 
+          class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'es' ? 'bg-color-accent text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-color-surface'}`}
+          aria-label="Cambiar a Español"
+          aria-current={lang === 'es' ? 'true' : undefined}
+        >
+          ES
         </a>
       </div>
     </nav>
@@ -181,298 +100,26 @@ const navItems = [
   Skip to main content
 </a>
 
-<script>
-  // Mobile menu management
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const line1 = document.getElementById('line1');
-  const line2 = document.getElementById('line2');
-  const line3 = document.getElementById('line3');
-  let isMenuOpen = false;
-
-  // Toggle mobile menu
-  function toggleMobileMenu() {
-    isMenuOpen = !isMenuOpen;
-    
-    if (isMenuOpen) {
-      // Open menu
-      mobileMenu?.classList.remove('pointer-events-none', 'opacity-0', 'translate-y-[-10px]');
-      mobileMenu?.classList.add('pointer-events-auto', 'opacity-100', 'translate-y-0');
-      mobileMenu?.setAttribute('aria-hidden', 'false');
-      mobileMenuButton?.setAttribute('aria-expanded', 'true');
-      
-      // Transform to X
-      line1?.setAttribute('transform', 'rotate(45 12 12)');
-      line1?.setAttribute('y1', '12');
-      line1?.setAttribute('y2', '12');
-      
-      line2?.setAttribute('opacity', '0');
-      
-      line3?.setAttribute('transform', 'rotate(-45 12 12)');
-      line3?.setAttribute('y1', '12');
-      line3?.setAttribute('y2', '12');
-    } else {
-      // Close menu
-      mobileMenu?.classList.add('pointer-events-none', 'opacity-0', 'translate-y-[-10px]');
-      mobileMenu?.classList.remove('pointer-events-auto', 'opacity-100', 'translate-y-0');
-      mobileMenu?.setAttribute('aria-hidden', 'true');
-      mobileMenuButton?.setAttribute('aria-expanded', 'false');
-      
-      // Transform back to hamburger
-      line1?.setAttribute('transform', 'rotate(0 12 12)');
-      line1?.setAttribute('y1', '7');
-      line1?.setAttribute('y2', '7');
-      
-      line2?.setAttribute('opacity', '1');
-      
-      line3?.setAttribute('transform', 'rotate(0 12 12)');
-      line3?.setAttribute('y1', '17');
-      line3?.setAttribute('y2', '17');
-    }
-  }
-
-  // Close menu when clicking on a link
-  function handleMenuLinkClick() {
-    if (isMenuOpen) {
-      toggleMobileMenu();
-    }
-  }
-
-  // Close menu with Escape key
-  function handleEscapeKey(event: KeyboardEvent) {
-    if (event.key === 'Escape' && isMenuOpen) {
-      toggleMobileMenu();
-    }
-  }
-
-  // Event listeners
-  mobileMenuButton?.addEventListener('click', toggleMobileMenu);
-  document.addEventListener('keydown', handleEscapeKey);
-  
-  // Close menu when clicking on links
-  const menuLinks = document.querySelectorAll('.mobile-menu-link');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', handleMenuLinkClick);
-  });
-</script>
-
 <style>
   /* Header with glow effect inspired by the reference image */
   .header-with-glow {
     position: relative;
     overflow: hidden;
   }
-  
-  .header-with-glow::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 300%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(0, 255, 194, 0.05) 25%,
-      rgba(93, 93, 255, 0.05) 50%,
-      rgba(0, 255, 194, 0.05) 75%,
-      transparent
-    );
-    animation: shimmer 15s infinite;
-    animation-delay: 0s;
-    pointer-events: none;
-    will-change: transform;
-  }
-  
-  /* Network background effect */
+
   .header-network-bg {
     position: absolute;
     inset: 0;
-    background-image: 
+    background: 
       radial-gradient(circle at 20% 50%, rgba(93, 93, 255, 0.08) 0%, transparent 50%),
       radial-gradient(circle at 80% 50%, rgba(0, 255, 194, 0.06) 0%, transparent 50%);
-    opacity: 0.6;
     pointer-events: none;
+    opacity: 0.7;
   }
-  
-  .header-network-bg::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: 
-      linear-gradient(90deg, rgba(0, 255, 194, 0.03) 1px, transparent 1px),
-      linear-gradient(0deg, rgba(93, 93, 255, 0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    animation: grid-flow 20s linear infinite;
-    animation-delay: 2s;
-    opacity: 0.3;
-    will-change: transform;
-  }
-  
-  .header-network-bg::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(0, 255, 194, 0.4) 10%,
-      rgba(93, 93, 255, 0.6) 50%,
-      rgba(0, 255, 194, 0.4) 90%,
-      transparent 100%
-    );
-    opacity: 0.5;
-    animation: pulse-line 3s ease-in-out infinite;
-    animation-delay: 1s;
-    will-change: opacity, transform;
-  }
-  
-  /* Enhanced logo glow */
-  #header a[href="/"] svg {
-    filter: drop-shadow(0 0 8px rgba(93, 93, 255, 0.3)) drop-shadow(0 0 12px rgba(0, 255, 194, 0.2));
-    transition: filter 0.3s ease;
-  }
-  
-  #header a[href="/"] svg:hover {
-    filter: drop-shadow(0 0 12px rgba(93, 93, 255, 0.5)) drop-shadow(0 0 18px rgba(0, 255, 194, 0.3));
-  }
-  
-  /* Navigation links with subtle glow on hover */
-  #header nav a:not([href="/"]) {
-    position: relative;
-  }
-  
-  #header nav a:not([href="/"]):hover::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--brand-primary, #00FFC2), transparent);
-    box-shadow: 0 0 8px rgba(0, 255, 194, 0.6);
-  }
-  
-  /* Language selector enhanced */
-  #header [role="group"] a {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  #header [role="group"] a::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(93, 93, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-  }
-  
-  #header [role="group"] a:hover::before {
-    left: 100%;
-  }
-  
-  /* Mobile menu enhanced */
-  .mobile-menu-panel {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .mobile-menu-panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(93, 93, 255, 0.08) 0%, transparent 50%, rgba(0, 255, 194, 0.06) 100%);
-    pointer-events: none;
-  }
-  
-  .mobile-menu-panel::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(0, 255, 194, 0.5) 20%,
-      rgba(93, 93, 255, 0.7) 50%,
-      rgba(0, 255, 194, 0.5) 80%,
-      transparent 100%
-    );
-    box-shadow: 0 0 10px rgba(0, 255, 194, 0.3);
-  }
-  
-  /* Mobile menu link hover effect */
-  .mobile-menu-link {
-    position: relative;
-  }
-  
-  .mobile-menu-link::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    height: 0;
-    background: linear-gradient(180deg, var(--brand-primary, #00FFC2), var(--brand-secondary, #5D5DFF));
-    border-radius: 2px;
-    transition: height 0.3s ease;
-    box-shadow: 0 0 8px rgba(0, 255, 194, 0.5);
-  }
-  
-  .mobile-menu-link:hover::before {
-    height: 60%;
-  }
-  
-  /* Animations */
-  @keyframes shimmer {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(33.333%);
-    }
-  }
-  
-  @keyframes grid-flow {
-    0% {
-      transform: translateY(0) translateX(0);
-    }
-    100% {
-      transform: translateY(40px) translateX(40px);
-    }
-  }
-  
-  @keyframes pulse-line {
-    0%, 100% {
-      opacity: 0.3;
-      transform: scaleX(0.95);
-    }
-    50% {
-      opacity: 0.7;
-      transform: scaleX(1);
-    }
-  }
-  
-  /* Reduce motion for accessibility */
-  @media (prefers-reduced-motion: reduce) {
-    .header-with-glow::before,
-    .header-network-bg::before,
-    .header-network-bg::after {
-      animation: none;
-      will-change: auto;
-    }
-    
-    #header a[href="/"] svg {
-      transition: none;
-    }
+
+  .glass-effect {
+    background: rgba(10, 14, 39, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 </style>
