@@ -427,7 +427,6 @@ const navItems = [
   .hamburger-line {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
     width: 20px;
     height: 2px;
     background-color: currentColor;
@@ -436,31 +435,32 @@ const navItems = [
   }
   
   .hamburger-line-1 {
-    top: 12px;
+    top: 50%;
+    transform: translate(-50%, -50%) translateY(-7px);
   }
   
   .hamburger-line-2 {
-    top: 19px;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
   
   .hamburger-line-3 {
-    top: 26px;
+    top: 50%;
+    transform: translate(-50%, -50%) translateY(7px);
   }
   
   /* Hamburger animation when menu is open */
   .menu-open .hamburger-line-1 {
-    top: 19px;
-    transform: translateX(-50%) rotate(45deg);
+    transform: translate(-50%, -50%) rotate(45deg);
   }
   
   .menu-open .hamburger-line-2 {
     opacity: 0;
-    transform: translateX(-50%) scaleX(0);
+    transform: translate(-50%, -50%) scaleX(0);
   }
   
   .menu-open .hamburger-line-3 {
-    top: 19px;
-    transform: translateX(-50%) rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
   
   /* Mobile menu link hover effect */
