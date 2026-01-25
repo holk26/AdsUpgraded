@@ -184,7 +184,7 @@ const { t } = Astro.props;
   </div>
 
   <!-- Bottom Wave Separator -->
-  <div class="absolute bottom-0 left-0 right-0 z-20" aria-hidden="true">
+  <div class="absolute bottom-0 left-0 right-0 z-section" aria-hidden="true">
     <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" class="w-full h-auto">
       <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V120Z" fill="var(--bg-surface)"/>
     </svg>
@@ -235,14 +235,6 @@ const { t } = Astro.props;
     box-shadow: 0 4px 20px rgba(0, 255, 194, 0.2);
   }
 
-  @media (min-width: 1024px) {
-    .service-icon {
-      width: 56px;
-      height: 56px;
-      transform: translateX(-28px) translateY(-28px);
-    }
-  }
-
   .service-icon:hover {
     transform: translateX(-24px) translateY(-24px) scale(1.1);
     box-shadow: 0 6px 25px rgba(0, 255, 194, 0.3);
@@ -250,21 +242,31 @@ const { t } = Astro.props;
   }
 
   @media (min-width: 1024px) {
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      transform: translateX(-28px) translateY(-28px);
+    }
+    
     .service-icon:hover {
       transform: translateX(-28px) translateY(-28px) scale(1.1);
+    }
+    
+    .tech-service {
+      transform-origin: 150px center;
     }
   }
 
   /* Floating Particles */
   .particle {
     position: absolute;
-    width: 4px;
-    height: 4px;
-    background: linear-gradient(135deg, #00FFC2, #5D5DFF);
     border-radius: 50%;
     opacity: 0.6;
     animation: float 6s ease-in-out infinite;
     box-shadow: 0 0 10px currentColor;
+    background: linear-gradient(135deg, #00FFC2, #5D5DFF);
+    width: 4px;
+    height: 4px;
   }
 
   @media (max-width: 640px) {
@@ -307,21 +309,6 @@ const { t } = Astro.props;
     left: 50%;
     animation-delay: 1.5s;
     animation-duration: 7.5s;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 1024px) {
-    .tech-service {
-      animation: orbit 20s linear infinite;
-      transform-origin: 150px center;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .particle {
-      width: 3px;
-      height: 3px;
-    }
   }
 
   /* Reduced motion */
