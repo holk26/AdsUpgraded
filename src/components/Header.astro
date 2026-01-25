@@ -15,7 +15,7 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5 shadow-lg">
+<header id="header" class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5 shadow-lg transition-all duration-300">
   <div class="container mx-auto px-4">
     <nav class="flex items-center justify-between py-3 md:py-4 gap-2 md:gap-4" aria-label="Main navigation">
       <!-- Logo -->
@@ -126,10 +126,47 @@ const navItems = [
             ES
           </a>
         </div>
-        <Button variant="primary" size="sm" href="#demo" ariaLabel={t('nav.demo')} class="text-xs md:text-sm px-3 md:px-4">
-          <span class="hidden sm:inline">{t('nav.demo')}</span>
-          <span class="sm:hidden">Demo</span>
-        </Button>
+        
+        <!-- Mobile Menu Button (Hamburger) -->
+        <button 
+          id="mobile-menu-button"
+          class="md:hidden p-2 text-text-body hover:text-color-secondary transition-colors focus-visible:outline-2 focus-visible:outline-color-accent rounded"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <svg id="hamburger-icon" class="w-6 h-6 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <line id="line1" x1="4" y1="7" x2="20" y2="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
+            <line id="line2" x1="4" y1="12" x2="20" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
+            <line id="line3" x1="4" y1="17" x2="20" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="transition-all duration-300 origin-center" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div 
+    id="mobile-menu" 
+    class="md:hidden fixed left-0 right-0 top-[60px] z-40 pointer-events-none opacity-0 translate-y-[-10px] transition-all duration-200 ease-out"
+    aria-hidden="true"
+  >
+    <nav class="bg-[#0A0E27]/95 backdrop-blur-md border-b border-white/10 shadow-xl">
+      <div class="container mx-auto px-4 py-2 flex flex-col">
+        {navItems.map((item) => (
+          <a 
+            href={item.href} 
+            class="text-white hover:text-color-accent transition-colors font-medium py-3 px-4 border-b border-white/5 last:border-0 mobile-menu-link"
+          >
+            {t(item.key)}
+          </a>
+        ))}
+        <a 
+          href="#demo"
+          class="text-white hover:text-color-accent transition-colors font-medium py-3 px-4 mobile-menu-link"
+        >
+          {t('nav.demo')}
+        </a>
       </div>
     </nav>
   </div>
@@ -142,3 +179,78 @@ const navItems = [
 >
   Skip to main content
 </a>
+
+<script>
+  // Mobile menu management
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const line1 = document.getElementById('line1');
+  const line2 = document.getElementById('line2');
+  const line3 = document.getElementById('line3');
+  let isMenuOpen = false;
+
+  // Toggle mobile menu
+  function toggleMobileMenu() {
+    isMenuOpen = !isMenuOpen;
+    
+    if (isMenuOpen) {
+      // Open menu
+      mobileMenu?.classList.remove('pointer-events-none', 'opacity-0', 'translate-y-[-10px]');
+      mobileMenu?.classList.add('pointer-events-auto', 'opacity-100', 'translate-y-0');
+      mobileMenu?.setAttribute('aria-hidden', 'false');
+      mobileMenuButton?.setAttribute('aria-expanded', 'true');
+      
+      // Transform to X
+      line1?.setAttribute('transform', 'rotate(45 12 12)');
+      line1?.setAttribute('y1', '12');
+      line1?.setAttribute('y2', '12');
+      
+      line2?.setAttribute('opacity', '0');
+      
+      line3?.setAttribute('transform', 'rotate(-45 12 12)');
+      line3?.setAttribute('y1', '12');
+      line3?.setAttribute('y2', '12');
+    } else {
+      // Close menu
+      mobileMenu?.classList.add('pointer-events-none', 'opacity-0', 'translate-y-[-10px]');
+      mobileMenu?.classList.remove('pointer-events-auto', 'opacity-100', 'translate-y-0');
+      mobileMenu?.setAttribute('aria-hidden', 'true');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+      
+      // Transform back to hamburger
+      line1?.setAttribute('transform', 'rotate(0 12 12)');
+      line1?.setAttribute('y1', '7');
+      line1?.setAttribute('y2', '7');
+      
+      line2?.setAttribute('opacity', '1');
+      
+      line3?.setAttribute('transform', 'rotate(0 12 12)');
+      line3?.setAttribute('y1', '17');
+      line3?.setAttribute('y2', '17');
+    }
+  }
+
+  // Close menu when clicking on a link
+  function handleMenuLinkClick() {
+    if (isMenuOpen) {
+      toggleMobileMenu();
+    }
+  }
+
+  // Close menu with Escape key
+  function handleEscapeKey(event: KeyboardEvent) {
+    if (event.key === 'Escape' && isMenuOpen) {
+      toggleMobileMenu();
+    }
+  }
+
+  // Event listeners
+  mobileMenuButton?.addEventListener('click', toggleMobileMenu);
+  document.addEventListener('keydown', handleEscapeKey);
+  
+  // Close menu when clicking on links
+  const menuLinks = document.querySelectorAll('.mobile-menu-link');
+  menuLinks.forEach(link => {
+    link.addEventListener('click', handleMenuLinkClick);
+  });
+</script>
