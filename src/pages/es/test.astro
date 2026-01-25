@@ -1,0 +1,135 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import { useTranslations } from '../../i18n/ui';
+
+const lang = 'es';
+const t = useTranslations(lang);
+---
+
+<Layout 
+  title="Prueba - Menú Hamburguesa"
+  description="Página de prueba para el menú hamburguesa"
+  lang={lang}
+>
+  <!-- Header with Navigation -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-header border-b border-white/5 shadow-lg transition-all duration-300 bg-bg-dark/85 backdrop-blur-xl">
+    <div class="container mx-auto px-4 relative z-10">
+      <nav class="flex items-center justify-between py-3 md:py-4 gap-2 md:gap-4" aria-label="Main navigation">
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2 group focus-visible:outline-2 focus-visible:outline-brand-accent rounded-lg flex-shrink-0">
+          <svg class="w-7 h-7 md:w-8 md:h-8 transition-transform group-hover:scale-110" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <radialGradient id="indigoGrad" cx="50%" cy="50%">
+                <stop offset="0%" style="stop-color:#7B7BFF;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#5D5DFF;stop-opacity:0.8" />
+              </radialGradient>
+              <radialGradient id="cyanGrad" cx="50%" cy="50%">
+                <stop offset="0%" style="stop-color:#00FFDB;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#00FFC2;stop-opacity:0.7" />
+              </radialGradient>
+            </defs>
+            <polygon points="60,15 80,28 80,54 60,67 40,54 40,28" fill="url(#indigoGrad)" opacity="0.9"/>
+            <polygon points="60,53 80,66 80,92 60,105 40,92 40,66" fill="url(#cyanGrad)" opacity="0.8"/>
+            <circle cx="60" cy="60" r="18" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.5"/>
+          </svg>
+          <span class="text-base md:text-xl font-bold text-color-accent tracking-wider">NYXOK</span>
+        </a>
+
+        <!-- Navigation Component -->
+        <div class="flex-1 flex justify-center">
+          <Navigation lang={lang} t={t} />
+        </div>
+
+        <!-- Language Selector -->
+        <div class="flex gap-1 md:gap-2" role="group" aria-label="Selección de idioma">
+          <a 
+            href="/test" 
+            class="px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all text-text-muted hover:text-text-heading hover:bg-color-surface"
+            aria-label="English"
+          >
+            EN
+          </a>
+          <a 
+            href="/es/test" 
+            class="px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all bg-color-accent text-white shadow-sm"
+            aria-label="Español"
+          >
+            ES
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Skip to main content link for accessibility -->
+  <a 
+    href="#main-content" 
+    class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-primary text-white px-4 py-2 rounded-lg z-skip focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+  >
+    Saltar al contenido principal
+  </a>
+
+  <!-- Main content -->
+  <main id="main-content" class="min-h-screen pt-24 pb-16 px-4">
+    <div class="container mx-auto max-w-4xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+        Página de Prueba - Menú Hamburguesa
+      </h1>
+      
+      <div class="space-y-6 text-gray-300">
+        <p class="text-lg">
+          Esta es una página de prueba para el menú hamburguesa.
+        </p>
+        
+        <div class="bg-brand-surface/50 p-6 rounded-lg border border-brand-border">
+          <h2 class="text-2xl font-semibold text-brand-primary mb-4">
+            Instrucciones de prueba:
+          </h2>
+          <ul class="space-y-2 list-disc list-inside">
+            <li>En escritorio (≥1024px): Deberías ver el menú horizontal en el centro del header</li>
+            <li>En móvil/tablet (&lt;1024px): Deberías ver el botón hamburguesa (3 líneas)</li>
+            <li>Al hacer clic en el hamburguesa: Se abre un menú overlay con los items</li>
+            <li>Al hacer clic en el fondo o la X: Se cierra el menú</li>
+            <li>Presiona Escape: También cierra el menú</li>
+            <li>Los enlaces navegan a las secciones correspondientes</li>
+          </ul>
+        </div>
+
+        <div class="bg-brand-surface/50 p-6 rounded-lg border border-brand-border">
+          <h2 class="text-2xl font-semibold text-brand-secondary mb-4">
+            Secciones de destino (para pruebas):
+          </h2>
+          <div class="space-y-12">
+            <section id="features">
+              <h3 class="text-xl font-semibold text-cyan-400 mb-2">Servicios</h3>
+              <p>Esta es la sección de servicios (navegas aquí con el enlace "Servicios")</p>
+            </section>
+
+            <section id="pricing">
+              <h3 class="text-xl font-semibold text-cyan-400 mb-2">Soluciones</h3>
+              <p>Esta es la sección de soluciones (navegas aquí con el enlace "Soluciones")</p>
+            </section>
+
+            <section id="about">
+              <h3 class="text-xl font-semibold text-cyan-400 mb-2">Acerca de</h3>
+              <p>Esta es la sección acerca de (navegas aquí con el enlace "Acerca de")</p>
+            </section>
+
+            <section id="demo">
+              <h3 class="text-xl font-semibold text-cyan-400 mb-2">Contáctanos</h3>
+              <p>Esta es la sección de contacto (navegas aquí con el enlace "Contáctanos")</p>
+            </section>
+          </div>
+        </div>
+
+        <div class="mt-12 p-6 bg-brand-surface/30 rounded-lg border border-cyan-400/20">
+          <p class="text-sm text-text-muted">
+            <strong>Nota:</strong> Esta página incluye solo el header con el menú hamburguesa para facilitar las pruebas.
+            Puedes redimensionar la ventana del navegador para probar la responsividad.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
