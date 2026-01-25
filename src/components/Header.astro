@@ -154,19 +154,19 @@ const navItems = [
     class="md:hidden fixed left-0 right-0 top-[60px] z-40 pointer-events-none opacity-0 translate-y-[-10px] transition-all duration-200 ease-out"
     aria-hidden="true"
   >
-    <nav class="bg-[#0A0E27]/95 backdrop-blur-md border-b border-white/10 shadow-xl">
+    <nav class="bg-[#0A0E27]/95 backdrop-blur-md border-b border-white/10 shadow-xl mobile-menu-panel">
       <div class="container mx-auto px-4 py-2 flex flex-col">
         {navItems.map((item) => (
           <a 
             href={item.href} 
-            class="text-white hover:text-color-accent transition-colors font-medium py-3 px-4 border-b border-white/5 last:border-0 mobile-menu-link"
+            class="text-white hover:text-brand-primary transition-all duration-300 font-medium py-3 px-4 border-b border-white/5 last:border-0 mobile-menu-link rounded-md hover:bg-white/5 hover:pl-6"
           >
             {t(item.key)}
           </a>
         ))}
         <a 
           href="#demo"
-          class="text-white hover:text-color-accent transition-colors font-medium py-3 px-4 mobile-menu-link"
+          class="text-white hover:text-brand-primary transition-all duration-300 font-medium py-3 px-4 mobile-menu-link rounded-md hover:bg-white/5 hover:pl-6"
         >
           {t('nav.demo')}
         </a>
@@ -380,17 +380,58 @@ const navItems = [
   }
   
   /* Mobile menu enhanced */
-  #mobile-menu nav {
+  .mobile-menu-panel {
     position: relative;
     overflow: hidden;
   }
   
-  #mobile-menu nav::before {
+  .mobile-menu-panel::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(93, 93, 255, 0.05) 0%, transparent 50%, rgba(0, 255, 194, 0.05) 100%);
+    background: linear-gradient(135deg, rgba(93, 93, 255, 0.08) 0%, transparent 50%, rgba(0, 255, 194, 0.06) 100%);
     pointer-events: none;
+  }
+  
+  .mobile-menu-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 255, 194, 0.5) 20%,
+      rgba(93, 93, 255, 0.7) 50%,
+      rgba(0, 255, 194, 0.5) 80%,
+      transparent 100%
+    );
+    box-shadow: 0 0 10px rgba(0, 255, 194, 0.3);
+  }
+  
+  /* Mobile menu link hover effect */
+  .mobile-menu-link {
+    position: relative;
+  }
+  
+  .mobile-menu-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: linear-gradient(180deg, var(--brand-primary, #00FFC2), var(--brand-secondary, #5D5DFF));
+    border-radius: 2px;
+    transition: height 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 255, 194, 0.5);
+  }
+  
+  .mobile-menu-link:hover::before {
+    height: 60%;
   }
   
   /* Animations */
