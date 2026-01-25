@@ -10,7 +10,7 @@ All z-index values are defined in `tailwind.config.mjs` and should be used via T
 |-------|-------|----------------|-------|
 | Skip Link | 100 | `z-skip` | Accessibility skip-to-content link (highest priority) |
 | Header | 50 | `z-header` | Main navigation header |
-| Modal/Overlay | 40 | `z-modal` or `z-overlay` | Modals, mobile menus, overlays |
+| Overlay | 40 | `z-overlay` | Modals, mobile menus, and overlays |
 | Section | 10 | `z-section` | Content sections when layering is needed |
 | Background | 0 | `z-background` | Background effects and decorations |
 
@@ -38,7 +38,7 @@ All z-index values are defined in `tailwind.config.mjs` and should be used via T
 1. **Never use arbitrary z-index values** (e.g., `z-[100]`) without adding them to the Tailwind config first
 2. **Use semantic layer names** from the config instead of numeric values
 3. **Document any new layers** added to the system
-4. **Keep related elements in the same layer** (e.g., all overlays at z-40)
+4. **Keep related elements in the same layer** (e.g., all modals and overlays at z-40)
 5. **Test across breakpoints** when changing z-index values
 
 ## Component Isolation

@@ -41,8 +41,7 @@ export default {
       zIndex: {
         'skip': '100',
         'header': '50',
-        'modal': '40',
-        'overlay': '40',
+        'overlay': '40', // Used for modals, mobile menus, and overlays
         'section': '10',
         'background': '0',
       },
