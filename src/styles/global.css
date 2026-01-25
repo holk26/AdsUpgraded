@@ -13,6 +13,7 @@
   
   /* Background Colors */
   --bg-dark: #0a0e1a;
+  --bg-mid: #0d1428;
   --bg-surface: #1a1a2e;
   --bg-card: rgba(26, 26, 46, 0.8);
   
@@ -53,7 +54,8 @@
 
 /* Base Styles */
 body {
-  @apply bg-[#0a0e1a] text-gray-100;
+  background-color: var(--bg-dark);
+  @apply text-gray-100;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
