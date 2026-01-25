@@ -186,87 +186,116 @@ const navItems = [
   Skip to main content
 </a>
 
-<script>
-  // Mobile menu management
-  const mobileMenuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileMenuNav = mobileMenu?.querySelector('nav');
-  const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
-  const body = document.body;
-  let isMenuOpen = false;
+<script is:inline>
+  // Mobile menu management - runs immediately when script loads
+  (function() {
+    // Wait for elements to be available
+    function initMenu() {
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      if (!mobileMenuButton || !mobileMenu) {
+        // Elements not ready yet, try again
+        setTimeout(initMenu, 50);
+        return;
+      }
+      
+      const mobileMenuNav = mobileMenu.querySelector('nav');
+      const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+      const body = document.body;
+      let isMenuOpen = false;
 
-  // Toggle mobile menu
-  function toggleMobileMenu() {
-    isMenuOpen = !isMenuOpen;
+      // Toggle mobile menu
+      function toggleMobileMenu() {
+        isMenuOpen = !isMenuOpen;
+        
+        if (isMenuOpen) {
+          // Open menu
+          mobileMenu.classList.remove('pointer-events-none');
+          mobileMenu.classList.add('pointer-events-auto');
+          if (mobileMenuNav) {
+            mobileMenuNav.classList.remove('translate-y-[-100%]');
+            mobileMenuNav.classList.add('translate-y-0');
+          }
+          mobileMenu.setAttribute('aria-hidden', 'false');
+          
+          if (mobileMenuOverlay) {
+            mobileMenuOverlay.classList.remove('pointer-events-none', 'opacity-0');
+            mobileMenuOverlay.classList.add('pointer-events-auto', 'opacity-100');
+            mobileMenuOverlay.setAttribute('aria-hidden', 'false');
+          }
+          
+          mobileMenuButton.setAttribute('aria-expanded', 'true');
+          mobileMenuButton.classList.add('menu-open');
+          
+          // Prevent body scroll
+          body.classList.add('overflow-hidden');
+        } else {
+          // Close menu
+          mobileMenu.classList.add('pointer-events-none');
+          mobileMenu.classList.remove('pointer-events-auto');
+          if (mobileMenuNav) {
+            mobileMenuNav.classList.add('translate-y-[-100%]');
+            mobileMenuNav.classList.remove('translate-y-0');
+          }
+          mobileMenu.setAttribute('aria-hidden', 'true');
+          
+          if (mobileMenuOverlay) {
+            mobileMenuOverlay.classList.add('pointer-events-none', 'opacity-0');
+            mobileMenuOverlay.classList.remove('pointer-events-auto', 'opacity-100');
+            mobileMenuOverlay.setAttribute('aria-hidden', 'true');
+          }
+          
+          mobileMenuButton.setAttribute('aria-expanded', 'false');
+          mobileMenuButton.classList.remove('menu-open');
+          
+          // Restore body scroll
+          body.classList.remove('overflow-hidden');
+        }
+      }
+
+      // Close menu when clicking on a link
+      function handleMenuLinkClick() {
+        if (isMenuOpen) {
+          toggleMobileMenu();
+        }
+      }
+
+      // Close menu when clicking overlay
+      function handleOverlayClick() {
+        if (isMenuOpen) {
+          toggleMobileMenu();
+        }
+      }
+
+      // Close menu with Escape key
+      function handleEscapeKey(event) {
+        if (event.key === 'Escape' && isMenuOpen) {
+          toggleMobileMenu();
+        }
+      }
+
+      // Event listeners
+      mobileMenuButton.addEventListener('click', toggleMobileMenu);
+      if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', handleOverlayClick);
+      }
+      document.addEventListener('keydown', handleEscapeKey);
+      
+      // Close menu when clicking on links
+      const menuLinks = document.querySelectorAll('.mobile-menu-link');
+      menuLinks.forEach(link => {
+        link.addEventListener('click', handleMenuLinkClick);
+      });
+    }
     
-    if (isMenuOpen) {
-      // Open menu
-      mobileMenu?.classList.remove('pointer-events-none');
-      mobileMenu?.classList.add('pointer-events-auto');
-      mobileMenuNav?.classList.remove('translate-y-[-100%]');
-      mobileMenuNav?.classList.add('translate-y-0');
-      mobileMenu?.setAttribute('aria-hidden', 'false');
-      
-      mobileMenuOverlay?.classList.remove('pointer-events-none', 'opacity-0');
-      mobileMenuOverlay?.classList.add('pointer-events-auto', 'opacity-100');
-      mobileMenuOverlay?.setAttribute('aria-hidden', 'false');
-      
-      mobileMenuButton?.setAttribute('aria-expanded', 'true');
-      mobileMenuButton?.classList.add('menu-open');
-      
-      // Prevent body scroll
-      body.classList.add('overflow-hidden');
+    // Start initialization
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMenu);
     } else {
-      // Close menu
-      mobileMenu?.classList.add('pointer-events-none');
-      mobileMenu?.classList.remove('pointer-events-auto');
-      mobileMenuNav?.classList.add('translate-y-[-100%]');
-      mobileMenuNav?.classList.remove('translate-y-0');
-      mobileMenu?.setAttribute('aria-hidden', 'true');
-      
-      mobileMenuOverlay?.classList.add('pointer-events-none', 'opacity-0');
-      mobileMenuOverlay?.classList.remove('pointer-events-auto', 'opacity-100');
-      mobileMenuOverlay?.setAttribute('aria-hidden', 'true');
-      
-      mobileMenuButton?.setAttribute('aria-expanded', 'false');
-      mobileMenuButton?.classList.remove('menu-open');
-      
-      // Restore body scroll
-      body.classList.remove('overflow-hidden');
+      initMenu();
     }
-  }
-
-  // Close menu when clicking on a link
-  function handleMenuLinkClick() {
-    if (isMenuOpen) {
-      toggleMobileMenu();
-    }
-  }
-
-  // Close menu when clicking overlay
-  function handleOverlayClick() {
-    if (isMenuOpen) {
-      toggleMobileMenu();
-    }
-  }
-
-  // Close menu with Escape key
-  function handleEscapeKey(event: KeyboardEvent) {
-    if (event.key === 'Escape' && isMenuOpen) {
-      toggleMobileMenu();
-    }
-  }
-
-  // Event listeners
-  mobileMenuButton?.addEventListener('click', toggleMobileMenu);
-  mobileMenuOverlay?.addEventListener('click', handleOverlayClick);
-  document.addEventListener('keydown', handleEscapeKey);
-  
-  // Close menu when clicking on links
-  const menuLinks = document.querySelectorAll('.mobile-menu-link');
-  menuLinks.forEach(link => {
-    link.addEventListener('click', handleMenuLinkClick);
-  });
+  })();
 </script>
 
 <style>
