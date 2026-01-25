@@ -59,13 +59,14 @@ const navItems = [
     </div>
   </button>
 
-  <!-- Mobile Menu Overlay -->
+  <!-- Mobile Menu Overlay - Will be moved to body level by script -->
   <div 
     id="mobile-menu"
     class="mobile-menu"
     role="dialog"
     aria-modal="true"
     aria-hidden="true"
+    data-teleport="true"
   >
     <div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
     <div class="mobile-menu-content">
@@ -280,12 +281,23 @@ const navItems = [
       this.menu = document.getElementById('mobile-menu');
       this.backdrop = document.getElementById('mobile-menu-backdrop');
       
+      // Teleport menu to body to avoid z-index stacking issues
+      this.teleportMenuToBody();
+      
       // Bind methods to preserve context
       this.boundToggleMenu = this.toggleMenu.bind(this);
       this.boundCloseMenu = this.closeMenu.bind(this);
       this.boundHandleEscape = this.handleEscape.bind(this);
       
       this.init();
+    }
+
+    private teleportMenuToBody(): void {
+      // Move the mobile menu to be a direct child of body
+      // This prevents z-index stacking context issues with the header
+      if (this.menu && this.menu.dataset.teleport === 'true') {
+        document.body.appendChild(this.menu);
+      }
     }
 
     private init(): void {
@@ -371,7 +383,14 @@ const navItems = [
   let menuController: MobileMenuController | null = null;
   
   if (typeof window !== 'undefined') {
-    menuController = new MobileMenuController();
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        menuController = new MobileMenuController();
+      });
+    } else {
+      menuController = new MobileMenuController();
+    }
     
     // Clean up on page unload (for SPAs or navigation)
     window.addEventListener('beforeunload', () => {
