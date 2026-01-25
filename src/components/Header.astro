@@ -147,17 +147,17 @@ const navItems = [
   <!-- Mobile Menu Overlay -->
   <div 
     id="mobile-menu-overlay" 
-    class="md:hidden fixed inset-0 z-overlay bg-black/60 backdrop-blur-sm pointer-events-none opacity-0 transition-opacity duration-300"
+    class="md:hidden fixed inset-0 z-overlay bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"
     aria-hidden="true"
   ></div>
 
   <!-- Mobile Menu -->
   <div 
     id="mobile-menu" 
-    class="md:hidden fixed inset-0 z-overlay pointer-events-none"
+    class="md:hidden fixed left-0 right-0 top-[60px] z-overlay opacity-0 pointer-events-none translate-y-2 transition-all duration-300 ease-out"
     aria-hidden="true"
   >
-    <nav class="absolute top-[var(--header-height,60px)] left-0 right-0 bottom-0 bg-[#0A0E27]/95 backdrop-blur-md shadow-xl mobile-menu-panel translate-y-[-100%] transition-transform duration-300 ease-out overflow-y-auto">
+    <nav class="bg-[#0A0E27]/95 backdrop-blur-md border-b border-white/10 shadow-xl mobile-menu-panel overflow-y-auto max-h-[calc(100vh-60px)]">
       <div class="container mx-auto px-4 py-6 flex flex-col">
         {navItems.map((item) => (
           <a 
@@ -200,7 +200,6 @@ const navItems = [
         return;
       }
       
-      const mobileMenuNav = mobileMenu.querySelector('nav');
       const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
       const body = document.body;
       let isMenuOpen = false;
@@ -211,17 +210,13 @@ const navItems = [
         
         if (isMenuOpen) {
           // Open menu
-          mobileMenu.classList.remove('pointer-events-none');
-          mobileMenu.classList.add('pointer-events-auto');
-          if (mobileMenuNav) {
-            mobileMenuNav.classList.remove('translate-y-[-100%]');
-            mobileMenuNav.classList.add('translate-y-0');
-          }
+          mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
+          mobileMenu.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
           mobileMenu.setAttribute('aria-hidden', 'false');
           
           if (mobileMenuOverlay) {
-            mobileMenuOverlay.classList.remove('pointer-events-none', 'opacity-0');
-            mobileMenuOverlay.classList.add('pointer-events-auto', 'opacity-100');
+            mobileMenuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+            mobileMenuOverlay.classList.add('opacity-100', 'pointer-events-auto');
             mobileMenuOverlay.setAttribute('aria-hidden', 'false');
           }
           
@@ -232,17 +227,13 @@ const navItems = [
           body.classList.add('overflow-hidden');
         } else {
           // Close menu
-          mobileMenu.classList.add('pointer-events-none');
-          mobileMenu.classList.remove('pointer-events-auto');
-          if (mobileMenuNav) {
-            mobileMenuNav.classList.add('translate-y-[-100%]');
-            mobileMenuNav.classList.remove('translate-y-0');
-          }
+          mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+          mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
           mobileMenu.setAttribute('aria-hidden', 'true');
           
           if (mobileMenuOverlay) {
-            mobileMenuOverlay.classList.add('pointer-events-none', 'opacity-0');
-            mobileMenuOverlay.classList.remove('pointer-events-auto', 'opacity-100');
+            mobileMenuOverlay.classList.add('opacity-0', 'pointer-events-none');
+            mobileMenuOverlay.classList.remove('opacity-100', 'pointer-events-auto');
             mobileMenuOverlay.setAttribute('aria-hidden', 'true');
           }
           
