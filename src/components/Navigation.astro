@@ -268,6 +268,10 @@ const navItems = [
     private menu: HTMLElement | null;
     private backdrop: HTMLElement | null;
     private isOpen: boolean = false;
+    private boundToggleMenu: () => void;
+    private boundCloseMenu: () => void;
+    private boundHandleEscape: (e: KeyboardEvent) => void;
+    private navLinkHandlers: Array<{ element: Element; handler: () => void }> = [];
 
     constructor() {
       this.menuButton = document.getElementById('mobile-menu-button');
@@ -275,38 +279,51 @@ const navItems = [
       this.menu = document.getElementById('mobile-menu');
       this.backdrop = document.getElementById('mobile-menu-backdrop');
       
+      // Bind methods to preserve context
+      this.boundToggleMenu = this.toggleMenu.bind(this);
+      this.boundCloseMenu = this.closeMenu.bind(this);
+      this.boundHandleEscape = this.handleEscape.bind(this);
+      
       this.init();
     }
 
-    private init() {
+    private init(): void {
       if (!this.menuButton || !this.menu) return;
 
       // Open menu
-      this.menuButton.addEventListener('click', () => this.toggleMenu());
+      this.menuButton.addEventListener('click', this.boundToggleMenu);
       
       // Close menu
-      this.closeButton?.addEventListener('click', () => this.closeMenu());
-      this.backdrop?.addEventListener('click', () => this.closeMenu());
+      if (this.closeButton) {
+        this.closeButton.addEventListener('click', this.boundCloseMenu);
+      }
+      if (this.backdrop) {
+        this.backdrop.addEventListener('click', this.boundCloseMenu);
+      }
 
       // Close on escape key
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && this.isOpen) {
-          this.closeMenu();
-        }
-      });
+      document.addEventListener('keydown', this.boundHandleEscape);
 
       // Close menu when clicking nav links
       const navLinks = this.menu.querySelectorAll('.mobile-nav-link');
       navLinks.forEach(link => {
-        link.addEventListener('click', () => this.closeMenu());
+        const handler = () => this.closeMenu();
+        this.navLinkHandlers.push({ element: link, handler });
+        link.addEventListener('click', handler);
       });
     }
 
-    private toggleMenu() {
+    private handleEscape(e: KeyboardEvent): void {
+      if (e.key === 'Escape' && this.isOpen) {
+        this.closeMenu();
+      }
+    }
+
+    private toggleMenu(): void {
       this.isOpen ? this.closeMenu() : this.openMenu();
     }
 
-    private openMenu() {
+    private openMenu(): void {
       if (!this.menu || !this.menuButton) return;
       
       this.isOpen = true;
@@ -317,7 +334,7 @@ const navItems = [
       document.body.classList.add('menu-open');
     }
 
-    private closeMenu() {
+    private closeMenu(): void {
       if (!this.menu || !this.menuButton) return;
       
       this.isOpen = false;
@@ -327,10 +344,40 @@ const navItems = [
       this.menu.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('menu-open');
     }
+
+    public destroy(): void {
+      // Clean up event listeners to prevent memory leaks
+      if (this.menuButton) {
+        this.menuButton.removeEventListener('click', this.boundToggleMenu);
+      }
+      if (this.closeButton) {
+        this.closeButton.removeEventListener('click', this.boundCloseMenu);
+      }
+      if (this.backdrop) {
+        this.backdrop.removeEventListener('click', this.boundCloseMenu);
+      }
+      document.removeEventListener('keydown', this.boundHandleEscape);
+      
+      // Clean up nav link handlers
+      this.navLinkHandlers.forEach(({ element, handler }) => {
+        element.removeEventListener('click', handler);
+      });
+      this.navLinkHandlers = [];
+    }
   }
 
-  // Initialize on page load
+  // Initialize on page load and store instance for potential cleanup
+  let menuController: MobileMenuController | null = null;
+  
   if (typeof window !== 'undefined') {
-    new MobileMenuController();
+    menuController = new MobileMenuController();
+    
+    // Clean up on page unload (for SPAs or navigation)
+    window.addEventListener('beforeunload', () => {
+      if (menuController) {
+        menuController.destroy();
+        menuController = null;
+      }
+    });
   }
 </script>
