@@ -157,7 +157,7 @@ const navItems = [
     class="md:hidden fixed inset-0 z-overlay pointer-events-none"
     aria-hidden="true"
   >
-    <nav class="absolute top-[60px] left-0 right-0 bottom-0 bg-[#0A0E27]/95 backdrop-blur-md shadow-xl mobile-menu-panel translate-y-[-100%] transition-transform duration-300 ease-out overflow-y-auto">
+    <nav class="absolute top-[var(--header-height,60px)] left-0 right-0 bottom-0 bg-[#0A0E27]/95 backdrop-blur-md shadow-xl mobile-menu-panel translate-y-[-100%] transition-transform duration-300 ease-out overflow-y-auto">
       <div class="container mx-auto px-4 py-6 flex flex-col">
         {navItems.map((item) => (
           <a 
@@ -190,6 +190,7 @@ const navItems = [
   // Mobile menu management
   const mobileMenuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
+  const mobileMenuNav = mobileMenu?.querySelector('nav');
   const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
   const body = document.body;
   let isMenuOpen = false;
@@ -202,8 +203,8 @@ const navItems = [
       // Open menu
       mobileMenu?.classList.remove('pointer-events-none');
       mobileMenu?.classList.add('pointer-events-auto');
-      mobileMenu?.querySelector('nav')?.classList.remove('translate-y-[-100%]');
-      mobileMenu?.querySelector('nav')?.classList.add('translate-y-0');
+      mobileMenuNav?.classList.remove('translate-y-[-100%]');
+      mobileMenuNav?.classList.add('translate-y-0');
       mobileMenu?.setAttribute('aria-hidden', 'false');
       
       mobileMenuOverlay?.classList.remove('pointer-events-none', 'opacity-0');
@@ -214,13 +215,13 @@ const navItems = [
       mobileMenuButton?.classList.add('menu-open');
       
       // Prevent body scroll
-      body.style.overflow = 'hidden';
+      body.classList.add('overflow-hidden');
     } else {
       // Close menu
       mobileMenu?.classList.add('pointer-events-none');
       mobileMenu?.classList.remove('pointer-events-auto');
-      mobileMenu?.querySelector('nav')?.classList.add('translate-y-[-100%]');
-      mobileMenu?.querySelector('nav')?.classList.remove('translate-y-0');
+      mobileMenuNav?.classList.add('translate-y-[-100%]');
+      mobileMenuNav?.classList.remove('translate-y-0');
       mobileMenu?.setAttribute('aria-hidden', 'true');
       
       mobileMenuOverlay?.classList.add('pointer-events-none', 'opacity-0');
@@ -231,7 +232,7 @@ const navItems = [
       mobileMenuButton?.classList.remove('menu-open');
       
       // Restore body scroll
-      body.style.overflow = '';
+      body.classList.remove('overflow-hidden');
     }
   }
 
@@ -273,6 +274,7 @@ const navItems = [
   .header-with-glow {
     position: relative;
     overflow: hidden;
+    --header-height: 60px;
   }
   
   .header-with-glow::before {
