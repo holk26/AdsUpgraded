@@ -281,7 +281,9 @@ const navItems = [
       transparent
     );
     animation: shimmer 15s infinite;
+    animation-delay: 0s;
     pointer-events: none;
+    will-change: transform;
   }
   
   /* Network background effect */
@@ -304,7 +306,9 @@ const navItems = [
       linear-gradient(0deg, rgba(93, 93, 255, 0.03) 1px, transparent 1px);
     background-size: 40px 40px;
     animation: grid-flow 20s linear infinite;
+    animation-delay: 2s;
     opacity: 0.3;
+    will-change: transform;
   }
   
   .header-network-bg::after {
@@ -324,6 +328,8 @@ const navItems = [
     );
     opacity: 0.5;
     animation: pulse-line 3s ease-in-out infinite;
+    animation-delay: 1s;
+    will-change: opacity, transform;
   }
   
   /* Enhanced logo glow */
@@ -348,7 +354,7 @@ const navItems = [
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, transparent, var(--brand-primary), transparent);
+    background: linear-gradient(90deg, transparent, var(--brand-primary, #00FFC2), transparent);
     box-shadow: 0 0 8px rgba(0, 255, 194, 0.6);
   }
   
@@ -423,6 +429,7 @@ const navItems = [
     .header-network-bg::before,
     .header-network-bg::after {
       animation: none;
+      will-change: auto;
     }
     
     #header a[href="/"] svg {
