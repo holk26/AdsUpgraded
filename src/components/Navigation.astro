@@ -1,0 +1,336 @@
+---
+/**
+ * Navigation Component
+ * Single Responsibility: Handle navigation menu display and mobile menu toggle
+ * Open/Closed: Extendable via props without modifying core logic
+ */
+export interface Props {
+  lang?: string;
+  t: (key: string) => string;
+}
+
+const { lang = 'en', t } = Astro.props;
+
+// Navigation items configuration (Open/Closed Principle)
+const navItems = [
+  { key: 'nav.features', href: '#features', label: t('nav.features') },
+  { key: 'nav.pricing', href: '#pricing', label: t('nav.pricing') },
+  { key: 'nav.about', href: '#about', label: t('nav.about') },
+  { key: 'nav.demo', href: '#demo', label: t('nav.demo'), isPrimary: true },
+];
+---
+
+<nav class="nav-wrapper" aria-label="Main navigation">
+  <!-- Desktop Navigation -->
+  <div class="hidden lg:flex items-center gap-2">
+    {navItems.map(item => 
+      item.isPrimary ? (
+        <a 
+          href={item.href}
+          class="px-4 py-2 rounded-lg bg-brand-accent text-white font-medium hover:bg-brand-accent/90 transition-all duration-200 hover:scale-105 shadow-sm"
+          aria-label={item.label}
+        >
+          {item.label}
+        </a>
+      ) : (
+        <a 
+          href={item.href}
+          class="px-3 py-2 rounded-md text-sm font-medium text-text-body hover:text-brand-primary hover:bg-brand-surface/50 transition-all duration-200"
+          aria-label={item.label}
+        >
+          {item.label}
+        </a>
+      )
+    )}
+  </div>
+
+  <!-- Mobile Menu Button -->
+  <button 
+    id="mobile-menu-button"
+    class="lg:hidden p-2 rounded-lg hover:bg-brand-surface/50 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-brand-accent"
+    aria-label="Toggle menu"
+    aria-expanded="false"
+    aria-controls="mobile-menu"
+  >
+    <div class="hamburger-icon">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </div>
+  </button>
+
+  <!-- Mobile Menu Overlay -->
+  <div 
+    id="mobile-menu"
+    class="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+  >
+    <div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
+    <div class="mobile-menu-content">
+      <!-- Close Button -->
+      <div class="mobile-menu-header">
+        <button 
+          id="mobile-menu-close"
+          class="p-2 rounded-lg hover:bg-brand-surface/50 transition-colors duration-200"
+          aria-label="Close menu"
+        >
+          <svg class="w-6 h-6 text-text-body" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Nav Items -->
+      <div class="mobile-nav-items">
+        {navItems.map((item, index) => (
+          <a 
+            href={item.href}
+            class={`mobile-nav-link ${item.isPrimary ? 'mobile-nav-link-primary' : ''}`}
+            style={`animation-delay: ${(index + 1) * 0.05}s`}
+            aria-label={item.label}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+  /* Hamburger Icon Animation */
+  .hamburger-icon {
+    width: 24px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .hamburger-line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-body);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+  }
+
+  .menu-open .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .menu-open .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Mobile Menu Overlay */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-menu.active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .mobile-menu-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 14, 26, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .mobile-menu-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-menu.active .mobile-menu-content {
+    transform: translateX(0);
+  }
+
+  .mobile-menu-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+  }
+
+  /* Mobile Navigation Items */
+  .mobile-nav-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 1rem 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--text-body);
+    border-radius: 0.75rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateX(20px);
+    background: rgba(26, 26, 46, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .mobile-menu.active .mobile-nav-link {
+    opacity: 1;
+    transform: translateX(0);
+    animation: slideInFromRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link:focus {
+    color: var(--brand-primary);
+    background: rgba(26, 26, 46, 0.8);
+    border-color: var(--brand-primary);
+    transform: translateX(4px);
+  }
+
+  .mobile-nav-link-primary {
+    background: linear-gradient(135deg, var(--brand-accent), var(--brand-secondary));
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-nav-link-primary:hover,
+  .mobile-nav-link-primary:focus {
+    box-shadow: 0 6px 16px rgba(14, 165, 233, 0.4);
+    transform: translateX(4px) scale(1.02);
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Prevent body scroll when menu is open */
+  :global(body.menu-open) {
+    overflow: hidden;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .hamburger-line,
+    .mobile-menu,
+    .mobile-menu-content,
+    .mobile-nav-link {
+      transition: none;
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  /**
+   * Mobile Menu Controller
+   * Single Responsibility: Handle mobile menu state and interactions
+   */
+  class MobileMenuController {
+    private menuButton: HTMLElement | null;
+    private closeButton: HTMLElement | null;
+    private menu: HTMLElement | null;
+    private backdrop: HTMLElement | null;
+    private isOpen: boolean = false;
+
+    constructor() {
+      this.menuButton = document.getElementById('mobile-menu-button');
+      this.closeButton = document.getElementById('mobile-menu-close');
+      this.menu = document.getElementById('mobile-menu');
+      this.backdrop = document.getElementById('mobile-menu-backdrop');
+      
+      this.init();
+    }
+
+    private init() {
+      if (!this.menuButton || !this.menu) return;
+
+      // Open menu
+      this.menuButton.addEventListener('click', () => this.toggleMenu());
+      
+      // Close menu
+      this.closeButton?.addEventListener('click', () => this.closeMenu());
+      this.backdrop?.addEventListener('click', () => this.closeMenu());
+
+      // Close on escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && this.isOpen) {
+          this.closeMenu();
+        }
+      });
+
+      // Close menu when clicking nav links
+      const navLinks = this.menu.querySelectorAll('.mobile-nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => this.closeMenu());
+      });
+    }
+
+    private toggleMenu() {
+      this.isOpen ? this.closeMenu() : this.openMenu();
+    }
+
+    private openMenu() {
+      if (!this.menu || !this.menuButton) return;
+      
+      this.isOpen = true;
+      this.menu.classList.add('active');
+      this.menuButton.classList.add('menu-open');
+      this.menuButton.setAttribute('aria-expanded', 'true');
+      this.menu.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('menu-open');
+    }
+
+    private closeMenu() {
+      if (!this.menu || !this.menuButton) return;
+      
+      this.isOpen = false;
+      this.menu.classList.remove('active');
+      this.menuButton.classList.remove('menu-open');
+      this.menuButton.setAttribute('aria-expanded', 'false');
+      this.menu.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('menu-open');
+    }
+  }
+
+  // Initialize on page load
+  if (typeof window !== 'undefined') {
+    new MobileMenuController();
+  }
+</script>

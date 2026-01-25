@@ -1,4 +1,6 @@
 ---
+import Navigation from './Navigation.astro';
+
 export interface Props {
   lang?: string;
   t: (key: string) => string;
@@ -13,7 +15,7 @@ const { lang = 'en', t } = Astro.props;
   
   <div class="container mx-auto px-4 relative z-10">
     <nav class="flex items-center justify-between py-3 md:py-4 gap-2 md:gap-4" aria-label="Main navigation">
-      <!-- Logo -->
+      <!-- Left Section: Logo -->
       <a href="/" class="flex items-center gap-2 group focus-visible:outline-2 focus-visible:outline-brand-accent rounded-lg flex-shrink-0">
         <svg class="w-7 h-7 md:w-8 md:h-8 transition-transform group-hover:scale-110" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
@@ -69,7 +71,12 @@ const { lang = 'en', t } = Astro.props;
         <span class="text-base md:text-xl font-bold text-color-accent tracking-wider">NYXOK</span>
       </a>
 
-      <!-- Language Selector -->
+      <!-- Center Section: Navigation -->
+      <div class="flex-1 flex justify-center">
+        <Navigation lang={lang} t={t} />
+      </div>
+
+      <!-- Right Section: Language Selector -->
       <div class="flex gap-1 md:gap-2" role="group" aria-label="Language selection">
         <a 
           href="/" 
