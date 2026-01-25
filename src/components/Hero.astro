@@ -8,54 +8,57 @@ export interface Props {
 const { t } = Astro.props;
 ---
 
-<section id="hero" class="relative pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-20 lg:pt-40 lg:pb-24 overflow-hidden min-h-[100svh] flex items-center">
-  <!-- Futuristic Tech Background - Inspired by digital globe cityscape -->
-  <div class="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#0d1428] to-[#1a1a2e]"></div>
-  
-  <!-- Animated Grid Pattern -->
-  <div class="absolute inset-0 opacity-20">
-    <div class="absolute inset-0" style="background-image: linear-gradient(rgba(93, 93, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(93, 93, 255, 0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
+<section id="hero" class="relative pt-20 pb-12 sm:pt-24 sm:pb-16 md:pt-32 md:pb-20 lg:pt-40 lg:pb-24 min-h-[100svh] flex items-center">
+  <!-- Background decorations container - contains overflow -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <!-- Futuristic Tech Background - Inspired by digital globe cityscape -->
+    <div class="absolute inset-0 bg-gradient-to-b from-[#0a0e1a] via-[#0d1428] to-[#1a1a2e]"></div>
+    
+    <!-- Animated Grid Pattern -->
+    <div class="absolute inset-0 opacity-20">
+      <div class="absolute inset-0" style="background-image: linear-gradient(rgba(93, 93, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(93, 93, 255, 0.1) 1px, transparent 1px); background-size: 50px 50px;"></div>
+    </div>
+    
+    <!-- Digital Globe Effect - Right Side -->
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] opacity-40">
+      <div class="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/30 via-blue-500/20 to-transparent blur-3xl animate-pulse-slow"></div>
+      <div class="absolute inset-0 rounded-full border border-cyan-400/20 animate-spin-slow"></div>
+      <div class="absolute inset-8 rounded-full border border-cyan-400/10 animate-spin-slow" style="animation-duration: 20s; animation-direction: reverse;"></div>
+    </div>
+    
+    <!-- Network Connections -->
+    <div class="absolute inset-0 opacity-30">
+      <svg class="absolute top-1/4 right-1/4 w-64 h-64" viewBox="0 0 200 200">
+        <line x1="20" y1="20" x2="180" y2="180" stroke="url(#lineGradient1)" stroke-width="1" class="animate-dash" />
+        <line x1="180" y1="20" x2="20" y2="180" stroke="url(#lineGradient2)" stroke-width="1" class="animate-dash" style="animation-delay: 0.5s;" />
+        <defs>
+          <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00FFC2;stop-opacity:0" />
+            <stop offset="50%" style="stop-color:#00FFC2;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#00FFC2;stop-opacity:0" />
+          </linearGradient>
+          <linearGradient id="lineGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#5D5DFF;stop-opacity:0" />
+            <stop offset="50%" style="stop-color:#5D5DFF;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#5D5DFF;stop-opacity:0" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    
+    <!-- Floating Particles -->
+    <div class="absolute inset-0">
+      <div class="particle particle-1"></div>
+      <div class="particle particle-2"></div>
+      <div class="particle particle-3"></div>
+      <div class="particle particle-4"></div>
+      <div class="particle particle-5"></div>
+    </div>
+    
+    <!-- Gradient Overlays -->
+    <div class="absolute inset-0" style="background: radial-gradient(circle at center, transparent 0%, transparent 50%, rgba(10, 14, 26, 0.8) 100%);"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0a0e1a] to-transparent"></div>
   </div>
-  
-  <!-- Digital Globe Effect - Right Side -->
-  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[800px] lg:h-[800px] opacity-40">
-    <div class="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-400/30 via-blue-500/20 to-transparent blur-3xl animate-pulse-slow"></div>
-    <div class="absolute inset-0 rounded-full border border-cyan-400/20 animate-spin-slow"></div>
-    <div class="absolute inset-8 rounded-full border border-cyan-400/10 animate-spin-slow" style="animation-duration: 20s; animation-direction: reverse;"></div>
-  </div>
-  
-  <!-- Network Connections -->
-  <div class="absolute inset-0 overflow-hidden opacity-30">
-    <svg class="absolute top-1/4 right-1/4 w-64 h-64" viewBox="0 0 200 200">
-      <line x1="20" y1="20" x2="180" y2="180" stroke="url(#lineGradient1)" stroke-width="1" class="animate-dash" />
-      <line x1="180" y1="20" x2="20" y2="180" stroke="url(#lineGradient2)" stroke-width="1" class="animate-dash" style="animation-delay: 0.5s;" />
-      <defs>
-        <linearGradient id="lineGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#00FFC2;stop-opacity:0" />
-          <stop offset="50%" style="stop-color:#00FFC2;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#00FFC2;stop-opacity:0" />
-        </linearGradient>
-        <linearGradient id="lineGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style="stop-color:#5D5DFF;stop-opacity:0" />
-          <stop offset="50%" style="stop-color:#5D5DFF;stop-opacity:1" />
-          <stop offset="100%" style="stop-color:#5D5DFF;stop-opacity:0" />
-        </linearGradient>
-      </defs>
-    </svg>
-  </div>
-  
-  <!-- Floating Particles -->
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="particle particle-1"></div>
-    <div class="particle particle-2"></div>
-    <div class="particle particle-3"></div>
-    <div class="particle particle-4"></div>
-    <div class="particle particle-5"></div>
-  </div>
-  
-  <!-- Gradient Overlays -->
-  <div class="absolute inset-0" style="background: radial-gradient(circle at center, transparent 0%, transparent 50%, rgba(10, 14, 26, 0.8) 100%);"></div>
-  <div class="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#0a0e1a] to-transparent"></div>
   
   <div class="container mx-auto px-4 sm:px-6 relative z-10">
     <div class="max-w-6xl mx-auto">
