@@ -145,25 +145,29 @@ const navItems = [
     </nav>
   </div>
   
-  <!-- Mobile Menu -->
+  <!-- Mobile Menu - Full Screen Overlay -->
   <div 
     id="mobile-menu" 
-    class="md:hidden fixed left-0 right-0 top-[60px] z-40 pointer-events-none opacity-0 translate-y-[-10px] transition-all duration-200 ease-out"
+    class="md:hidden fixed inset-0 z-40 pointer-events-none opacity-0 transition-opacity duration-300 ease-out"
     aria-hidden="true"
   >
-    <nav class="bg-[#0A0E27]/95 backdrop-blur-md border-b border-white/10 shadow-xl">
-      <div class="container mx-auto px-4 py-2 flex flex-col">
+    <!-- Backdrop -->
+    <div class="absolute inset-0 bg-[#0A0E27]/98 backdrop-blur-lg"></div>
+    
+    <!-- Menu Content -->
+    <nav class="relative h-full flex flex-col justify-center items-center px-6">
+      <div class="flex flex-col space-y-6 w-full max-w-sm">
         {navItems.map((item) => (
           <a 
             href={item.href} 
-            class="text-white hover:text-color-accent transition-colors font-medium py-3 px-4 border-b border-white/5 last:border-0 mobile-menu-link"
+            class="text-white text-center hover:text-color-accent transition-colors font-medium text-2xl py-4 mobile-menu-link"
           >
             {t(item.key)}
           </a>
         ))}
         <a 
           href="#demo"
-          class="text-white hover:text-color-accent transition-colors font-medium py-3 px-4 mobile-menu-link"
+          class="text-white text-center hover:text-color-accent transition-colors font-medium text-2xl py-4 mobile-menu-link"
         >
           {t('nav.demo')}
         </a>
@@ -195,10 +199,13 @@ const navItems = [
     
     if (isMenuOpen) {
       // Open menu
-      mobileMenu?.classList.remove('pointer-events-none', 'opacity-0', 'translate-y-[-10px]');
-      mobileMenu?.classList.add('pointer-events-auto', 'opacity-100', 'translate-y-0');
+      mobileMenu?.classList.remove('pointer-events-none', 'opacity-0');
+      mobileMenu?.classList.add('pointer-events-auto', 'opacity-100');
       mobileMenu?.setAttribute('aria-hidden', 'false');
       mobileMenuButton?.setAttribute('aria-expanded', 'true');
+      
+      // Block body scroll
+      document.body.style.overflow = 'hidden';
       
       // Transform to X
       line1?.setAttribute('transform', 'rotate(45 12 12)');
@@ -212,10 +219,13 @@ const navItems = [
       line3?.setAttribute('y2', '12');
     } else {
       // Close menu
-      mobileMenu?.classList.add('pointer-events-none', 'opacity-0', 'translate-y-[-10px]');
-      mobileMenu?.classList.remove('pointer-events-auto', 'opacity-100', 'translate-y-0');
+      mobileMenu?.classList.add('pointer-events-none', 'opacity-0');
+      mobileMenu?.classList.remove('pointer-events-auto', 'opacity-100');
       mobileMenu?.setAttribute('aria-hidden', 'true');
       mobileMenuButton?.setAttribute('aria-expanded', 'false');
+      
+      // Restore body scroll
+      document.body.style.overflow = '';
       
       // Transform back to hamburger
       line1?.setAttribute('transform', 'rotate(0 12 12)');
