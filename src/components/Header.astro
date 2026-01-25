@@ -1,6 +1,4 @@
 ---
-import Button from './ui/Button.astro';
-
 export interface Props {
   lang?: string;
   t: (key: string) => string;
@@ -15,7 +13,7 @@ const navItems = [
 ];
 ---
 
-<header id="header" class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5 shadow-lg transition-all duration-300 header-with-glow">
+<header id="header" class="fixed top-0 left-0 right-0 z-header glass-effect border-b border-white/5 shadow-lg transition-all duration-300 header-with-glow">
   <!-- Animated network background -->
   <div class="header-network-bg"></div>
   
@@ -92,8 +90,8 @@ const navItems = [
           <circle cx="34" cy="92" r="2.5" fill="#5D5DFF" filter="url(#glowIndigo)"/>
           <circle cx="34" cy="28" r="2.5" fill="#00FFC2" filter="url(#glowCyan)"/>
         </svg>
-        <span class="text-base md:text-xl font-bold text-color-accent hidden xs:inline" style="letter-spacing: 0.05em;">NYXOK</span>
-        <span class="text-base md:text-xl font-bold text-color-accent xs:hidden" style="letter-spacing: 0.05em;">NYXOK</span>
+        <span class="text-base md:text-xl font-bold text-color-accent hidden xs:inline tracking-wider">NYXOK</span>
+        <span class="text-base md:text-xl font-bold text-color-accent xs:hidden tracking-wider">NYXOK</span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -151,7 +149,7 @@ const navItems = [
   <!-- Mobile Menu -->
   <div 
     id="mobile-menu" 
-    class="md:hidden fixed left-0 right-0 top-[60px] z-40 pointer-events-none opacity-0 translate-y-[-10px] transition-all duration-200 ease-out"
+    class="md:hidden fixed left-0 right-0 top-[60px] z-overlay pointer-events-none opacity-0 translate-y-[-10px] transition-all duration-200 ease-out"
     aria-hidden="true"
   >
     <nav class="bg-[#0A0E27]/95 backdrop-blur-md border-b border-white/10 shadow-xl mobile-menu-panel">
@@ -178,7 +176,7 @@ const navItems = [
 <!-- Skip to main content link for accessibility -->
 <a 
   href="#main-content" 
-  class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-primary text-white px-4 py-2 rounded-lg z-[100] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
+  class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-primary text-white px-4 py-2 rounded-lg z-skip focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-accent"
 >
   Skip to main content
 </a>
