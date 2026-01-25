@@ -15,8 +15,11 @@ const navItems = [
 ];
 ---
 
-<header id="header" class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5 shadow-lg transition-all duration-300">
-  <div class="container mx-auto px-4">
+<header id="header" class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/5 shadow-lg transition-all duration-300 header-with-glow">
+  <!-- Animated network background -->
+  <div class="header-network-bg"></div>
+  
+  <div class="container mx-auto px-4 relative z-10">
     <nav class="flex items-center justify-between py-3 md:py-4 gap-2 md:gap-4" aria-label="Main navigation">
       <!-- Logo -->
       <a href="/" class="flex items-center gap-2 group focus-visible:outline-2 focus-visible:outline-brand-accent rounded-lg flex-shrink-0">
@@ -151,19 +154,19 @@ const navItems = [
     class="md:hidden fixed left-0 right-0 top-[60px] z-40 pointer-events-none opacity-0 translate-y-[-10px] transition-all duration-200 ease-out"
     aria-hidden="true"
   >
-    <nav class="bg-[#0A0E27]/95 backdrop-blur-md border-b border-white/10 shadow-xl">
+    <nav class="bg-[#0A0E27]/95 backdrop-blur-md border-b border-white/10 shadow-xl mobile-menu-panel">
       <div class="container mx-auto px-4 py-2 flex flex-col">
         {navItems.map((item) => (
           <a 
             href={item.href} 
-            class="text-white hover:text-color-accent transition-colors font-medium py-3 px-4 border-b border-white/5 last:border-0 mobile-menu-link"
+            class="text-white hover:text-brand-primary transition-all duration-300 font-medium py-3 px-4 border-b border-white/5 last:border-0 mobile-menu-link rounded-md hover:bg-white/5 hover:pl-6"
           >
             {t(item.key)}
           </a>
         ))}
         <a 
           href="#demo"
-          class="text-white hover:text-color-accent transition-colors font-medium py-3 px-4 mobile-menu-link"
+          class="text-white hover:text-brand-primary transition-all duration-300 font-medium py-3 px-4 mobile-menu-link rounded-md hover:bg-white/5 hover:pl-6"
         >
           {t('nav.demo')}
         </a>
@@ -254,3 +257,224 @@ const navItems = [
     link.addEventListener('click', handleMenuLinkClick);
   });
 </script>
+
+<style>
+  /* Header with glow effect inspired by the reference image */
+  .header-with-glow {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .header-with-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 300%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(0, 255, 194, 0.05) 25%,
+      rgba(93, 93, 255, 0.05) 50%,
+      rgba(0, 255, 194, 0.05) 75%,
+      transparent
+    );
+    animation: shimmer 15s infinite;
+    animation-delay: 0s;
+    pointer-events: none;
+    will-change: transform;
+  }
+  
+  /* Network background effect */
+  .header-network-bg {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(93, 93, 255, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 50%, rgba(0, 255, 194, 0.06) 0%, transparent 50%);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+  .header-network-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(90deg, rgba(0, 255, 194, 0.03) 1px, transparent 1px),
+      linear-gradient(0deg, rgba(93, 93, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: grid-flow 20s linear infinite;
+    animation-delay: 2s;
+    opacity: 0.3;
+    will-change: transform;
+  }
+  
+  .header-network-bg::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 255, 194, 0.4) 10%,
+      rgba(93, 93, 255, 0.6) 50%,
+      rgba(0, 255, 194, 0.4) 90%,
+      transparent 100%
+    );
+    opacity: 0.5;
+    animation: pulse-line 3s ease-in-out infinite;
+    animation-delay: 1s;
+    will-change: opacity, transform;
+  }
+  
+  /* Enhanced logo glow */
+  #header a[href="/"] svg {
+    filter: drop-shadow(0 0 8px rgba(93, 93, 255, 0.3)) drop-shadow(0 0 12px rgba(0, 255, 194, 0.2));
+    transition: filter 0.3s ease;
+  }
+  
+  #header a[href="/"] svg:hover {
+    filter: drop-shadow(0 0 12px rgba(93, 93, 255, 0.5)) drop-shadow(0 0 18px rgba(0, 255, 194, 0.3));
+  }
+  
+  /* Navigation links with subtle glow on hover */
+  #header nav a:not([href="/"]) {
+    position: relative;
+  }
+  
+  #header nav a:not([href="/"]):hover::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--brand-primary, #00FFC2), transparent);
+    box-shadow: 0 0 8px rgba(0, 255, 194, 0.6);
+  }
+  
+  /* Language selector enhanced */
+  #header [role="group"] a {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  #header [role="group"] a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(93, 93, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  #header [role="group"] a:hover::before {
+    left: 100%;
+  }
+  
+  /* Mobile menu enhanced */
+  .mobile-menu-panel {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .mobile-menu-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(93, 93, 255, 0.08) 0%, transparent 50%, rgba(0, 255, 194, 0.06) 100%);
+    pointer-events: none;
+  }
+  
+  .mobile-menu-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 255, 194, 0.5) 20%,
+      rgba(93, 93, 255, 0.7) 50%,
+      rgba(0, 255, 194, 0.5) 80%,
+      transparent 100%
+    );
+    box-shadow: 0 0 10px rgba(0, 255, 194, 0.3);
+  }
+  
+  /* Mobile menu link hover effect */
+  .mobile-menu-link {
+    position: relative;
+  }
+  
+  .mobile-menu-link::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background: linear-gradient(180deg, var(--brand-primary, #00FFC2), var(--brand-secondary, #5D5DFF));
+    border-radius: 2px;
+    transition: height 0.3s ease;
+    box-shadow: 0 0 8px rgba(0, 255, 194, 0.5);
+  }
+  
+  .mobile-menu-link:hover::before {
+    height: 60%;
+  }
+  
+  /* Animations */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(33.333%);
+    }
+  }
+  
+  @keyframes grid-flow {
+    0% {
+      transform: translateY(0) translateX(0);
+    }
+    100% {
+      transform: translateY(40px) translateX(40px);
+    }
+  }
+  
+  @keyframes pulse-line {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scaleX(0.95);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scaleX(1);
+    }
+  }
+  
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .header-with-glow::before,
+    .header-network-bg::before,
+    .header-network-bg::after {
+      animation: none;
+      will-change: auto;
+    }
+    
+    #header a[href="/"] svg {
+      transition: none;
+    }
+  }
+</style>
