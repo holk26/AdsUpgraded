@@ -99,8 +99,9 @@ const { t } = Astro.props;
 
   /* Reduced motion */
   @media (prefers-reduced-motion: reduce) {
-    * {
-      animation: none !important;
+    .animate-fade-in,
+    .animate-fade-in-up {
+      animation: none;
     }
   }
 </style>
