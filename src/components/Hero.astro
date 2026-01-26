@@ -10,15 +10,16 @@ const { t } = Astro.props;
 
 <!-- 
   Hero Section - Refactored for Predictability & Responsiveness
-  - Respects fixed header (pt-20 accounts for ~70px header height)
-  - Uses flex for vertical centering (no magic margins)
+  - Respects fixed header with proper spacing
+  - Uses flex for true vertical centering
   - Mobile-first approach with Tailwind utilities only
   - Background opacity reduced to not compete with content
 -->
 <section 
   id="hero" 
-  class="relative pt-20 pb-16 sm:pb-20 lg:pb-24 min-h-svh flex flex-col justify-center overflow-hidden"
+  class="relative min-h-svh flex items-center overflow-hidden"
   aria-labelledby="hero-heading"
+  style="padding-top: max(5rem, env(safe-area-inset-top)); padding-bottom: max(4rem, env(safe-area-inset-bottom));"
 >
   <!-- Background Layer - Subtle, non-competing -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
