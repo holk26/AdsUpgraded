@@ -68,16 +68,18 @@ const { lang = 'en', t } = Astro.props;
           <circle cx="34" cy="92" r="2.5" fill="#5D5DFF" filter="url(#glowIndigo)"/>
           <circle cx="34" cy="28" r="2.5" fill="#00FFC2" filter="url(#glowCyan)"/>
         </svg>
-        <span class="text-base md:text-xl font-bold text-color-accent tracking-wider">NYXOK</span>
+        <span class="text-base md:text-xl font-bold text-color-accent tracking-wider">Techvin</span>
       </a>
 
-      <!-- Center Section: Navigation -->
+      <!-- Center Section: Desktop Navigation Only -->
       <div class="flex-1 flex justify-center">
-        <Navigation lang={lang} t={t} />
+        <div class="hidden lg:flex items-center gap-2">
+          <Navigation lang={lang} t={t} />
+        </div>
       </div>
 
-      <!-- Right Section: Language Selector -->
-      <div class="flex gap-1 md:gap-2" role="group" aria-label="Language selection">
+      <!-- Right Section: Language Selector + Mobile Menu Button -->
+      <div class="flex items-center gap-2 md:gap-3" role="group" aria-label="Language selection and menu">
         <a 
           href="/" 
           class={`px-2 md:px-3 py-1 md:py-1.5 rounded-md text-sm font-medium transition-all ${lang === 'en' ? 'bg-color-accent text-white shadow-sm' : 'text-text-muted hover:text-text-heading hover:bg-color-surface'}`}
@@ -94,8 +96,41 @@ const { lang = 'en', t } = Astro.props;
         >
           ES
         </a>
+        
+        <!-- Mobile Menu Button (moved from Navigation component) -->
+        <button 
+          id="mobile-menu-button"
+          class="lg:hidden p-2 rounded-lg hover:bg-brand-surface/50 transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-brand-accent"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <div class="hamburger-icon">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </div>
+        </button>
       </div>
     </nav>
+  </div>
+  
+  <!-- Mobile Menu (moved from Navigation component) -->
+  <div 
+    id="mobile-menu"
+    class="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    data-teleport="true"
+  >
+    <div class="mobile-menu-backdrop" id="mobile-menu-backdrop"></div>
+    <div class="mobile-menu-content">
+      <!-- Mobile Nav Items -->
+      <div class="mobile-nav-items" id="mobile-nav-items">
+        <!-- Will be populated by script -->
+      </div>
+    </div>
   </div>
 </header>
 
@@ -123,4 +158,319 @@ const { lang = 'en', t } = Astro.props;
     pointer-events: none;
     opacity: 0.7;
   }
+
+  /* Hamburger Icon Animation */
+  .hamburger-icon {
+    width: 24px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .hamburger-line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-body);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+  }
+
+  .menu-open .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .menu-open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .menu-open .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Mobile Menu Overlay - Fixed below header */
+  .mobile-menu {
+    position: fixed;
+    top: 65px; /* Below header (header height ~60-70px) */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90; /* Below header which is z-header (100+) */
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-menu.active {
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  .mobile-menu-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 14, 26, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .mobile-menu-content {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .mobile-menu.active .mobile-menu-content {
+    transform: translateX(0);
+  }
+
+  /* Mobile Navigation Items */
+  .mobile-nav-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem 0;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 1.25rem 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--text-body);
+    border-radius: 0.75rem;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateX(20px);
+    background: rgba(26, 26, 46, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .mobile-menu.active .mobile-nav-link {
+    opacity: 1;
+    transform: translateX(0);
+    animation: slideInFromRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link:focus {
+    color: var(--brand-primary);
+    background: rgba(26, 26, 46, 0.8);
+    border-color: var(--brand-primary);
+    transform: translateX(4px);
+  }
+
+  .mobile-nav-link-primary {
+    background: linear-gradient(135deg, var(--brand-accent), var(--brand-secondary));
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-nav-link-primary:hover,
+  .mobile-nav-link-primary:focus {
+    box-shadow: 0 6px 16px rgba(14, 165, 233, 0.4);
+    transform: translateX(4px) scale(1.02);
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Prevent body scroll when menu is open */
+  :global(body.menu-open) {
+    overflow: hidden;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .hamburger-line,
+    .mobile-menu,
+    .mobile-menu-content,
+    .mobile-nav-link {
+      transition: none;
+      animation: none;
+    }
+  }
 </style>
+
+<script>
+  /**
+   * Mobile Menu Controller
+   * Single Responsibility: Handle mobile menu state and interactions
+   */
+  const navItems = [
+    { key: 'nav.features', href: '#features', labelEn: 'Services', labelEs: 'Servicios' },
+    { key: 'nav.pricing', href: '#pricing', labelEn: 'Solutions', labelEs: 'Soluciones' },
+    { key: 'nav.about', href: '#about', labelEn: 'About', labelEs: 'Acerca de' },
+    { key: 'nav.demo', href: '#demo', labelEn: 'Contact Us', labelEs: 'Contáctanos', isPrimary: true },
+  ];
+
+  class MobileMenuController {
+    private menuButton: HTMLElement | null;
+    private menu: HTMLElement | null;
+    private backdrop: HTMLElement | null;
+    private navItemsContainer: HTMLElement | null;
+    private isOpen: boolean = false;
+    private boundToggleMenu: () => void;
+    private boundCloseMenu: () => void;
+    private boundHandleEscape: (e: KeyboardEvent) => void;
+    private navLinkHandlers: Array<{ element: Element; handler: () => void }> = [];
+
+    constructor() {
+      this.menuButton = document.getElementById('mobile-menu-button');
+      this.menu = document.getElementById('mobile-menu');
+      this.backdrop = document.getElementById('mobile-menu-backdrop');
+      this.navItemsContainer = document.getElementById('mobile-nav-items');
+      
+      // Teleport menu to body to avoid z-index stacking issues
+      this.teleportMenuToBody();
+      
+      // Populate nav items
+      this.populateNavItems();
+      
+      // Bind methods to preserve context
+      this.boundToggleMenu = this.toggleMenu.bind(this);
+      this.boundCloseMenu = this.closeMenu.bind(this);
+      this.boundHandleEscape = this.handleEscape.bind(this);
+      
+      this.init();
+    }
+
+    private teleportMenuToBody(): void {
+      // Move the mobile menu to be a direct child of body
+      // This prevents z-index stacking context issues with the header
+      if (this.menu && this.menu.dataset.teleport === 'true') {
+        document.body.appendChild(this.menu);
+      }
+    }
+
+    private populateNavItems(): void {
+      if (!this.navItemsContainer) return;
+      
+      // Detect current language from URL
+      const lang = window.location.pathname.startsWith('/es') ? 'es' : 'en';
+      
+      navItems.forEach((item, index) => {
+        const link = document.createElement('a');
+        link.href = item.href;
+        link.className = `mobile-nav-link ${item.isPrimary ? 'mobile-nav-link-primary' : ''}`;
+        link.style.animationDelay = `${(index + 1) * 0.05}s`;
+        link.setAttribute('aria-label', lang === 'es' ? item.labelEs : item.labelEn);
+        link.textContent = lang === 'es' ? item.labelEs : item.labelEn;
+        
+        this.navItemsContainer!.appendChild(link);
+      });
+    }
+
+    private init(): void {
+      if (!this.menuButton || !this.menu) return;
+
+      // Toggle menu with same button
+      this.menuButton.addEventListener('click', this.boundToggleMenu);
+      
+      // Close menu when clicking backdrop
+      if (this.backdrop) {
+        this.backdrop.addEventListener('click', this.boundCloseMenu);
+      }
+
+      // Close on escape key
+      document.addEventListener('keydown', this.boundHandleEscape);
+
+      // Close menu when clicking nav links
+      const navLinks = this.menu.querySelectorAll('.mobile-nav-link');
+      navLinks.forEach(link => {
+        const handler = () => this.closeMenu();
+        this.navLinkHandlers.push({ element: link, handler });
+        link.addEventListener('click', handler);
+      });
+    }
+
+    private handleEscape(e: KeyboardEvent): void {
+      if (e.key === 'Escape' && this.isOpen) {
+        this.closeMenu();
+      }
+    }
+
+    private toggleMenu(): void {
+      this.isOpen ? this.closeMenu() : this.openMenu();
+    }
+
+    private openMenu(): void {
+      if (!this.menu || !this.menuButton) return;
+      
+      this.isOpen = true;
+      this.menu.classList.add('active');
+      this.menuButton.classList.add('menu-open');
+      this.menuButton.setAttribute('aria-expanded', 'true');
+      this.menu.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('menu-open');
+    }
+
+    private closeMenu(): void {
+      if (!this.menu || !this.menuButton) return;
+      
+      this.isOpen = false;
+      this.menu.classList.remove('active');
+      this.menuButton.classList.remove('menu-open');
+      this.menuButton.setAttribute('aria-expanded', 'false');
+      this.menu.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('menu-open');
+    }
+
+    public destroy(): void {
+      // Clean up event listeners to prevent memory leaks
+      if (this.menuButton) {
+        this.menuButton.removeEventListener('click', this.boundToggleMenu);
+      }
+      if (this.backdrop) {
+        this.backdrop.removeEventListener('click', this.boundCloseMenu);
+      }
+      document.removeEventListener('keydown', this.boundHandleEscape);
+      
+      // Clean up nav link handlers
+      this.navLinkHandlers.forEach(({ element, handler }) => {
+        element.removeEventListener('click', handler);
+      });
+      this.navLinkHandlers = [];
+    }
+  }
+
+  // Initialize on page load and store instance for potential cleanup
+  let menuController: MobileMenuController | null = null;
+  
+  if (typeof window !== 'undefined') {
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        menuController = new MobileMenuController();
+      });
+    } else {
+      menuController = new MobileMenuController();
+    }
+    
+    // Clean up on page unload (for SPAs or navigation)
+    window.addEventListener('beforeunload', () => {
+      if (menuController) {
+        menuController.destroy();
+        menuController = null;
+      }
+    });
+  }
+</script>
