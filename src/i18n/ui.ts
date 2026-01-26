@@ -39,7 +39,7 @@ export const ui = {
     'how.step4.title': 'Social Media Tech',
     'how.step4.desc': 'Automated social media management, ad campaigns, and growth strategies. Data-driven targeting for qualified leads and measurable ROI.',
     
-    'bento.title': 'Why Choose NYXOK',
+    'bento.title': 'Why Choose Techvin',
     'bento.subtitle': 'Engineering best practices that power your growth',
     'bento.feature1.title': 'Fast Performance',
     'bento.feature1.desc': 'Optimized code, server-side rendering, and edge deployment. Your app loads in under 2 seconds—every time.',
@@ -111,7 +111,7 @@ export const ui = {
     'pricing.migrations.feature6': 'Future-proof architecture for 2026+',
     'pricing.migrations.cta': 'Contact Us',
     
-    'footer.tagline': 'NYXOK - Digital Engineering Devshop',
+    'footer.tagline': 'Techvin - Digital Engineering Devshop',
     'footer.rights': 'All rights reserved.',
     'footer.product': 'Services',
     'footer.company': 'Company',
@@ -158,7 +158,7 @@ export const ui = {
     'how.step4.title': 'Tecnología de Redes Sociales',
     'how.step4.desc': 'Gestión automatizada de redes sociales, campañas publicitarias y estrategias de crecimiento. Segmentación basada en datos para leads calificados y ROI medible.',
     
-    'bento.title': 'Por Qué Elegir NYXOK',
+    'bento.title': 'Por Qué Elegir Techvin',
     'bento.subtitle': 'Mejores prácticas de ingeniería que impulsan tu crecimiento',
     'bento.feature1.title': 'Rendimiento Rápido',
     'bento.feature1.desc': 'Código optimizado, renderizado del lado del servidor y despliegue en el edge. Tu app carga en menos de 2 segundos—siempre.',
@@ -230,7 +230,7 @@ export const ui = {
     'pricing.migrations.feature6': 'Arquitectura a prueba de futuro para 2026+',
     'pricing.migrations.cta': 'Contáctanos',
     
-    'footer.tagline': 'NYXOK - Digital Engineering Devshop',
+    'footer.tagline': 'Techvin - Digital Engineering Devshop',
     'footer.rights': 'Todos los derechos reservados.',
     'footer.product': 'Servicios',
     'footer.company': 'Compañía',
